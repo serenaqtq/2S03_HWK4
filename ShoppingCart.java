@@ -34,6 +34,9 @@ public class ShoppingCart extends User{//public ShoopingCart
 		} catch (FileNotFoundException e) {//catch FileNotFoundException
 			
 			File createShoppingCart = new File ("Cart_"+name+".txt"); //Create a shopping cart for the new user
+			
+		} catch (IOException e) {
+			System.out.println("There is an error");
 		}
 		
 		
@@ -74,7 +77,7 @@ public class ShoppingCart extends User{//public ShoopingCart
 	
 	public double getHST() {//return the hst of the cart
 		
-		double hst;//create a double to store the hst
+		double hst = 0;//create a double to store the hst
 		for (int i = 0; i < content.size();i++) {//loop through the ArrayList
 			
 			hst += content.get(i).getQuantity() * content.get(i).getPrice();//increment the hst by the quantity*price
@@ -84,7 +87,7 @@ public class ShoppingCart extends User{//public ShoopingCart
 	
 	public double getTotal() {//return the total amount of the cart
 		
-		double total;//create a double variable to store the total amount
+		double total = 0;//create a double variable to store the total amount
 		for (int i = 0; i < content.size();i++) {//loop through the ArrayList
 			
 			total += content.get(i).getQuantity() * content.get(i).getPrice();//increment total by the quantity*price
@@ -102,7 +105,7 @@ public class ShoppingCart extends User{//public ShoopingCart
 		String[] temp = str.split(", ");//split the string
 		Item i1 = new Item();//call the constructor
 		
-		return i1//return the item
+		return i1;//return the item
 	}
 	
 	public void writeCart() {//write the ArrayList back to the text file

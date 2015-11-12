@@ -18,7 +18,7 @@ public class Readable extends Item {
 	public String getInfo (){
 		String bookInfo = Integer.toString(sNo) +", " + Double.toString(price)+ ", " + bookName + ", " + authorName  + ", " + Integer.toString(quantityAvl);
 		return bookInfo;
-	} //Returns sNo, Name, Author name etc in a string @ overide
+	} //Returns sNo, Name, Author name etc in a string @ override
 	
 	public double getPrice() {
 		return price;
@@ -27,12 +27,16 @@ public class Readable extends Item {
 	public int getQuantity() {
 		return quantityAvl;
 	} // override ...}
+	
+	public int changeQuantity(int change) {
+		return quantityAvl + change;
+	}
 
 	public int getsNo(){
 		return sNo;
 	}
 	
-	public String getBookName(){
+	public String getTitle(){
 		return bookName;
 	}
 	

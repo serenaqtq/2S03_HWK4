@@ -120,7 +120,7 @@ public class UserInterface {//public the class
 	public Book stringToBook(String str) {//Convert a string to book
 		
 		String[] temp = str.split(", ");//split the string array
-		Book b1 = new Book();//call the constructor
+		Book b1 = new Book(Integer.parseInt(temp[0]), (double)Integer.parseInt(temp[1]), temp[2], temp[3], Integer.parseInt(temp[4]));//call the constructor
 		
 		return b1;//return the book
 	}
@@ -128,7 +128,7 @@ public class UserInterface {//public the class
 	public eBook stringToEbook(String str) {//Convert a string to ebook
 		
 		String[] temp = str.split(", ");//split the string array
-		eBook e1 = new eBook();//call the constructor
+		eBook e1 = new eBook(Integer.parseInt(temp[0]), (double)Integer.parseInt(temp[1]), temp[2], temp[3], Integer.parseInt(temp[4]));//call the constructor
 		
 		return e1;//return the ebook
 	}
