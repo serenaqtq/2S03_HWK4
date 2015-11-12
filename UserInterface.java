@@ -424,6 +424,7 @@ public class UserInterface {//public the class
 		System.out.print("Environment Tax    2%    ");//print out message
 		
 		System.out.println(cart.getEnvirTax());//print EnviroTax
+		
 		System.out.print("HST    13%    ");//print out message
 		
 		System.out.println(cart.getHST());//print hst

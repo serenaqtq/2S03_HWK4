@@ -33,7 +33,7 @@ public class ShoppingCart extends User{//public ShoopingCart
 			
 		} catch (FileNotFoundException e) {//catch FileNotFoundException
 			
-			File createShoppingCart = new File ("Cart_"+n1+".txt"); //Create a shopping cart for the new user
+			File createShoppingCart = new File ("Cart_"+name+".txt"); //Create a shopping cart for the new user
 		}
 		
 		
@@ -64,7 +64,10 @@ public class ShoppingCart extends User{//public ShoopingCart
 		double shipping;//create a double to store the shipping fee
 		for (int i = 0; i < content.size();i++) {//loop through the ArrayList
 			
-			shipping += content.get(i).getQuantity() * content.get(i).getPrice();//increment the shipping by the quantity*price
+			if (content.get(i).getType() != "MP3") {//MP3 don't need shipping
+				shipping += content.get(i).getQuantity() * content.get(i).getPrice();//increment the shipping by the quantity*price
+		
+			}
 		}
 		return shipping * 0.1;//return shipping * 10%
 	}
