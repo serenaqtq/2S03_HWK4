@@ -8,11 +8,8 @@ public abstract class Item {
 
 	public abstract int getQuantity();
 
-	public abstract String getAuthorName();
-
 	public abstract String getTitle();
 	
-	//public abstract String getType();
 
 	protected double price;
 	protected int sNo;
