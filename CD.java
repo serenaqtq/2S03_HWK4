@@ -1,12 +1,12 @@
-public class CDs extends Audio {
+public class CD extends Audio {
 
 	
-	public CDs(int sNo, double price, String audioName, String artistName, int quantityAvl){
+	public CD(int sNo, double price, String audioName, String artistName, int quantityAvl){
 		super(sNo, price, audioName, artistName, quantityAvl);
 		this.type= "CD";
 	}
 	public int changeQuantity (int change){
-		return quantityAvl - change;
+		return quantityAvl + change;
 	}
 
 	public double getPrice(){

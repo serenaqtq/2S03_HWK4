@@ -7,7 +7,7 @@ public class Book extends Readable {
 	}
 
 	public int changeQuantity(int change) {
-		return quantityAvl - change;
+		return quantityAvl + change;
 	}
 
 	public String getType() {
