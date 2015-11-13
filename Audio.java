@@ -20,10 +20,6 @@ public class Audio extends Item {
 	public int getsNo(){
 		return sNo;
 	}
-	
-	public int changeQuantity(int change) {
-		return quantityAvl - change;
-	}
 
 	public int getQuantity(){
 		return quantityAvl;

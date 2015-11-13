@@ -27,7 +27,7 @@ public class UserInterface {//public the class
 		return currentPage;//return the value of currentPage
 	}
 	
-	public void changeCurrentPage(int newPage){//update the value of currentPage
+	public int changeCurrentPage(int newPage){//update the value of currentPage
 		
 		currentPage = newPage;//set currentPage to the given int
 		displayPage(currentPage);//display the page message
@@ -334,7 +334,7 @@ public class UserInterface {//public the class
 			}
 			
 			
-			cart.AddItem(readables.get((int)option - 1).getTitle());//add item to cart
+			cart.AddItem(readables.get((int)option - 1));//add item to cart
 			readables.get((int)option - 1).changeQuantity(-quan);//update the quantity of readable
 			int i = cart.getIndex(readables.get((int)option - 1));//get the index of given item in cart
 			cart.addQuantity(i, quan);//update quantity of cart
@@ -390,7 +390,7 @@ public class UserInterface {//public the class
 				quan = sc.nextInt();//overwrite the int with new user input
 			}
 			
-			cart.AddItem(audioProducts.get((int)option - 1).getTitle());//add item to cart
+			cart.AddItem(audioProducts.get((int)option - 1));//add item to cart
 			audioProducts.get((int)option - 1).changeQuantity(-quan);//update the quantity of audioProducts
 			int i = cart.getIndex(audioProducts.get((int)option - 1));//get the index of given item in cart
 			cart.addQuantity(i, quan);//update quantity of cart

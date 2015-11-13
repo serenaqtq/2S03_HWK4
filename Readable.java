@@ -28,9 +28,6 @@ public class Readable extends Item {
 		return quantityAvl;
 	} // override ...}
 	
-	public int changeQuantity(int change) {
-		return quantityAvl - change;
-	}
 
 	public int getsNo(){
 		return sNo;

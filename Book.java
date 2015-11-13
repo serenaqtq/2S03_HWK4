@@ -6,6 +6,10 @@ public class Book extends Readable {
 		this.type = "Book";
 	}
 
+	public int changeQuantity(int change) {
+		return quantityAvl + change;
+	}
+
 	public String getType() {
 		return type;
 	}

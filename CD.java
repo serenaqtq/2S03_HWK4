@@ -5,6 +5,9 @@ public class CD extends Audio {
 		super(sNo, price, audioName, artistName, quantityAvl);
 		this.type= "CD";
 	}
+	public int changeQuantity (int change){
+		return quantityAvl + change;
+	}
 
 	public double getPrice(){
 		return price*1.02;
