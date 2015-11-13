@@ -12,6 +12,11 @@ import java.io.FileReader;//import FileReader
 import java.io.FileWriter;//import FileWriter
 import java.io.IOException;//import IOException
 import java.util.ArrayList;//import ArrayList
+import java.util.Date;//Import Date Function
+import java.text.DateFormat;//Import DateFormat
+import java.text.SimpleDateFormat;//Import SimpleDateFormat
+
+//Question, in the readable and audio text files, does an item still exist if it has 0 quantity? If it doesn't, how do we find the type of an item in the shopping cart if it's sold out?
 
 public class ShoppingCart extends User{//public ShoopingCart
 	
@@ -22,6 +27,7 @@ public class ShoppingCart extends User{//public ShoopingCart
 	private ArrayList<MP3> m1 = new ArrayList<MP3>();
 	private ArrayList<eBook> e1 = new ArrayList<eBook>();
 	private ArrayList<CD> c1 = new ArrayList<CD>();
+	private String temp1;
 	
 	public ShoppingCart(String name){//Constructor which take in a string as user name
 		
@@ -34,17 +40,23 @@ public class ShoppingCart extends User{//public ShoopingCart
 			while ((line = input.readLine()) != null) {//while loop to loop thorough the file
 				String[] temp = line.split(", ");
 				int quan = Integer.parseInt(temp[3]);
-				String temp1 = checkType(temp[1]);
+				temp1 = checkType(temp[1]);
 				
 				if (temp1.equals("Book")) {
 					contentR.add(stringToBook(temp1, quan));
 				}
 				
-				if (temp1.equals("eBook")) {}
+				if (temp1.equals("eBook")) {
+					contentR.add(stringToEbook(temp1, quan));
+				}
 				
-				if (temp1.equals("CD")) {}
+				if (temp1.equals("CD")) {
+					contentA.add(stringToCD(temp1,quan));
+				}
 				
-				if (temp1.equals("MP3")) {}
+				if (temp1.equals("MP3")) {
+					contentA.add(stringToAudio(temp1,quan));
+				}
 			}
 			
 			input.close();//close the file
@@ -58,14 +70,89 @@ public class ShoppingCart extends User{//public ShoopingCart
 		}
 	}
 	
-	public void readBook() {}//read Book.txt into ArrayList
+	public void readBook() {
+		try {//try-catch structure
+			BufferedReader inputB = new BufferedReader(new FileReader("Books.txt"));//file reader
+			
+			String lineB = null;//create a string to store each line of the file
+			while ((lineB = inputB.readLine()) != null) {//loop through the file
+				b1.add(stringToBook(lineB));//add book to ArrayList
+			}
+			
+			inputB.close();//close the file
+			
+		} catch(IOException e) {//catch IOException
+			System.out.println("There is an error.");//print out the error message
+		}
+	}//read Book.txt into ArrayList
 	
-	public void readeBook() {}//read eBook.txt into ArrayList
+	public void readeBook() {
+		try {//try-catch structure
+			BufferedReader inputE = new BufferedReader(new FileReader("EBooks.txt"));//file reader
+			
+			String lineE = null;//create a string to store each line of the file
+			while ((lineE = inputE.readLine()) != null) {//loop through the file
+				e1.add(stringToEbook(lineE));//add eBook to ArrayList
+			}
+			
+			inputE.close();//close the file
+		} catch(IOException e) {//catch IOException
+			System.out.println("There is an error.");//print out the error message
+		}
+	}//read eBook.txt into ArrayList
 	
-	public void readCD() {}//read CD.txt into ArrayList
+	public void readCD() {
+		
+		try {//try-catch structure
+			BufferedReader inputC = new BufferedReader(new FileReader("CDs.txt"));//file reader
+			
+			String lineC = null;//create a string to store each line of the file
+			while ((lineC = inputC.readLine()) != null) {//loop through the file
+				c1.add(stringToCD(lineC));//add CD to ArrayList
+			}
+		} catch(IOException e) {//catch IOException
+			System.out.println("There is an error.");///print out the error message
+		}
+	}//read CD.txt into ArrayList
 	
-	public void readMP3() {}//read MP3.txt into ArrayList
+	public void readMP3() {
+		
+		try {//try-catch structure
+			BufferedReader inputM= new BufferedReader(new FileReader("MP3.txt"));//file reader
+			
+			String lineM = null;//create a string to store each line of the file
+			while ((lineM = inputM.readLine()) != null) {//loop through the file
+				m1.add(stringToMP3(lineM));//add CD to ArrayList
+			}
+			
+			inputM.close();//close the file
+		} catch(IOException e) {//catch IOException
+			System.out.println("There is an error.");///print out the error message
+		}
+	}//read MP3.txt into ArrayList
+	public eBook stringToEbook(String str) {//Convert a string to ebook
+		
+		String[] temp = str.split(", ");//split the string array
+		eBook e1 = new eBook(Integer.parseInt(temp[0]), (double)Integer.parseInt(temp[1]), temp[2], temp[3], Integer.parseInt(temp[4]));//call the constructor
+		
+		return e1;//return the ebook
+	}
 	
+	public CD stringToCD(String str) {//Convert a string to CD
+		
+		String[] temp = str.split(", ");//split the string array
+		CD c1 = new CD();//call the constructor
+		
+		return c1;//return the CD
+	}
+	
+	public MP3 stringToMP3(String str) {//Convert a string to MP3
+		
+		String[] temp = str.split(", ");//split the string array
+		MP3 m1 = new MP3();//call the constructor
+		
+		return m1;//return the MP3
+	}
 	public Book stringToBook(String str, int quan) {
 		
 		Book temp;
@@ -78,11 +165,29 @@ public class ShoppingCart extends User{//public ShoopingCart
 		return temp;
 	}
 	
-	public eBook stringToEbook(String str, int quan) {}
+	public eBook stringToEbook(String str, int quan) {
+		eBook temp;
+		for (int i = 0; i < e1.size(); i++) {
+			temp = new eBook(e1.get(i).getsNo(), b1.get(i).getPrice(), str, b1.get(i).getAuthorName(),quan);
+		}
+		return temp;
+	}
 	
-	public CD stringToCD(String str, int quan) {}
+	public CD stringToCD(String str, int quan) {
+		CD temp;
+		for (int i = 0; i < c1.size(); i++) {
+			temp = new eBook(c1.get(i).getsNo(), c1.get(i).getPrice(), str, c1.get(i).getArtistName(),quan);
+		}
+		return temp;
+	}
 	
-	public MP3 stringToMP3(String str, int quan) {}
+	public MP3 stringToMP3(String str, int quan) {
+		MP3 temp;
+		for (int i = 0; i < m1.size(); i++) {
+			temp = new eBook(m1.get(i).getsNo(), m1.get(i).getPrice(), str, m1.get(i).getAuthorName(),quan);
+		}
+		return temp;
+	}
 	
 	public String checkType(String str) {
 		
@@ -148,7 +253,7 @@ public class ShoppingCart extends User{//public ShoopingCart
 		double shipping;//create a double to store the shipping fee
 		for (int i = 0; i < content.size();i++) {//loop through the ArrayList
 			
-			if (content.get(i).getType() != "MP3") {//MP3 don't need shipping
+			if (content.get(i).getType() != "MP3" || content.get(i).getType() != "eBook") {//MP3 don't need shipping
 				shipping += content.get(i).getQuantity() * content.get(i).getPrice();//increment the shipping by the quantity*price
 		
 			}
@@ -176,9 +281,26 @@ public class ShoppingCart extends User{//public ShoopingCart
 		return total + getHST() + getShipping() + getEnvirTax();//return the total price by adding hst, environmental tax and shipping
 	}
 	
-	public void AddItem(Item a){//add an item to the cart
+	public void AddItem(String title){//add an item to the cart
+		temp1 = checkType(title);//Check the type of the item added
+		private int sNoDisplay;
+		private int quantityDisplay;
 		
-		content.add(a);//add to ArrayList
+		if (temp1.equals("Book") || temp1.equals("eBook")) {
+			sNoDisplay = contentR.get(contentR.indexOf(title)).getsNo();//Get sNo in the shopping cart
+			quantityDisplay = contentR.get(contentR.indexOf(title)).getQuantity();//Get quantity in the shopping cart
+		}
+				
+		if (temp1.equals("CD") || temp1.equals("MP3")) {
+			sNoDisplay = contentA.get(contentR.indexOf(title)).getsNo();//Get sNo in the shopping cart
+			quantityDisplay = contentA.get(contentR.indexOf(title)).getQuantity();//Get quantity in the shopping cart
+		}
+
+		DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd");//Get current yyyy/MM/dd and display it as it is
+		//get current date time with Date()
+		Date date = new Date();
+		String display = sNoDisplay + " ," + title + " ," + dateFormat.format(date) + " ," + quantityDisplay; //The format of displaying information in shopping cart
+		content.add(display);//add to ArrayList
 	}
 	
 	

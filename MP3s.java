@@ -5,10 +5,6 @@ public class MP3s extends Audio{
 		this.type="MP3";
 	}
 	
-	public int changeQuantity (int change){
-		return quantityAvl - change;
-	}
-
 	public double getPrice(){
 		return super.getPrice();
 	}// get base price from super class
