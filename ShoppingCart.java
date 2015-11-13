@@ -15,13 +15,7 @@ import java.util.ArrayList;//import ArrayList
 
 public class ShoppingCart extends User{//public ShoopingCart
 	
-	private ArrayList<Readable> contentR = new ArrayList<Readable>();
-	private ArrayList<Audio> contentA = new ArrayList<Audio>();
-	
-	private ArrayList<Book> b1 = new ArrayList<Book>();
-	private ArrayList<MP3> m1 = new ArrayList<MP3>();
-	private ArrayList<eBook> e1 = new ArrayList<eBook>();
-	private ArrayList<CD> c1 = new ArrayList<CD>();
+	private ArrayList<Item> content = new ArrayList<Item>();//ArrayList of items
 	
 	public ShoppingCart(String name){//Constructor which take in a string as user name
 		
@@ -32,19 +26,7 @@ public class ShoppingCart extends User{//public ShoopingCart
 			
 			String line = null;//define a string to store each line of the file
 			while ((line = input.readLine()) != null) {//while loop to loop thorough the file
-				String[] temp = line.split(", ");
-				int quan = Integer.parseInt(temp[3]);
-				String temp1 = checkType(temp[1]);
-				
-				if (temp1.equals("Book")) {
-					contentR.add(stringToBook(temp1, quan));
-				}
-				
-				if (temp1.equals("eBook")) {}
-				
-				if (temp1.equals("CD")) {}
-				
-				if (temp1.equals("MP3")) {}
+				content.add(stringToItem(line));//add item to the ArrayList
 			}
 			
 			input.close();//close the file
@@ -56,70 +38,7 @@ public class ShoppingCart extends User{//public ShoopingCart
 		} catch (IOException e) {
 			System.out.println("There is an error");
 		}
-	}
-	
-	public void readBook() {}//read Book.txt into ArrayList
-	
-	public void readeBook() {}//read eBook.txt into ArrayList
-	
-	public void readCD() {}//read CD.txt into ArrayList
-	
-	public void readMP3() {}//read MP3.txt into ArrayList
-	
-	public Book stringToBook(String str, int quan) {
 		
-		Book temp;
-		for (int i = 0; i < b1.size(); i++) {
-			
-			if (b1.get(i).getTitle().equals(str)) {
-				temp = new Book(b1.get(i).getsNo(), b1.get(i).getPrice(), str, b1.get(i).getAuthorName(), quan); 
-			}
-		}
-		return temp;
-	}
-	
-	public eBook stringToEbook(String str, int quan) {}
-	
-	public CD stringToCD(String str, int quan) {}
-	
-	public MP3 stringToMP3(String str, int quan) {}
-	
-	public String checkType(String str) {
-		
-		int check = 0;
-		for (int i = 0; i < b1.size(); i++) {
-			
-			if (b1.get(i).getTitle().equals(str)) {
-				check = 1; 
-			}
-		}
-		
-		for (int i = 0; i < e1.size(); i++) {
-			
-			if (e1.get(i).getTitle().equals(str)) {
-				check = 2;
-			}
-		}
-		
-		for (int i = 0; i < m1.size(); i++) {
-			
-			if (m1.get(i).getTitle().equals(str)) {
-				check = 3;
-			}
-		}
-		
-		for (int i = 0; i < c1.size(); i++) {
-			
-			if (c1.get(i).getTitle().equals(str)) {
-				check = 4;
-			}
-		}
-		
-		if (check == 1) {return "Book";}
-		if (check == 2) {return "eBook";}
-		if (check == 3) {return "MP3";}
-		if (check == 4) {return "CD";}
-		else {return "No type match!";}
 		
 	}
 	
@@ -181,11 +100,23 @@ public class ShoppingCart extends User{//public ShoopingCart
 		content.add(a);//add to ArrayList
 	}
 	
+	public Item stringToItem(String str) {//convert a string to item
+		
+		String[] temp = str.split(", ");//split the string
+		Item i1 = new Item();//call the constructor
+		
+		return i1;//return the item
+	}
 	
 	public void writeCart() {//write the ArrayList back to the text file
 		
 		try {
 			BufferedWriter output = new BufferedWriter(new FileWriter("Cart_" + super.getUsername() + ".txt", false));//file writer
+			for (int i = 0; i < this.content.size(); i++) {//loop through the ArrayList
+				
+				output.write(content.get(i).getInfo());//write the information of each item as a string
+				output.newLine();//print a new line
+			}
 			
 			output.close();//close the file
 		} catch (IOException e) {}//Catch IOException
