@@ -29,8 +29,20 @@ public class Readable extends Item {
 	} // override ...}
 	
 
+	public int changeQuantity(int change) {
+		return quantityAvl + change;
+	}
+	
+	public int changeQuantityC(int num) {
+		return quantityAvl = num;
+	}
+	
 	public int getsNo(){
 		return sNo;
+	}
+	
+	public String getType() {
+		return type;
 	}
 	
 	public String getTitle(){

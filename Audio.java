@@ -24,16 +24,28 @@ public class Audio extends Item {
 	public int getQuantity(){
 		return quantityAvl;
 	}
+	
+	public int changeQuantity(int change) {
+		return quantityAvl + change;
+	}
 
+	public int changeQuantityC(int num) {
+		return quantityAvl = num;
+	}
+	
 	public String getTitle(){
 		return audioName;
+	}
+	
+	public String getType() {
+		return type;
 	}
 
 	public double getPrice(){
 		return price;
 	} // override
 
-	public String getArtistName(){
+	public String getAuthorName(){
 		return artistName;
 	}
 

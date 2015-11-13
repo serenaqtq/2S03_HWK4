@@ -17,6 +17,8 @@ public class UserInterface {//public the class
 	
 	private int currentPage;//Create a int to track the page
 	
+	Scanner sc = new Scanner(System.in);
+	
 	public UserInterface(int num) {//Constructor
 		
 		currentPage = num;//set current page as given int
@@ -27,7 +29,7 @@ public class UserInterface {//public the class
 		return currentPage;//return the value of currentPage
 	}
 	
-	public int changeCurrentPage(int newPage){//update the value of currentPage
+	public void changeCurrentPage(int newPage){//update the value of currentPage
 		
 		currentPage = newPage;//set currentPage to the given int
 		displayPage(currentPage);//display the page message
@@ -136,7 +138,7 @@ public class UserInterface {//public the class
 	public CD stringToCD(String str) {//Convert a string to CD
 		
 		String[] temp = str.split(", ");//split the string array
-		CD c1 = new CD();//call the constructor
+		CD c1 = new CD(Integer.parseInt(temp[0]), (double)Integer.parseInt(temp[1]), temp[2], temp[3], Integer.parseInt(temp[4]));//call the constructor
 		
 		return c1;//return the CD
 	}
@@ -144,7 +146,7 @@ public class UserInterface {//public the class
 	public MP3 stringToMP3(String str) {//Convert a string to MP3
 		
 		String[] temp = str.split(", ");//split the string array
-		MP3 m1 = new MP3();//call the constructor
+		MP3 m1 = new MP3(Integer.parseInt(temp[0]), (double)Integer.parseInt(temp[1]), temp[2], temp[3], Integer.parseInt(temp[4]));//call the constructor
 		
 		return m1;//return the MP3
 	}
@@ -182,7 +184,7 @@ public class UserInterface {//public the class
 	}
 	
 	public void p1Info(){//display the information of page 1
-		Scanner sc = new Scanner(System.in);//create scanner
+		//Scanner sc = new Scanner(System.in);//create scanner
 		
 		System.out.println("1. Sign in");//print each option
 		System.out.println("2. Sign up");//print each option
@@ -201,7 +203,7 @@ public class UserInterface {//public the class
 	
 	public void p2Info(){//display the information of page 2
 		
-		Scanner sc = new Scanner(System.in);//create a scanner
+		//Scanner sc = new Scanner(System.in);//create a scanner
 		
 		System.out.println("Choose your user name:");//ask for user name
 		String n1 = sc.nextLine();//read user input as a string
@@ -214,7 +216,7 @@ public class UserInterface {//public the class
 	
 	public void p34Info(){//display the information for page 3 and 4
 		
-		Scanner sc = new Scanner(System.in);//create the scanner
+		//Scanner sc = new Scanner(System.in);//create the scanner
 		
 		System.out.println("Enter your username: ");//ask for user name
 		String n1 = sc.nextLine();//store user input as a string
@@ -240,7 +242,7 @@ public class UserInterface {//public the class
 	
 	public void p5Info(){//display the information for page 5
 		
-		Scanner sc = new Scanner(System.in);//create scanner
+		//Scanner sc = new Scanner(System.in);//create scanner
 		
 		System.out.println("1. View Items By Category");//print out option
 		System.out.println("2. View Shooping Cart");//print out option
@@ -263,7 +265,7 @@ public class UserInterface {//public the class
 	
 	public void p6Info() {//display the information for page 6
 		
-		Scanner sc = new Scanner(System.in);//create scanner
+		//Scanner sc = new Scanner(System.in);//create scanner
 		
 		System.out.println("1. Readables");//print out option
 		System.out.println("2. Audio");//print out option
@@ -285,9 +287,9 @@ public class UserInterface {//public the class
 	
 	public void p7Info() {//display the information for page 7
 		
-		Scanner sc = new Scanner(System.in);//create scanner
+		//Scanner sc = new Scanner(System.in);//create scanner
 		
-		System.out.println(cart.getContent());//print out the whole cart
+		cart.getContent();//print out the whole cart
 		System.out.println("Plz enter 1 to checkout or -1 to previous page: ");//ask for user input
 		double option = sc.nextDouble();//store the user input in a double
 		
@@ -303,7 +305,7 @@ public class UserInterface {//public the class
 	
 	public void p8Info() {//display the information for page 8
 		
-		Scanner sc = new Scanner(System.in);//create scanner
+		//Scanner sc = new Scanner(System.in);//create scanner
 		
 		System.out.println("Readables: \n");//print out the message
 		System.out.println("S.No  Name of the Book   Author  Price($)  Quantity in Store  Type");//print out the message
@@ -334,10 +336,11 @@ public class UserInterface {//public the class
 			}
 			
 			
-			cart.AddItem(readables.get((int)option - 1));//add item to cart
+			cart.AddItem(readables.get((int)option - 1).getTitle(), quan);//add item to cart
 			readables.get((int)option - 1).changeQuantity(-quan);//update the quantity of readable
-			int i = cart.getIndex(readables.get((int)option - 1));//get the index of given item in cart
-			cart.addQuantity(i, quan);//update quantity of cart
+			System.out.println(readables.get((int)option - 1).getType());
+//			int i = cart.getIndex(readables.get((int)option - 1), (readables.get((int)option - 1).getType());//get the index of given item in cart
+//			cart.addQuantity(i, quan);//update quantity of cart
 			
 			System.out.println(quan + readables.get((int)option - 1).getTitle() + "successfully added to your cart.");//print out message
 			
@@ -360,7 +363,7 @@ public class UserInterface {//public the class
 	
 	public void p9Info() {//display the information for page 9
 		
-		Scanner sc = new Scanner(System.in);//create scanner
+		//Scanner sc = new Scanner(System.in);//create scanner
 		
 		System.out.println("Audio: \n");//print out the message
 		System.out.println("S.No  Name   Author  Price($)  Quantity in Store  Type");//print out the message
@@ -390,10 +393,10 @@ public class UserInterface {//public the class
 				quan = sc.nextInt();//overwrite the int with new user input
 			}
 			
-			cart.AddItem(audioProducts.get((int)option - 1));//add item to cart
+			cart.AddItem(audioProducts.get((int)option - 1).getTitle(), quan);//add item to cart
 			audioProducts.get((int)option - 1).changeQuantity(-quan);//update the quantity of audioProducts
-			int i = cart.getIndex(audioProducts.get((int)option - 1));//get the index of given item in cart
-			cart.addQuantity(i, quan);//update quantity of cart
+			//int i = cart.getIndex(audioProducts.get((int)option - 1), audioProducts.get((int)option - 1).getType());//get the index of given item in cart
+			//cart.addQuantity(i, quan);//update quantity of cart
 			
 			System.out.println(quan + audioProducts.get((int)option - 1).getTitle() + "successfully added to your cart.");//print out message
 			
@@ -414,12 +417,12 @@ public class UserInterface {//public the class
 	
 	public void p10Info() {//display the information for page 10
 		
-		Scanner sc = new Scanner(System.in);//create scanner
+		//Scanner sc = new Scanner(System.in);//create scanner
 		
 		System.out.println("Billing Information: ");//print out message
 		System.out.println("Name     Quantity   Price");//print out message
 		
-		System.out.println(cart.getContent());//print out the content of the cart
+		cart.getContent();//print out the content of the cart
 		
 		System.out.print("Environment Tax    2%    ");//print out message
 		
@@ -498,5 +501,20 @@ public void writeAudio() {//write the audio ArrayList to a file
 				outputM.close();//close the file
 			}
 		} catch (IOException e) {}//handle exception
+	}
+
+	public void writeUser() {
+		
+		try {
+			BufferedWriter output = new BufferedWriter(new FileWriter("Users.txt", false));
+			
+			for (int i = 0; i < name.size(); i++) {
+				output.write(name.get(i).getUsername());
+				output.newLine();
+			}
+			output.close();
+		} catch (IOException e) {
+			System.out.println("There is an error in writeUser()");
+		}
 	}
 }
