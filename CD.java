@@ -9,6 +9,10 @@ public class CD extends Audio {
 		return quantityAvl + change;
 	}
 
+	public int getQuantity() {
+		return quantityAvl;
+	}
+	
 	public double getPrice(){
 		return price*1.02;
 	}// override to get the item price and add 2% (Environment Tax)

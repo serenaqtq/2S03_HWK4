@@ -61,9 +61,17 @@ public class ShoppingCart extends User{//public ShoopingCart
 			
 			input.close();//close the file
 			
-		} catch (FileNotFoundException e) {//catch FileNotFoundException
-			
-			File createShoppingCart = new File ("Cart_"+name+".txt"); //Create a shopping cart for the new user
+		} catch (FileNotFoundException f) {//catch FileNotFoundException
+			try {
+				File createShoppingCart = new File ("Cart_"+name+".txt"); //Create a new file object for user
+				if(createShoppingCart.createNewFile()){//Create a new file for user's shopping cart an returns a boolean value true if the file is created successfully, vice versa
+					return;
+				}else {
+			        System.out.println("File already exists.");
+				}
+			}catch(IOException e) {//catch IOException
+				System.out.println("There is an error.");///print out the error message
+			}
 			
 		} catch (IOException e) {
 			System.out.println("There is an error");
@@ -181,6 +189,8 @@ public class ShoppingCart extends User{//public ShoopingCart
 			while ((lineC = inputC.readLine()) != null) {//loop through the file
 				c1.add(stringToCD(lineC));//add CD to ArrayList
 			}
+			
+			inputC.close();
 		} catch(IOException e) {//catch IOException
 			System.out.println("There is an error.");///print out the error message
 		}
@@ -235,7 +245,7 @@ public class ShoppingCart extends User{//public ShoopingCart
 
 	public Book stringToBook(String str, int quan) {
 		
-		Book temp;
+		Book temp = null;
 		for (int i = 0; i < b1.size(); i++) {
 			
 			if (b1.get(i).getTitle().equals(str)) {
@@ -246,7 +256,7 @@ public class ShoppingCart extends User{//public ShoopingCart
 	}
 	
 	public eBook stringToEbook(String str, int quan) {
-		eBook temp;
+		eBook temp = null;
 		for (int i = 0; i < e1.size(); i++) {
 			if (e1.get(i).getTitle().equals(str)) {
 				temp = new eBook(e1.get(i).getsNo(), b1.get(i).getPrice(), str, b1.get(i).getAuthorName(),quan);
@@ -256,7 +266,7 @@ public class ShoppingCart extends User{//public ShoopingCart
 	}
 	
 	public CD stringToCD(String str, int quan) {
-		CD temp;
+		CD temp = null;
 		for (int i = 0; i < c1.size(); i++) {
 			if (c1.get(i).getTitle().equals(str)) {
 				temp = new CD(c1.get(i).getsNo(), c1.get(i).getPrice(), str, c1.get(i).getAuthorName(),quan);
@@ -359,12 +369,12 @@ public class ShoppingCart extends User{//public ShoopingCart
 		double tax = 0;
 		for (int i = 0; i < contentR.size(); i++) {
 			if (contentR.get(i).getType().equals("Book")) {
-				tax += (((Book)(contentR.get(i))).getPrice() - contentR.get(i).getPrice()) * contentR.get(i).getQuantity();
+				tax += ((contentR.get(i)).getPrice() - contentR.get(i).getPrice()/1.02) * contentR.get(i).getQuantity();
 			}
 		}
 		for (int i = 0; i < contentA.size(); i++) {
 			if (contentA.get(i).getType().equals("CD")) {
-				tax += (((CD)(contentA.get(i))).getPrice() - contentA.get(i).getPrice()) * contentA.get(i).getQuantity();
+				tax += ((contentA.get(i)).getPrice() - contentA.get(i).getPrice()/1.02) * contentA.get(i).getQuantity();
 			}
 		}
 		return tax;
@@ -418,7 +428,7 @@ public class ShoppingCart extends User{//public ShoopingCart
 			
 			total += contentR.get(i).getQuantity() * contentR.get(i).getPrice();//increment the hst by the quantity*price
 		}
-		return total + getHST() + getShipping() + getEnvirTax();//return the total price by adding hst, environmental tax and shipping
+		return total + getHST() + getShipping();//return the total price by adding hst, environmental tax and shipping
 	}
 	
 	public void AddItem(String title, int quan){//add an item to the cart
@@ -484,12 +494,36 @@ public class ShoppingCart extends User{//public ShoopingCart
 		}
 	}
 	
+	public void clearCart(String userName) {
+		File deleteShoppingCart = new File ("Cart_"+userName+".txt");//Create a file object for the user shopping cart text file
+		try {
+		if (deleteShoppingCart.delete()){//deletes the file and returns true if the file is deleted successfully
+			try {
+				if (deleteShoppingCart.createNewFile()) {//creates the file and returns true if the file is created successfully
+					return;
+				}else {
+			        System.out.println("File already exist");//prints error message the error already exists
+				}
+			}catch (IOException e) {
+		        System.out.println("File not created");//prints error message
+			}
+		}else {
+	        System.out.println("File not deleted");//prints error message file can not be deleted
+		}
+		}catch (Exception e) {  
+	        System.out.println("Some error occured while deleting file");//prints error messgae
+		 } 
+	}
+
 	
 //	public void writeCart() {//write the ArrayList back to the text file
 //		
 //		try {
 //			BufferedWriter output = new BufferedWriter(new FileWriter("Cart_" + super.getUsername() + ".txt", false));//file writer
-//			
+//			for (int i = 0; i < contentR.size(); i++) {
+//				output.write(contentR.get(i).getsNo(),contentR.get(i).getTitle());
+//				output.newLine();
+//			}
 //			output.close();//close the file
 //		} catch (IOException e) {}//Catch IOException
 //	}

@@ -9,6 +9,10 @@ public class MP3 extends Audio{
 		return quantityAvl + change;
 	}
 
+	public int getQuantity() {
+		return quantityAvl;
+	}
+	
 	public double getPrice(){
 		return super.getPrice();
 	}// get base price from super class

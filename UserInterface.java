@@ -6,7 +6,6 @@
 */
 import java.util.ArrayList;//import ArrayList
 import java.util.Scanner;//import Scanner
-import java.lang.StringBuilder;//import StringBuilder
 import java.io.*;//import IO
 public class UserInterface {//public the class
 	
@@ -14,6 +13,7 @@ public class UserInterface {//public the class
 	private ArrayList<Audio> audioProducts = new ArrayList<Audio>();//ArrayList contains all the audio item
 	private ArrayList<User> name = new ArrayList<User>();//ArrayList contains all the user
 	private ShoppingCart cart;//Create a shopping cart object
+	private String n1;
 	
 	private int currentPage;//Create a int to track the page
 	
@@ -204,22 +204,30 @@ public class UserInterface {//public the class
 	public void p2Info(){//display the information of page 2
 		
 		//Scanner sc = new Scanner(System.in);//create a scanner
-		
-		System.out.println("Choose your user name:");//ask for user name
-		String n1 = sc.nextLine();//read user input as a string
-		File createShoppingCart = new File ("Cart_"+n1+".txt"); //Create a shopping cart for the new user
-		cart = new ShoppingCart(n1);//initialize the shopping cart
-		name.add(stringToUser(n1));//add user to the ArrayList
-		System.out.println("\nUser name successfully added");//print out the message
-		changeCurrentPage(1);//change current page to page 1
+		try {
+			System.out.println("Choose your user name:");//ask for user name
+			n1 = sc.nextLine();//read user input as a string
+			File createShoppingCart = new File ("Cart_"+n1+".txt"); //Create a new file object for user
+			if(createShoppingCart.createNewFile()){//Create a new file for user's shopping cart an returns a boolean value true if the file is created successfully, vice versa
+				cart = new ShoppingCart(n1);//initialize the shopping cart
+				name.add(stringToUser(n1));//add user to the ArrayList
+				System.out.println("\nUser name successfully added");//print out the message
+				changeCurrentPage(1);//change current page to page 1
+			}else {
+		        System.out.println("File already exists.");
+			}
+		}catch(IOException e) {//catch IOException
+			System.out.println("There is an error.");///print out the error message
+		}
 	}
+		
 	
 	public void p34Info(){//display the information for page 3 and 4
 		
 		//Scanner sc = new Scanner(System.in);//create the scanner
 		
 		System.out.println("Enter your username: ");//ask for user name
-		String n1 = sc.nextLine();//store user input as a string
+		n1 = sc.nextLine();//store user input as a string
 		boolean check = false;//set boolean to false
 		
 		for (int i = 0; i < name.size(); i++) {//loop through the user ArrayList
@@ -450,6 +458,7 @@ public class UserInterface {//public the class
 			System.out.println("Comfirmation ID: U1000");//!!!U1000 should be upadated, but how?
 			System.out.println("Items shipped to: " + cart.getUsername());//print out message
 			System.out.println("Thanks for shopping! Now goes to browse item page");//print out message
+			cart.clearCart(n1);
 			changeCurrentPage(5);//change current page to page 5
 		}
 		
@@ -516,5 +525,17 @@ public void writeAudio() {//write the audio ArrayList to a file
 		} catch (IOException e) {
 			System.out.println("There is an error in writeUser()");
 		}
+	}
+	
+	public static void main(String[] args) {
+		UserInterface a = new UserInterface(1);
+		a.getUser();
+		a.getReadables();
+		a.getAudioProducts();
+		a.changeCurrentPage(1);
+		a.writeReadable();
+		a.writeAudio();
+		a.writeUser();
+		
 	}
 }

@@ -9,6 +9,10 @@ public class Book extends Readable {
 	public int changeQuantity(int change) {
 		return quantityAvl + change;
 	}
+	
+	public int getQuantity() {
+		return quantityAvl;
+	}
 
 	public String getType() {
 		return type;

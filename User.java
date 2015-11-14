@@ -16,7 +16,7 @@ public class User {//public class
 		}
 		
 		public String getUsername() {//return the user name as a string
-			return username;//retunr the string
+			return username;//return the string
 		}
 		
 }

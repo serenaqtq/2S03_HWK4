@@ -9,6 +9,10 @@ public class eBook extends Readable {
 	public String getType() {
 		return type;
 	}
+	
+	public int getQuantity() {
+		return quantityAvl;
+	}
 
 	public int changeQuantity(int change) {
 		return quantityAvl + change;
