@@ -144,6 +144,7 @@ public class UserInterface {//public the class
 		return c1;//return the CD
 	}
 	
+	
 	public MP3 stringToMP3(String str) {//Convert a string to MP3
 		
 		String[] temp = str.split(", ");//split the string array
@@ -345,15 +346,14 @@ public class UserInterface {//public the class
 			System.out.println("Plz enter a valid option: ");//if not, ask for user input
 			option = sc.nextDouble();//overwrite the double with new user input
 		}
-		
-		while (readables.get((int)option - 1).getQuantity() == 0) {
-			System.out.println("Sorry, the item is out of stock! Plz choose another item: ");
-			option = sc.nextDouble();
-		}
+
 		
 		if (option == -1) {changeCurrentPage(6);}//if option = -1, change current page to page 6
 		else {//if user want to add item to cart
-			
+			while (readables.get((int)option - 1).getQuantity() == 0) {
+				System.out.println("Sorry, the item is out of stock! Plz choose another item: ");
+				option = sc.nextDouble();
+			}
 			System.out.println("Enter quantity: ");//ask for user input
 			int quan = sc.nextInt();//store the user input in a int
 			
@@ -365,11 +365,11 @@ public class UserInterface {//public the class
 			
 			
 			cart.AddItem(readables.get((int)option - 1).getTitle(), quan);//add item to cart
-			readables.get((int)option - 1).changeQuantity(-quan);//update the quantity of readable
+			readables.get((int)option - 1).changeQuantity(quan);//update the quantity of readable
 			//System.out.println(readables.get((int)option - 1).getType());
 //			int i = cart.getIndex(readables.get((int)option - 1), (readables.get((int)option - 1).getType());//get the index of given item in cart
 //			cart.addQuantity(i, quan);//update quantity of cart
-			
+
 			System.out.println(quan + " " + readables.get((int)option - 1).getTitle() + " successfully added to your cart.");//print out message
 			
 			System.out.println("Press -2 to Continue Shopping or Press 0 to CheckOut: ");//ask for user input
@@ -409,13 +409,14 @@ public class UserInterface {//public the class
 			option = sc.nextDouble();//overwrite the double with new user input
 		}
 		
-		while (audioProducts.get((int)option - 1).getQuantity() == 0) {
-			System.out.println("Sorry, the item is out of stock! Plz choose another item: ");
-			option = sc.nextDouble();
-		}
 		
 		if (option == -1) {changeCurrentPage(6);}//check if user input equals to -1
 		else {//if not
+			
+			while (audioProducts.get((int)option - 1).getQuantity() == 0) {
+				System.out.println("Sorry, the item is out of stock! Plz choose another item: ");
+				option = sc.nextDouble();
+			}
 			
 			System.out.println("Enter quantity: ");//ask for user input
 			int quan = sc.nextInt();//store the user input in a int
@@ -427,7 +428,7 @@ public class UserInterface {//public the class
 			}
 			
 			cart.AddItem(audioProducts.get((int)option - 1).getTitle(), quan);//add item to cart
-			audioProducts.get((int)option - 1).changeQuantity(-quan);//update the quantity of audioProducts
+			audioProducts.get((int)option - 1).changeQuantity(quan);//update the quantity of audioProducts
 			//int i = cart.getIndex(audioProducts.get((int)option - 1), audioProducts.get((int)option - 1).getType());//get the index of given item in cart
 			//cart.addQuantity(i, quan);//update quantity of cart
 			

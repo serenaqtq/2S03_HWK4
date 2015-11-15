@@ -10,13 +10,13 @@ public class eBook extends Readable {
 		return type;
 	}
 	
-	public int getQuantity() {
-		return quantityAvl;
-	}
+//	public int getQuantity() {
+//		return quantityAvl;
+//	}
 
-	public int changeQuantity(int change) {
-		return quantityAvl + change;
-	}
+//	public void changeQuantity(int change) {
+//		quantityAvl -= change;
+//	}
 
 	public double getPrice() {
 		return price;

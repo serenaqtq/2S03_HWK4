@@ -318,12 +318,19 @@ public class ShoppingCart extends User{//public ShoopingCart
 		
 		for (int i = 0; i < contentR.size(); i++) {
 			
-			System.out.println(contentR.get(i).getTitle() + "    " + contentR.get(i).getQuantity() + "    " + contentR.get(i).getPrice()/1.02);
+			if (contentR.get(i).getType() == "Book") {//Divide price by 1.02 to get original price
+				System.out.println(contentR.get(i).getTitle() + "    " + contentR.get(i).getQuantity() + "    " + (contentR.get(i).getPrice())/1.02);
+			} else {
+				System.out.println(contentR.get(i).getTitle() + "    " + contentR.get(i).getQuantity() + "    " + contentR.get(i).getPrice());
+			}
 		}
 		
 		for (int i = 0; i < contentA.size(); i++) {
-			
-			System.out.println(contentA.get(i).getTitle() + "    " + contentA.get(i).getQuantity() + "    " + contentA.get(i).getPrice()/1.02);
+			if (contentA.get(i).getType() == "CD") {			
+				System.out.println(contentA.get(i).getTitle() + "    " + contentA.get(i).getQuantity() + "    " + (contentA.get(i).getPrice())/1.02);
+			}else{
+				System.out.println(contentA.get(i).getTitle() + "    " + contentA.get(i).getQuantity() + "    " + contentA.get(i).getPrice());
+			}
 		}
 	}
 	
@@ -368,13 +375,19 @@ public class ShoppingCart extends User{//public ShoopingCart
 		
 		double hst = 0;//create a double to store the hst
 		for (int i = 0; i < contentA.size();i++) {//loop through the ArrayList
-			
-			hst += contentA.get(i).getQuantity() * (contentA.get(i).getPrice()/1.02);//increment the hst by the quantity*price
+			if (contentR.get(i).getType() == "Book") {//Divide price by 1.02 to get original price
+				hst += contentA.get(i).getQuantity() * (contentA.get(i).getPrice()/1.02);//increment the hst by the quantity*price
+			}else{//Divide price by 1.02 to get original price
+				hst += contentA.get(i).getQuantity() * (contentA.get(i).getPrice());//increment the hst by the quantity*price
+			}
 		}
 		
 		for (int i = 0; i < contentR.size();i++) {//loop through the ArrayList
-			
-			hst += contentR.get(i).getQuantity() * (contentR.get(i).getPrice()/1.02);//increment the hst by the quantity*price
+			if (contentA.get(i).getType() == "CD") {//Divide price by 1.02 to get original price
+				hst += contentA.get(i).getQuantity() * (contentA.get(i).getPrice()/1.02);//increment the hst by the quantity*price
+			}else{
+				hst += contentA.get(i).getQuantity() * (contentA.get(i).getPrice());//increment the hst by the quantity*price1
+			}	
 		}
 		return Math.round(hst * 0.13 * 100)/100.0;//return hst * 13%
 	}
@@ -465,6 +478,8 @@ public class ShoppingCart extends User{//public ShoopingCart
 		if (deleteShoppingCart.delete()){//deletes the file and returns true if the file is deleted successfully
 			try {
 				if (deleteShoppingCart.createNewFile()) {//creates the file and returns true if the file is created successfully
+					contentR.clear();
+					contentA.clear();
 					return;
 				}else {
 			        System.out.println("File already exist");//prints error message the error already exists
