@@ -82,13 +82,6 @@ public class ShoppingCart extends User{//public ShoopingCart
 		} catch (IOException e) {
 			System.out.println(e);
 		}
-//		for (int i = 0; i < contentR.size(); i++) {
-//			System.out.println(contentR.get(i).getInfo());
-//		}
-//		
-//		for (int i = 0; i < contentA.size(); i++) {
-//			System.out.println(contentA.get(i).getInfo());
-//		}
 	}
 	
 	public void readBook() {
@@ -274,17 +267,6 @@ public class ShoppingCart extends User{//public ShoopingCart
 		
 	}
 	
-//	public int getIndex(Item name, String str) {//return the index of the ArrayList of a given item
-//		
-//		int index = 0;
-//		if (str.equals("Book") || str.equals("eBook")) {
-//			index = contentR.indexOf((Readable)name);
-//		}
-//		if (str.equals("Book") || str.equals("eBook")) {
-//			index = contentA.indexOf((Audio)name);
-//		}
-//		return index;
-//	}
 	
 	public void addQuantity(int index, int quan, String str){//add given quantity to the item at given index
 		
@@ -495,17 +477,5 @@ public class ShoppingCart extends User{//public ShoopingCart
 	        System.out.println("Some error occured while deleting file");//prints error messgae
 		 } 
 	}
-
-	
-//	public void writeCart() {//write the ArrayList back to the text file
-//		
-//		try {
-//			BufferedWriter output = new BufferedWriter(new FileWriter("Cart_" + super.getUsername() + ".txt", false));//file writer
-//			for (int i = 0; i < contentR.size(); i++) {
-//				output.write(contentR.get(i).getsNo(),contentR.get(i).getTitle());
-//				output.newLine();
-//			}
-//			output.close();//close the file
-//		} catch (IOException e) {}//Catch IOException
-//	}
 }
+
