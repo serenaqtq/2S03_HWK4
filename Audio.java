@@ -13,7 +13,7 @@ public class Audio extends Item {
 	}
 
 	public String getInfo(){
-		String bookInfo = Integer.toString(sNo) +", " + Double.toString(price)+ ", " + audioName + ", " + artistName  + ", " + Integer.toString(quantityAvl);
+		String bookInfo = Integer.toString(sNo) +", " + audioName + ", " + artistName + ", "+ Double.toString(price)+ ", " + Integer.toString(quantityAvl);
 		return bookInfo;
 	} //Returns sNo, Name, Artist name, etc in a string
 

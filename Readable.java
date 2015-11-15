@@ -16,7 +16,7 @@ public class Readable extends Item {
 	}
 
 	public String getInfo (){
-		String bookInfo = Integer.toString(sNo) +", " + Double.toString(price)+ ", " + bookName + ", " + authorName  + ", " + Integer.toString(quantityAvl);
+		String bookInfo = Integer.toString(sNo) +", " + bookName + ", " + authorName + ", "+ Double.toString(price)+ ", " + Integer.toString(quantityAvl) + ", " + getType();
 		return bookInfo;
 	} //Returns sNo, Name, Author name etc in a string @ override
 	

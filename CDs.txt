@@ -1,0 +1,6 @@
+64, Java you are in my heart, ADF, 100.0, 5
+34, C++ you are my soul, DEF, 150.0, 5
+987, Python I miss you too, Skfj, 57.0, 4
+11, Haskell was interesting, May C, 243.53, 0
+123, Jay, Jay Chou, 100.0, 100
+44, This is CD1, Kathy L, 45.23, 20

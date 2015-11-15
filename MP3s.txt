@@ -1,0 +1,7 @@
+654, GHID, CDF, 20.0, 5
+88, FTHD, REF, 10.0, 5
+987, Over the Rainbow, Spidy, 30.23, 10
+996, Seasons in the Song, THE, 20.34, 100
+9871, Friday, Reb, 1.0, 100
+666, All About the Base, Katy, 15.0, 0
+98788, Sail, Hello, 10.0, 20

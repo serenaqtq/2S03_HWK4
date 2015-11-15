@@ -1,0 +1,7 @@
+1, Java Rocks, XYZ, 150.0, 0, Book
+3, Python Sucks, YYZ, 200.0, 20, Book
+5, This Is A Book All Vol, ABC, 100.5, 50, Book
+6, Big Bang, BCD, 300.0, 3, Book
+87, Fall In Love With Stats, CDE, 385.0, 100, Book
+987, Haskell Is Beautiful, EFG, 202.8, 34, Book
+99, Cool UNIX, FGH, 223.5, 5, Book

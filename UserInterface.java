@@ -13,7 +13,7 @@ public class UserInterface {//public the class
 	private ArrayList<Audio> audioProducts = new ArrayList<Audio>();//ArrayList contains all the audio item
 	private ArrayList<User> name = new ArrayList<User>();//ArrayList contains all the user
 	private ShoppingCart cart;//Create a shopping cart object
-	private String n1;
+
 	
 	private int currentPage;//Create a int to track the page
 	
@@ -49,7 +49,7 @@ public class UserInterface {//public the class
 			inputU.close();//close the file
 			
 		} catch (IOException e) {//catch IOException
-			System.out.println("There is an error.");//print out error message
+			System.out.println("There is an error in getUser().");//print out error message
 		}
 	}
 	
@@ -75,7 +75,7 @@ public class UserInterface {//public the class
 			
 			inputE.close();//close the file
 		} catch(IOException e) {//catch IOException
-			System.out.println("There is an error.");//print out the error message
+			System.out.println("There is an error in getReadable().");//print out the error message
 		}
 	}
 	
@@ -83,7 +83,7 @@ public class UserInterface {//public the class
 		
 		try {//try-catch structure
 			BufferedReader inputC = new BufferedReader(new FileReader("CDs.txt"));//file reader
-			BufferedReader inputM= new BufferedReader(new FileReader("MP3.txt"));//file reader
+			BufferedReader inputM= new BufferedReader(new FileReader("MP3s.txt"));//file reader
 			
 			String lineC = null;//create a string to store each line of the file
 			while ((lineC = inputC.readLine()) != null) {//loop through the file
@@ -99,7 +99,7 @@ public class UserInterface {//public the class
 			
 			inputM.close();//close the file
 		} catch(IOException e) {//catch IOException
-			System.out.println("There is an error.");///print out the error message
+			System.out.println("There is an error in getAudioProducts().");///print out the error message
 		}
 	}
 	
@@ -122,7 +122,7 @@ public class UserInterface {//public the class
 	public Book stringToBook(String str) {//Convert a string to book
 		
 		String[] temp = str.split(", ");//split the string array
-		Book b1 = new Book(Integer.parseInt(temp[0]), (double)Integer.parseInt(temp[1]), temp[2], temp[3], Integer.parseInt(temp[4]));//call the constructor
+		Book b1 = new Book(Integer.parseInt(temp[0]), Double.parseDouble(temp[3]), temp[1], temp[2], Integer.parseInt(temp[4]));//call the constructor
 		
 		return b1;//return the book
 	}
@@ -130,7 +130,8 @@ public class UserInterface {//public the class
 	public eBook stringToEbook(String str) {//Convert a string to ebook
 		
 		String[] temp = str.split(", ");//split the string array
-		eBook e1 = new eBook(Integer.parseInt(temp[0]), (double)Integer.parseInt(temp[1]), temp[2], temp[3], Integer.parseInt(temp[4]));//call the constructor
+		
+		eBook e1 = new eBook(Integer.parseInt(temp[0]), Double.parseDouble(temp[3]), temp[1], temp[2], Integer.parseInt(temp[4]));//call the constructor
 		
 		return e1;//return the ebook
 	}
@@ -138,7 +139,7 @@ public class UserInterface {//public the class
 	public CD stringToCD(String str) {//Convert a string to CD
 		
 		String[] temp = str.split(", ");//split the string array
-		CD c1 = new CD(Integer.parseInt(temp[0]), (double)Integer.parseInt(temp[1]), temp[2], temp[3], Integer.parseInt(temp[4]));//call the constructor
+		CD c1 = new CD(Integer.parseInt(temp[0]), Double.parseDouble(temp[3]), temp[1], temp[2], Integer.parseInt(temp[4]));//call the constructor
 		
 		return c1;//return the CD
 	}
@@ -146,7 +147,7 @@ public class UserInterface {//public the class
 	public MP3 stringToMP3(String str) {//Convert a string to MP3
 		
 		String[] temp = str.split(", ");//split the string array
-		MP3 m1 = new MP3(Integer.parseInt(temp[0]), (double)Integer.parseInt(temp[1]), temp[2], temp[3], Integer.parseInt(temp[4]));//call the constructor
+		MP3 m1 = new MP3(Integer.parseInt(temp[0]), Double.parseDouble(temp[3]), temp[1], temp[2], Integer.parseInt(temp[4]));//call the constructor
 		
 		return m1;//return the MP3
 	}
@@ -196,6 +197,7 @@ public class UserInterface {//public the class
 			System.out.println("Plz enter choice 1 or 2: ");//if not, ask for another user input
 			choice = sc.nextDouble();//overwrite the double
 		}
+		System.out.println("\n========================================");
 		if ((int)choice == 2) {changeCurrentPage(2);}//if user choose 1, display page 2
 		if ((int)choice == 1) {changeCurrentPage(3);}//if user choose 2, display page 3
 		
@@ -206,18 +208,22 @@ public class UserInterface {//public the class
 		//Scanner sc = new Scanner(System.in);//create a scanner
 		try {
 			System.out.println("Choose your user name:");//ask for user name
-			n1 = sc.nextLine();//read user input as a string
+			sc.nextLine();
+			String n1 = sc.nextLine();//read user input as a string
 			File createShoppingCart = new File ("Cart_"+n1+".txt"); //Create a new file object for user
 			if(createShoppingCart.createNewFile()){//Create a new file for user's shopping cart an returns a boolean value true if the file is created successfully, vice versa
 				cart = new ShoppingCart(n1);//initialize the shopping cart
 				name.add(stringToUser(n1));//add user to the ArrayList
 				System.out.println("\nUser name successfully added");//print out the message
 				changeCurrentPage(1);//change current page to page 1
+				System.out.println("\n========================================");
 			}else {
-		        System.out.println("File already exists.");
+				System.out.println("\n========================================");
+		        changeCurrentPage(1);
+		        //System.out.println("File already exists.");
 			}
 		}catch(IOException e) {//catch IOException
-			System.out.println("There is an error.");///print out the error message
+			System.out.println("There is an error in p2Info().");///print out the error message
 		}
 	}
 		
@@ -227,7 +233,8 @@ public class UserInterface {//public the class
 		//Scanner sc = new Scanner(System.in);//create the scanner
 		
 		System.out.println("Enter your username: ");//ask for user name
-		n1 = sc.nextLine();//store user input as a string
+		sc.nextLine();
+		String n1 = sc.nextLine();//store user input as a string
 		boolean check = false;//set boolean to false
 		
 		for (int i = 0; i < name.size(); i++) {//loop through the user ArrayList
@@ -238,12 +245,20 @@ public class UserInterface {//public the class
 		}
 		
 		if (check) {//name match the existing name
-			cart = new ShoppingCart(n1);//assign to the shopping cart
+			
+			cart = new ShoppingCart(n1);
+			cart.readBook();
+			cart.readCD();
+			cart.readeBook();
+			cart.readMP3();
+			cart.loadCart();//assign to the shopping cart
 			System.out.println("Hello Mr/Miss. " + n1);//print out the welcome message
 			changeCurrentPage(5);//change current page to page 5
+			System.out.println("\n========================================");
 		} else {//if not match the existing name
 			
 			System.out.println("No Access");//print out the message
+			System.out.println("\n========================================");
 			changeCurrentPage(1);////change current page to page 1
 		}
 	}
@@ -264,7 +279,7 @@ public class UserInterface {//public the class
 			System.out.println("Plz enter option 1, 2 or 3: ");//if not, ask for user input
 			option = sc.nextDouble();//overwrite the double with new user input
 		}
-		
+		System.out.println("\n========================================");
 		if (option == 1) {changeCurrentPage(6);}//if option = 1, change current page to page 6
 		if (option == 2) {changeCurrentPage(7);}//if option = 2, change current page to page 7
 		if (option == 3) {changeCurrentPage(1);}//if option = 3, change current page to page 1
@@ -278,7 +293,7 @@ public class UserInterface {//public the class
 		System.out.println("1. Readables");//print out option
 		System.out.println("2. Audio");//print out option
 		System.out.println("\nChoose your oprion: ");//ask for user input
-		System.out.println("\nPress -1 to return  to previous meanu");//print out option
+		System.out.println("\nPress -1 to return  to previous menu");//print out option
 		
 		double option = sc.nextDouble();//store the user input in a double
 		
@@ -287,7 +302,7 @@ public class UserInterface {//public the class
 			System.out.println("Plz enter option 1, 2 or -1: ");//if not, ask for user input
 			option = sc.nextDouble();//overwrite the double with new user input
 		}
-		
+		System.out.println("\n========================================");
 		if (option == 1) {changeCurrentPage(8);}//if option = 1, change current page to page 8
 		if (option == 2) {changeCurrentPage(9);}//if option = 2, change current page to page 9
 		if (option == -1) {changeCurrentPage(5);}//if option = -1, change current page to page 5
@@ -296,7 +311,7 @@ public class UserInterface {//public the class
 	public void p7Info() {//display the information for page 7
 		
 		//Scanner sc = new Scanner(System.in);//create scanner
-		
+		System.out.println("\n========================================");
 		cart.getContent();//print out the whole cart
 		System.out.println("Plz enter 1 to checkout or -1 to previous page: ");//ask for user input
 		double option = sc.nextDouble();//store the user input in a double
@@ -306,7 +321,7 @@ public class UserInterface {//public the class
 			System.out.println("Plz enter option 1 or -1: ");//if not, ask for user input
 			option = sc.nextDouble();//overwrite the double with new user input
 		}
-		
+		System.out.println("\n========================================");
 		if (option == 1) {changeCurrentPage(10);}//if option = 1, change current page to page 10
 		if (option == -1) {changeCurrentPage(5);}//if option = -1, change current page to page 5
 	}
@@ -318,9 +333,9 @@ public class UserInterface {//public the class
 		System.out.println("Readables: \n");//print out the message
 		System.out.println("S.No  Name of the Book   Author  Price($)  Quantity in Store  Type");//print out the message
 		
-		getReadables();//print out the readable ArrayList
+		printReadable();//print out the readable ArrayList
 		
-		System.out.println("Choose your option: ");//ask for user input
+		System.out.println("Choose your option from 1 to " + readables.size() + ": ");//ask for user input
 		System.out.println("Press -1 to return to previous menu.");//print out the message
 		
 		double option = sc.nextDouble();//store the user input in a double
@@ -329,6 +344,11 @@ public class UserInterface {//public the class
 			
 			System.out.println("Plz enter a valid option: ");//if not, ask for user input
 			option = sc.nextDouble();//overwrite the double with new user input
+		}
+		
+		while (readables.get((int)option - 1).getQuantity() == 0) {
+			System.out.println("Sorry, the item is out of stock! Plz choose another item: ");
+			option = sc.nextDouble();
 		}
 		
 		if (option == -1) {changeCurrentPage(6);}//if option = -1, change current page to page 6
@@ -346,13 +366,13 @@ public class UserInterface {//public the class
 			
 			cart.AddItem(readables.get((int)option - 1).getTitle(), quan);//add item to cart
 			readables.get((int)option - 1).changeQuantity(-quan);//update the quantity of readable
-			System.out.println(readables.get((int)option - 1).getType());
+			//System.out.println(readables.get((int)option - 1).getType());
 //			int i = cart.getIndex(readables.get((int)option - 1), (readables.get((int)option - 1).getType());//get the index of given item in cart
 //			cart.addQuantity(i, quan);//update quantity of cart
 			
-			System.out.println(quan + readables.get((int)option - 1).getTitle() + "successfully added to your cart.");//print out message
+			System.out.println(quan + " " + readables.get((int)option - 1).getTitle() + " successfully added to your cart.");//print out message
 			
-			System.out.println("Press -2 to Continue Shopping or Press 0 to CheckOur: ");//ask for user input
+			System.out.println("Press -2 to Continue Shopping or Press 0 to CheckOut: ");//ask for user input
 			
 			double option1 = sc.nextDouble();//store the user input in a double
 			
@@ -361,7 +381,7 @@ public class UserInterface {//public the class
 				System.out.println("Plz enter option 0 or -2: ");//if not, ask for user input
 				option1 = sc.nextDouble();//overwrite the double with new user input
 			}
-			
+			System.out.println("\n========================================");
 			if (option1 == 0) {changeCurrentPage(10);}//if option = 0, change current page to page 10
 			if (option1 == -2) {changeCurrentPage(6);}//if option = 2, change current page to page 6
 			
@@ -376,9 +396,9 @@ public class UserInterface {//public the class
 		System.out.println("Audio: \n");//print out the message
 		System.out.println("S.No  Name   Author  Price($)  Quantity in Store  Type");//print out the message
 		
-		getAudioProducts();//print out the information of the audio ArrayList
+		printAudioProduct();;//print out the information of the audio ArrayList
 		
-		System.out.println("Choose your option: ");//ask for user input
+		System.out.println("Choose your option from 1 to " + audioProducts.size() + ": ");//ask for user input
 		System.out.println("Press -1 to return to previous menu.");//print out the message
 		
 		double option = sc.nextDouble();//store the user input in a double
@@ -387,6 +407,11 @@ public class UserInterface {//public the class
 			
 			System.out.println("Plz enter a valid option: ");//if not, ask for user input
 			option = sc.nextDouble();//overwrite the double with new user input
+		}
+		
+		while (audioProducts.get((int)option - 1).getQuantity() == 0) {
+			System.out.println("Sorry, the item is out of stock! Plz choose another item: ");
+			option = sc.nextDouble();
 		}
 		
 		if (option == -1) {changeCurrentPage(6);}//check if user input equals to -1
@@ -406,9 +431,9 @@ public class UserInterface {//public the class
 			//int i = cart.getIndex(audioProducts.get((int)option - 1), audioProducts.get((int)option - 1).getType());//get the index of given item in cart
 			//cart.addQuantity(i, quan);//update quantity of cart
 			
-			System.out.println(quan + audioProducts.get((int)option - 1).getTitle() + "successfully added to your cart.");//print out message
+			System.out.println(quan + " " + audioProducts.get((int)option - 1).getTitle() + "successfully added to your cart.");//print out message
 			
-			System.out.println("Press -2 to Continue Shopping or Press 0 to CheckOur: ");//ask for user input
+			System.out.println("Press -2 to Continue Shopping or Press 0 to CheckOut: ");//ask for user input
 			
 			double option1 = sc.nextDouble();//store the user input in a double
 			
@@ -417,7 +442,7 @@ public class UserInterface {//public the class
 				System.out.println("Plz enter option 0 or -2: ");//if not, ask for user input
 				option1 = sc.nextDouble();//overwrite the double with new user input
 			}
-			
+			System.out.println("\n========================================");
 			if (option1 == 0) {changeCurrentPage(10);}//if option = 0, change current page to page 10
 			if (option1 == -2){changeCurrentPage(6);}//if option = 2, change current page to page 6
 		}
@@ -430,7 +455,7 @@ public class UserInterface {//public the class
 		System.out.println("Billing Information: ");//print out message
 		System.out.println("Name     Quantity   Price");//print out message
 		
-		cart.getContent();//print out the content of the cart
+		cart.getCheckout();//print out the content of the cart
 		
 		System.out.print("Environment Tax    2%    ");//print out message
 		
@@ -447,24 +472,44 @@ public class UserInterface {//public the class
 		System.out.println(cart.getTotal());//print total
 		System.out.println("Are you sure you want to pay?");//ask for user input
 		String s1 = sc.nextLine().toLowerCase();//store the user input in a string and make it not case sensitive
+		//System.out.println(s1);
 		
 		while (!s1.equals("yes") && !s1.equals("no")) {//check if user input is yes or no
 			
 			System.out.println("Plz enter yes or no: ");//if not, ask for user input
 			s1 = sc.nextLine().toLowerCase();//!!!!!String cannot be overwritten!! How to do the error handle
+			System.out.println(s1);
 		}
 		
 		if (s1.equals("yes")) {//if the user want to pay
 			System.out.println("Comfirmation ID: U1000");//!!!U1000 should be upadated, but how?
 			System.out.println("Items shipped to: " + cart.getUsername());//print out message
 			System.out.println("Thanks for shopping! Now goes to browse item page");//print out message
-			cart.clearCart(n1);
+			cart.clearCart();
+			writeReadable();
+			writeAudio();
+			writeUser();System.out.println("\n========================================");
 			changeCurrentPage(5);//change current page to page 5
 		}
 		
 		if (s1.equals("no")) {// if they don't want to pay
 			System.out.println("Checkout not finished. Go to browse item page");//print out message
+			System.out.println("\n========================================");
 			changeCurrentPage(5);//change current page to page 5
+		}
+	}
+	
+	public void printReadable() {
+		
+		for (int i = 0; i < readables.size(); i++) {
+			System.out.println(readables.get(i).getInfo());
+		}
+	}
+	
+public void printAudioProduct() {
+		
+		for (int i = 0; i < audioProducts.size(); i++) {
+			System.out.println(audioProducts.get(i).getInfo());
 		}
 	}
 	
@@ -472,11 +517,14 @@ public class UserInterface {//public the class
 		
 		try {
 			BufferedWriter outputB = new BufferedWriter(new FileWriter("Books.txt", false));//file writer
+			//System.out.println("W1 load");
 			BufferedWriter outputE = new BufferedWriter(new FileWriter("Ebooks.txt", false));//file writer
+			//System.out.println("W2 load");
 			for (int i = 0; i < readables.size(); i++) {//loop thorough the readable ArrayList
 				
 				if (readables.get(i).getType().equals("Book")) {//check type
 					
+					//System.out.println(readables.get(i).getType());
 					outputB.write(readables.get(i).getInfo());//write book into text file
 					outputB.newLine();//print a new line
 				} else {//if it is a ebook
@@ -484,17 +532,19 @@ public class UserInterface {//public the class
 					outputE.newLine();//print a new line
 				}
 				
-				outputB.close();//close the file
-				outputE.close();//close the file
 			}
-		} catch (IOException e) {}//handle exception
+			outputB.close();//close the file
+			outputE.close();//close the file
+		} catch (IOException e) {
+			System.out.println(e);
+		}//handle exception
 	}
 	
-public void writeAudio() {//write the audio ArrayList to a file
+	public void writeAudio() {//write the audio ArrayList to a file
 		
 		try {
 			BufferedWriter outputC = new BufferedWriter(new FileWriter("CDs.txt", false));//file writer
-			BufferedWriter outputM = new BufferedWriter(new FileWriter("MP3.txt", false));//file writer
+			BufferedWriter outputM = new BufferedWriter(new FileWriter("MP3s.txt", false));//file writer
 			for (int i = 0; i < audioProducts.size(); i++) {//loop thorough the audio ArrayList
 				
 				if (audioProducts.get(i).getType().equals("CD")) {//check type
@@ -506,10 +556,12 @@ public void writeAudio() {//write the audio ArrayList to a file
 					outputM.newLine();//print a new line
 				}
 				
-				outputC.close();//close the file
-				outputM.close();//close the file
 			}
-		} catch (IOException e) {}//handle exception
+			outputC.close();//close the file
+			outputM.close();//close the file
+		} catch (IOException e) {
+			System.out.println("There is an error in writeAudio()");
+		}//handle exception
 	}
 
 	public void writeUser() {
@@ -527,15 +579,5 @@ public void writeAudio() {//write the audio ArrayList to a file
 		}
 	}
 	
-	public static void main(String[] args) {
-		UserInterface a = new UserInterface(1);
-		a.getUser();
-		a.getReadables();
-		a.getAudioProducts();
-		a.changeCurrentPage(1);
-		a.writeReadable();
-		a.writeAudio();
-		a.writeUser();
-		
-	}
+	
 }

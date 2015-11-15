@@ -1,0 +1,6 @@
+33, Harry Potter All Vol., ZZZ, 200.0, 5, eBook
+54, Twilight, DSS, 250.0, 3, eBook
+44, Recipe for Cakes, Kate La, 345.23, 10, eBook
+897, Book of Life, May Cat, 52.34, 100, eBook
+111, 100 Healthy Habits, Carl Smith, 120.0, 23, eBook
+44, How to Get 100 Percent In Java, ABC, 200000.34, 1, eBook
