@@ -432,7 +432,7 @@ public class UserInterface {//public the class
 			//int i = cart.getIndex(audioProducts.get((int)option - 1), audioProducts.get((int)option - 1).getType());//get the index of given item in cart
 			//cart.addQuantity(i, quan);//update quantity of cart
 			
-			System.out.println(quan + " " + audioProducts.get((int)option - 1).getTitle() + "successfully added to your cart.");//print out message
+			System.out.println(quan + " " + audioProducts.get((int)option - 1).getTitle() + " successfully added to your cart.");//print out message
 			
 			System.out.println("Press -2 to Continue Shopping or Press 0 to CheckOut: ");//ask for user input
 			

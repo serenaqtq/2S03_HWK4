@@ -192,7 +192,7 @@ public class ShoppingCart extends User{//public ShoopingCart
 		for (int i = 0; i < b1.size(); i++) {
 			
 			if (b1.get(i).getTitle().equals(str)) {
-				Book temp = new Book(b1.get(i).getsNo(), b1.get(i).getPrice(), str, b1.get(i).getAuthorName(), quan); 
+				Book temp = new Book(b1.get(i).getsNo(), b1.get(i).getPrice()/1.02, str, b1.get(i).getAuthorName(), quan); 
 				//System.out.println(temp.getInfo());
 				contentR.add(temp);
 			}
@@ -203,7 +203,7 @@ public class ShoppingCart extends User{//public ShoopingCart
 	public void stringToEbook(String str, int quan) {
 		for (int i = 0; i < e1.size(); i++) {
 			if (e1.get(i).getTitle().equals(str)) {
-				eBook temp = new eBook(e1.get(i).getsNo(), b1.get(i).getPrice(), str, b1.get(i).getAuthorName(),quan);
+				eBook temp = new eBook(e1.get(i).getsNo(), e1.get(i).getPrice(), str, e1.get(i).getAuthorName(),quan);
 				contentR.add(temp);
 			}
 		}
@@ -214,7 +214,7 @@ public class ShoppingCart extends User{//public ShoopingCart
 		
 		for (int i = 0; i < c1.size(); i++) {
 			if (c1.get(i).getTitle().equals(str)) {
-				CD temp = new CD(c1.get(i).getsNo(), c1.get(i).getPrice(), str, c1.get(i).getAuthorName(),quan);
+				CD temp = new CD(c1.get(i).getsNo(), c1.get(i).getPrice()/1.02, str, c1.get(i).getAuthorName(),quan);
 				contentA.add(temp);
 			}
 		}
@@ -374,15 +374,16 @@ public class ShoppingCart extends User{//public ShoopingCart
 	public double getHST() {//return the hst of the cart
 		
 		double hst = 0;//create a double to store the hst
-		for (int i = 0; i < contentA.size();i++) {//loop through the ArrayList
+
+		for (int i = 0; i < contentR.size();i++) {//loop through the ArrayList
 			if (contentR.get(i).getType() == "Book") {//Divide price by 1.02 to get original price
-				hst += contentA.get(i).getQuantity() * (contentA.get(i).getPrice()/1.02);//increment the hst by the quantity*price
+				hst += contentR.get(i).getQuantity() * (contentR.get(i).getPrice()/1.02);//increment the hst by the quantity*price
 			}else{//Divide price by 1.02 to get original price
-				hst += contentA.get(i).getQuantity() * (contentA.get(i).getPrice());//increment the hst by the quantity*price
+				hst += contentR.get(i).getQuantity() * (contentR.get(i).getPrice());//increment the hst by the quantity*price
 			}
 		}
 		
-		for (int i = 0; i < contentR.size();i++) {//loop through the ArrayList
+		for (int i = 0; i < contentA.size();i++) {//loop through the ArrayList
 			if (contentA.get(i).getType() == "CD") {//Divide price by 1.02 to get original price
 				hst += contentA.get(i).getQuantity() * (contentA.get(i).getPrice()/1.02);//increment the hst by the quantity*price
 			}else{
