@@ -295,17 +295,17 @@ public class ShoppingCart extends User{//public ShoopingCart
 			System.out.println("There is an error in getContent().");//print out the error message
 		}
 	}
-	
-	public void writeItemsBought () {
+
+	public void writeItemsBought (String confirmationId) {
 		try {
 		BufferedWriter history = new BufferedWriter(new FileWriter("ItemsBought.txt", true));
 				for (int i = 0; i < contentR.size(); i++) {
 					if (contentR.get(i).getType() == "Book") {//Divide price by 1.02 to get original price
-					String display = "U1000   " + contentR.get(i).getTitle() +"   "+contentR.get(i).getPrice()/1.02;
+					String display = confirmationId +"   "+ contentR.get(i).getTitle() +"   "+contentR.get(i).getPrice()/1.02;
 				    history.write(display);
 					history.newLine();//print a new line
 					} else{
-						String display = "U1000   " + contentR.get(i).getTitle() +"   "+contentR.get(i).getPrice();
+						String display = confirmationId+ "   " + contentR.get(i).getTitle() +"   "+contentR.get(i).getPrice();
 					    history.write(display);
 						history.newLine();//print a new line
 
@@ -313,7 +313,7 @@ public class ShoppingCart extends User{//public ShoopingCart
 				}
 				for (int i = 0; i < contentA.size(); i++) {
 					if (contentA.get(i).getType() == "CD") {			
-						String display = "U1000   " + contentA.get(i).getTitle() +"   "+contentA.get(i).getPrice()/1.02;
+						String display = confirmationId + "   " + contentA.get(i).getTitle() +"   "+contentA.get(i).getPrice()/1.02;
 					    history.write(display);
 						history.newLine();//print a new line
 
@@ -324,14 +324,14 @@ public class ShoppingCart extends User{//public ShoopingCart
 
 					}
 				}
-			    history.close();
+			history.close();
 		}catch (Exception e) {  
 	        System.out.println("Some error occured while writing file");//prints error messgae
-		 } 
-			}	
+		} 
+	}	
 
 
-	public void getItemsBought () {
+	public void getItemsBought () {//Prints out the ItemsBought
 		try {
 			BufferedReader inputB = new BufferedReader(new FileReader("ItemsBought.txt"));//file reader
 			String lineB = null;
@@ -342,6 +342,49 @@ public class ShoppingCart extends User{//public ShoopingCart
 		} catch(IOException e) {//catch IOException
 			System.out.println("There is an error in getContent().");//print out the error message
 		}
+	}
+	
+	public int checkItemsBought (){//Check how many items are in ItemBought
+		int counter = 0;
+		try {
+			BufferedReader inputB = new BufferedReader(new FileReader("ItemsBought.txt"));//file reader
+			while ((inputB.readLine()) != null) {//loop through the file
+				counter++;
+			}
+			inputB.close(); //close the file
+		}catch(IOException e) {//catch IOException
+			System.out.println("There is an error in getContent().");//print out the error message
+		}
+		return counter;
+	}
+	
+	public String getConfirmationId() {//Returns confirmation ID
+		int counter = 0;
+		String lineB = "1";
+		String [] temp = new String [3];
+		try {
+			BufferedReader inputB = new BufferedReader(new FileReader("ItemsBought.txt"));//file reader
+			while ((inputB.readLine()) != null) {//loop through the file
+				counter++;
+			}
+			inputB.close(); //close the file
+			
+		} catch(IOException e) {//catch IOException
+			System.out.println("There is an error in getContent().");//print out the error message
+		}
+		try {
+			BufferedReader inputB = new BufferedReader(new FileReader("ItemsBought.txt"));//file reader
+			for (int i = 0; i<counter; i++) {
+				lineB=inputB.readLine();
+			}
+
+			temp = lineB.split("   ");
+			inputB.close();
+		}catch(IOException e) {//catch IOException
+			System.out.println("There is an error in getContent().");//print out the error message
+		}
+		return temp [0];
+		//String [] temp = lineB.spilt
 	}
 	
 	public void getCheckout() {

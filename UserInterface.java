@@ -16,6 +16,7 @@ public class UserInterface {//public the class
 	private ArrayList<Audio> audioProducts = new ArrayList<Audio>();//ArrayList contains all the audio item
 	private ArrayList<User> name = new ArrayList<User>();//ArrayList contains all the user
 	private ShoppingCart cart;//Create a shopping cart object
+	private String confirmationId;
 
 	
 	private int currentPage;//Create a int to track the page
@@ -196,7 +197,6 @@ public class UserInterface {//public the class
 		System.out.println("2. Sign up");//print each option
 		System.out.println("Choose your option: ");//ask for user input
 		double choice = sc.nextDouble();//take a user input as double
-		
 		while (choice != 1 && choice != 2) {//check if choice == 1 or 2
 			
 			System.out.println("Plz enter choice 1 or 2: ");//if not, ask for another user input
@@ -236,7 +236,6 @@ public class UserInterface {//public the class
 	public void p34Info(){//display the information for page 3 and 4
 		
 		//Scanner sc = new Scanner(System.in);//create the scanner
-		
 		System.out.println("Enter your username: ");//ask for user name
 		sc.nextLine();
 		String n1 = sc.nextLine();//store user input as a string
@@ -483,10 +482,19 @@ public class UserInterface {//public the class
 		}
 		
 		if (s1.equals("yes")) {//if the user want to pay
-			System.out.println("Comfirmation ID: U1000");//!!!U1000 should be upadated, but how?
+			int num = cart.checkItemsBought(); //Check how many items are in ItemsBought
+			if (num == 0) {
+				confirmationId = "U1000";//If ItemsBought is empty, begin with U1000 as confirmation id
+			}
+			else {
+				String a=cart.getConfirmationId();//Get confirmation ID as a string
+				int id =Integer.parseInt(a.substring(1,a.length())) + 1;//Convert 1000 to a number and add 1
+				confirmationId = "U" + String.valueOf(id);//Set new confirmation id
+			}
+			System.out.println(confirmationId);//prints confirmation Id
 			System.out.println("Items shipped to: " + cart.getUsername());//print out message
 			System.out.println("Thanks for shopping! Now goes to browse item page");//print out message
-			cart.writeItemsBought();
+			cart.writeItemsBought(confirmationId);
 			cart.clearCart();
 			writeReadable();
 			writeAudio();
