@@ -5,8 +5,11 @@
 * Description:​This class build the UserInterface which contains all the page navigation
 */
 import java.util.ArrayList;//import ArrayList
+import java.util.Date;
 import java.util.Scanner;//import Scanner
 import java.io.*;//import IO
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 public class UserInterface {//public the class
 	
 	private ArrayList<Readable> readables = new ArrayList<Readable>();//ArrayList contains all the readable item
@@ -180,7 +183,8 @@ public class UserInterface {//public the class
 				break;//break the loop
 		case 10: p10Info();//if pageNum = 10, display the p10 message
 				break;//break the loop
-			
+		case 11: p11Info(); //if pageNum = 11, display the p11 message
+				break;//break the loop
 		}
 		
 	}
@@ -271,19 +275,21 @@ public class UserInterface {//public the class
 		System.out.println("1. View Items By Category");//print out option
 		System.out.println("2. View Shooping Cart");//print out option
 		System.out.println("3. Sign Out");//print out option
+		System.out.println("4. View Previous Orders");
 		System.out.println("\nChoose your option: ");//ask for user input
 		
 		double option = sc.nextDouble();//store user input into a double
 		
-		while(option != 1 && option != 2 && option != 3) {//check if user input equals to 1, 2 or 3
+		while(option != 1 && option != 2 && option != 3 && option != 4) {//check if user input equals to 1, 2 or 3
 			
-			System.out.println("Plz enter option 1, 2 or 3: ");//if not, ask for user input
+			System.out.println("Plz enter option 1, 2, 3 or 4: ");//if not, ask for user input
 			option = sc.nextDouble();//overwrite the double with new user input
 		}
 		System.out.println("\n========================================");
 		if (option == 1) {changeCurrentPage(6);}//if option = 1, change current page to page 6
 		if (option == 2) {changeCurrentPage(7);}//if option = 2, change current page to page 7
 		if (option == 3) {changeCurrentPage(1);}//if option = 3, change current page to page 1
+		if (option == 4) {changeCurrentPage(11);}//if option = 4, change current page to page 11
 		
 	}
 	
@@ -474,13 +480,13 @@ public class UserInterface {//public the class
 			
 			System.out.println("Plz enter yes or no: ");//if not, ask for user input
 			s1 = sc.nextLine().toLowerCase();//!!!!!String cannot be overwritten!! How to do the error handle
-			System.out.println(s1);
 		}
 		
 		if (s1.equals("yes")) {//if the user want to pay
 			System.out.println("Comfirmation ID: U1000");//!!!U1000 should be upadated, but how?
 			System.out.println("Items shipped to: " + cart.getUsername());//print out message
 			System.out.println("Thanks for shopping! Now goes to browse item page");//print out message
+			cart.writeItemsBought();
 			cart.clearCart();
 			writeReadable();
 			writeAudio();
@@ -495,6 +501,20 @@ public class UserInterface {//public the class
 		}
 	}
 	
+	public void p11Info() {
+		System.out.println("Confirmation Id   Product Name   Total");
+		cart.getItemsBought();
+		System.out.println("Press -1 to return to the previous page: ");//ask for user input
+		double option1 = sc.nextDouble();//store the user input in a double
+		while (option1 != -1) {//check if user input equals to 0 or -2
+			
+			System.out.println("Plz enter option -1: ");//if not, ask for user input
+			option1 = sc.nextDouble();//overwrite the double with new user input
+		}
+		System.out.println("\n========================================");
+		if (option1 == -1){changeCurrentPage(5);}//if option = 2, change current page to page 6
+	}
+	
 	public void printReadable() {
 		
 		for (int i = 0; i < readables.size(); i++) {
@@ -502,7 +522,7 @@ public class UserInterface {//public the class
 		}
 	}
 	
-public void printAudioProduct() {
+	public void printAudioProduct() {
 		
 		for (int i = 0; i < audioProducts.size(); i++) {
 			System.out.println(audioProducts.get(i).getInfo());
