@@ -5,6 +5,7 @@
 * Description:​This class build the UserInterface which contains all the page navigation
 */
 import java.util.ArrayList;//import ArrayList
+import java.util.Collections;
 import java.util.Scanner;//import Scanner
 import java.io.*;//import IO
 public class UserInterface {//public the class
@@ -14,6 +15,7 @@ public class UserInterface {//public the class
 	private ArrayList<User> name = new ArrayList<User>();//ArrayList contains all the user
 	private ShoppingCart cart;//Create a shopping cart object
 	private String confirmationId;//Create a string to store the confirmation ID for each order
+	private ADMIN adm;
 
 	
 	private int currentPage;//Create a int to track the page
@@ -183,6 +185,16 @@ public class UserInterface {//public the class
 				break;//break the loop
 		case 11: p11Info(); //if pageNum = 11, display the p11 message
 				break;//break the loop
+		case 12: p12Info(); //if pageNum = 12, display the p12 message
+				break;//break the loop
+		case 13: p13Info();//if pageNum = 12, display the p13 message
+				break;//break the loop
+		case 14: p14Info();//if pageNum = 12, display the p14 message
+				break;//break the loop
+		case 15: p15Info();//if pageNum = 12, display the p15 message
+				break;//break the loop
+		case 16: p16Info();//if pageNum = 12, display the p16 message
+				break;//break the loop
 		}
 		
 	}
@@ -238,29 +250,52 @@ public class UserInterface {//public the class
 		String n1 = sc.nextLine();//store user input as a string
 		boolean check = false;//set boolean to false
 		
-		for (int i = 0; i < name.size(); i++) {//loop through the user ArrayList
-			if (((name.get(i)).getUsername()).equals(n1)) {//check if the user input match the existing name
-				
-				check = true;//if match, change to true
+		if (n1.equals("ADMIN")) {
+			adm = new ADMIN();
+			System.out.println("Plz enter your password: ");
+			//sc.nextLine();
+			String p1 = sc.nextLine();
+			if (!p1.equals(adm.getPassword())) {
+				System.out.println("Access denied. Back to previous menu.");
+				System.out.println("\n========================================");//formating
+				changeCurrentPage(1);
+			} else {
+				System.out.println("Hello, ADMIN");
+				System.out.println("\n========================================");//formating
+				cart = new ShoppingCart(n1);
+				cart.readBook();
+				cart.readCD();
+				cart.readeBook();
+				cart.readMP3();
+				cart.loadCart();//assign to the shopping cart
+				changeCurrentPage(12);
 			}
-		}
+		} else {
 		
-		if (check) {//name match the existing name
+			for (int i = 0; i < name.size(); i++) {//loop through the user ArrayList
+				if (((name.get(i)).getUsername()).equals(n1)) {//check if the user input match the existing name
+					
+					check = true;//if match, change to true
+				}
+			}
 			
-			cart = new ShoppingCart(n1);
-			cart.readBook();
-			cart.readCD();
-			cart.readeBook();
-			cart.readMP3();
-			cart.loadCart();//assign to the shopping cart
-			System.out.println("Hello Mr/Miss. " + n1);//print out the welcome message
-			changeCurrentPage(5);//change current page to page 5
-			System.out.println("\n========================================");//formating
-		} else {//if not match the existing name
-			
-			System.out.println("No Access");//print out the message
-			System.out.println("\n========================================");//formating
-			changeCurrentPage(1);////change current page to page 1
+			if (check) {//name match the existing name
+				
+				cart = new ShoppingCart(n1);
+				cart.readBook();
+				cart.readCD();
+				cart.readeBook();
+				cart.readMP3();
+				cart.loadCart();//assign to the shopping cart
+				System.out.println("Hello Mr/Miss. " + n1);//print out the welcome message
+				changeCurrentPage(5);//change current page to page 5
+				System.out.println("\n========================================");//formating
+			} else {//if not match the existing name
+				
+				System.out.println("No Access");//print out the message
+				System.out.println("\n========================================");//formating
+				changeCurrentPage(1);////change current page to page 1
+			}
 		}
 	}
 	
@@ -495,7 +530,8 @@ public class UserInterface {//public the class
 			cart.clearCart();//Clear the cart after checkout
 			writeReadable();//Write readable back to file
 			writeAudio();//Write audio back to file
-			writeUser();System.out.println("\n========================================");//formating
+			writeUser();
+			System.out.println("\n========================================");//formating
 			changeCurrentPage(5);//change current page to page 5
 		}
 		
@@ -520,6 +556,264 @@ public class UserInterface {//public the class
 		if (option1 == -1){changeCurrentPage(5);}//if option = -1, change current page to page 5
 	}
 	
+	public void p12Info(){
+		
+		System.out.println("1. View Items By Category");//print out option
+		System.out.println("2. View Shooping Cart");//print out option
+		System.out.println("3. Sign Out");//print out option
+		System.out.println("4. View Previous Orders");
+		System.out.println("5. Change password");
+		System.out.println("6. Delete duplicate username");
+		System.out.println("7. Add items to inventory");
+		System.out.println("8. Sort the inventory");
+		System.out.println("\nChoose your option: ");//ask for user input
+		
+		//sc.nextLine();
+		String option = sc.nextLine();
+		while (!option.equals("1") && !option.equals("2") && !option.equals("3") && !option.equals("4") && 
+				!option.equals("5") && !option.equals("6") && !option.equals("7") && !option.equals("8")) {
+			System.out.println("Plz enter a number between 1-8: ");
+			option = sc.nextLine();
+		}
+		
+		if (Integer.parseInt(option) == 1) {changeCurrentPage(6);}//if option = 1, change current page to page 6
+		if (Integer.parseInt(option) == 2) {changeCurrentPage(7);}//if option = 2, change current page to page 7
+		if (Integer.parseInt(option) == 3) {changeCurrentPage(1);}//if option = 3, change current page to page 1
+		if (Integer.parseInt(option) == 4) {changeCurrentPage(11);}//if option = 4, change current page to page 11
+		if (Integer.parseInt(option) == 5) {changeCurrentPage(13);}//if option = 5, change current page to page 13
+		if (Integer.parseInt(option) == 6) {changeCurrentPage(14);}//if option = 6, change current page to page 14
+		if (Integer.parseInt(option) == 7) {changeCurrentPage(15);}//if option = 7, change current page to page 15
+		if (Integer.parseInt(option) == 8) {changeCurrentPage(16);}//if option = 8, change current page to page 16
+		
+	}
+	
+	public void p13Info() {
+		
+		System.out.println("Plz enter your new password: ");
+		String str = sc.nextLine();
+		
+		adm.changePassword(str);
+		//System.out.println(adm.getPassword());
+		System.out.println("Password successfully changed. Now back to previous menu");
+		System.out.println("\n========================================");//formating
+		changeCurrentPage(12);
+	}
+	
+	public void p14Info() {
+		System.out.println("System checking for duplicate username ...");
+		System.out.println("Users.txt before checking: ");
+		
+		for (int i = 0; i < name.size(); i++) {
+			System.out.println(name.get(i).getUsername());
+		}
+		
+		System.out.println("\n========================================");//formating
+		for (int i = 0; i < name.size(); i++) {
+			
+			String temp = name.get(i).getUsername();
+			for (int j = i + 1; j < name.size(); j++) {
+				if (name.get(j).getUsername().equals(temp)) {
+					name.remove(j);
+				}
+			}
+		}
+		
+		System.out.println("Users after checking");
+		for (int i = 0; i < name.size(); i++) {
+			System.out.println(name.get(i).getUsername());
+		}
+		System.out.println("\n========================================");//formating
+		System.out.println("Operation finished. Now back to previous menu.");
+		System.out.println("\n========================================");//formating
+		changeCurrentPage(12);
+	}
+	
+	public void p15Info() {
+	
+		System.out.println("Enter the information of the item: ");
+		System.out.println("sNO: ");
+		
+		while (!sc.hasNextInt()) {
+			System.out.println("Plz enter a integer as sNo: ");
+			sc.next();
+		}
+		
+		int num = sc.nextInt();
+	
+		System.out.println("Title: ");
+		sc.nextLine();
+		String title = sc.nextLine();
+		
+		System.out.println("Author name: ");
+		String aName = sc.nextLine();
+		
+		System.out.println("Price: ");
+		
+		while (!sc.hasNextDouble()) {
+			System.out.println("Plz enter a double as price: ");
+			sc.next();
+		}
+		
+		double price = sc.nextDouble();
+		
+		System.out.println("Quantity: ");
+		
+		while (!sc.hasNextInt()) {
+			System.out.println("Plz enter a integer as sNo: ");
+			sc.next();
+		}
+		int quan = sc.nextInt();
+		
+		System.out.println("Choose inventory: ");
+		System.out.println("1. Books");//print out option
+		System.out.println("2. eBooks");//print out option
+		System.out.println("3. CDs");
+		System.out.println("4. MP3s");
+		System.out.println("\nChoose your oprion: ");//ask for user input
+		
+		String option = sc.nextLine();
+		while (!option.equals("1") && !option.equals("2") && !option.equals("3") && !option.equals("4")) {
+			System.out.println("Plz enter a number between 1-4: ");
+			option = sc.nextLine();
+		}
+		
+		if (Integer.parseInt(option) == 1) {
+			System.out.println("Now add item to book inventory...");
+			Book tempB = new Book(num, price, title, aName, quan);
+			readables.add(tempB);
+		}
+		if (Integer.parseInt(option) == 2) {
+			System.out.println("Now add item to eBook inventory...");
+			eBook tempB = new eBook(num, price, title, aName, quan);
+			readables.add(tempB);
+		}
+		if (Integer.parseInt(option) == 3) {
+			System.out.println("Now add item to CD inventory...");
+			CD tempB = new CD(num, price, title, aName, quan);
+			audioProducts.add(tempB);
+		}
+		if (Integer.parseInt(option) == 4) {
+			System.out.println("Now add item to MP3 inventory...");
+			MP3 tempB = new MP3(num, price, title, aName, quan);
+			audioProducts.add(tempB);
+		}
+		System.out.println("Item add succesfully. Do you wanna ad  another item? ");
+		String s1 = sc.nextLine().toLowerCase();//store the user input in a string and make it not case sensitive
+		
+		while (!s1.equals("yes") && !s1.equals("no")) {//check if user input is yes or no
+			
+			System.out.println("Plz enter yes or no: ");//if not, ask for user input
+			s1 = sc.nextLine().toLowerCase();//!!!!!String cannot be overwritten!! How to do the error handle
+		}
+		
+		if (s1.equals("no")) {
+			writeReadable();//Write readable back to file
+			writeAudio();//Write audio back to file
+			System.out.println("Now back to previous menu.");
+			System.out.println("\n========================================");//formating
+			changeCurrentPage(12);
+		}
+		if (s1.equals("yes")) {
+			System.out.println("\n========================================");//formating
+			changeCurrentPage(15);
+		}
+	}
+	
+	public void p16Info() {
+		
+		System.out.println("Which inventory you want to sort? ");
+		System.out.println("1. Readable");
+		System.out.println("1. Audio");
+		System.out.println("Choose your option: ");
+		
+		String option = sc.nextLine();
+		while (!option.equals("1") && !option.equals("2")) {
+			System.out.println("Plz enter a number between 1-2: ");
+			option = sc.nextLine();
+		}
+		
+		System.out.println("\n========================================");//formating
+		
+		System.out.println("What kind of sorting algorithm you want to use? ");
+		System.out.println("1. Sort by title");
+		System.out.println("2. Sort by price");
+		System.out.println("Choose your option: ");
+		
+		String option1 = sc.nextLine();
+		while (!option1.equals("1") && !option1.equals("2")) {
+			System.out.println("Plz enter a number between 1-2: ");
+			option1 = sc.nextLine();
+		}
+		
+		if (Integer.parseInt(option) == 1) {
+			if (Integer.parseInt(option1) == 1) {
+				for (int i = 0; i < readables.size() - 1; i++){
+		            int index = i;
+		            for (int j = i + 1; j < readables.size(); j++){
+		            	double temp;
+		            	temp = readables.get(j).getTitle().compareTo(readables.get(j).getTitle());
+		                if (temp > 0){
+		                    index = j;}
+		            
+		            Collections.swap(readables, i, index);
+		            }
+				}
+			}
+			if (Integer.parseInt(option1) == 2) {
+				for (int i = 0; i < readables.size() - 1; i++){
+		            int index = i;
+		            for (int j = i + 1; j < readables.size(); j++){
+		                if (readables.get(j).getPrice() < readables.get(index).getPrice()){
+		                    index = j;
+		                }
+		            }
+		            
+		            Collections.swap(readables, i, index);
+		        }
+			}
+		}
+		
+		if (Integer.parseInt(option) == 2) {
+			if (Integer.parseInt(option1) == 1) {
+
+				for (int i = 0; i < audioProducts.size() - 1; i++){
+		            int index = i;
+		            for (int j = i + 1; j < audioProducts.size(); j++){
+		            	double temp;
+		            	temp = readables.get(j).getTitle().compareTo(audioProducts.get(j).getTitle());
+		                if (temp > 0){
+		                    index = j;}
+		            
+		            Collections.swap(audioProducts, i, index);
+		            }
+				}
+			
+			}
+			if (Integer.parseInt(option1) == 2) {
+				for (int i = 0; i < audioProducts.size() - 1; i++){
+		            int index = i;
+		            for (int j = i + 1; j < audioProducts.size(); j++){
+		                if (audioProducts.get(j).getPrice() < audioProducts.get(index).getPrice()){
+		                    index = j;
+		                }
+		            }		            
+		            Collections.swap(audioProducts, i, index);
+		        }
+			}
+		}
+//		for (int i = 0; i < audioProducts.size(); i++) {
+//			System.out.println(audioProducts.get(i).getInfo());
+//		}
+		writeReadable();
+		writeAudio();
+		System.out.println("Sorting finished. Now back to previous page");
+		System.out.println("\n========================================");//formating
+		changeCurrentPage(12);
+
+		
+	}
+		
+	
 	public void printReadable() {//print out the readable on the screen
 		
 		for (int i = 0; i < readables.size(); i++) {//loop through the readable
@@ -533,6 +827,8 @@ public class UserInterface {//public the class
 			System.out.println(audioProducts.get(i).getInfo());//call the getInfo() for each item
 		}
 	}
+	
+	
 	
 	public void writeReadable() {//write the readable ArrayList to a file
 		
@@ -597,6 +893,4 @@ public class UserInterface {//public the class
 			System.out.println("There is an error in writeUser()");//print out the message
 		}
 	}
-	
-	
 }
