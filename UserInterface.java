@@ -5,23 +5,20 @@
 * Description:​This class build the UserInterface which contains all the page navigation
 */
 import java.util.ArrayList;//import ArrayList
-import java.util.Date;
 import java.util.Scanner;//import Scanner
 import java.io.*;//import IO
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
 public class UserInterface {//public the class
 	
 	private ArrayList<Readable> readables = new ArrayList<Readable>();//ArrayList contains all the readable item
 	private ArrayList<Audio> audioProducts = new ArrayList<Audio>();//ArrayList contains all the audio item
 	private ArrayList<User> name = new ArrayList<User>();//ArrayList contains all the user
 	private ShoppingCart cart;//Create a shopping cart object
-	private String confirmationId;
+	private String confirmationId;//Create a string to store the confirmation ID for each order
 
 	
 	private int currentPage;//Create a int to track the page
 	
-	Scanner sc = new Scanner(System.in);
+	Scanner sc = new Scanner(System.in);//Create Scanenr
 	
 	public UserInterface(int num) {//Constructor
 		
@@ -202,7 +199,7 @@ public class UserInterface {//public the class
 			System.out.println("Plz enter choice 1 or 2: ");//if not, ask for another user input
 			choice = sc.nextDouble();//overwrite the double
 		}
-		System.out.println("\n========================================");
+		System.out.println("\n========================================");//formating
 		if ((int)choice == 2) {changeCurrentPage(2);}//if user choose 1, display page 2
 		if ((int)choice == 1) {changeCurrentPage(3);}//if user choose 2, display page 3
 		
@@ -221,9 +218,9 @@ public class UserInterface {//public the class
 				name.add(stringToUser(n1));//add user to the ArrayList
 				System.out.println("\nUser name successfully added");//print out the message
 				changeCurrentPage(1);//change current page to page 1
-				System.out.println("\n========================================");
+				System.out.println("\n========================================");//formating
 			}else {
-				System.out.println("\n========================================");
+				System.out.println("\n========================================");//formating
 		        changeCurrentPage(1);
 		        //System.out.println("File already exists.");
 			}
@@ -258,11 +255,11 @@ public class UserInterface {//public the class
 			cart.loadCart();//assign to the shopping cart
 			System.out.println("Hello Mr/Miss. " + n1);//print out the welcome message
 			changeCurrentPage(5);//change current page to page 5
-			System.out.println("\n========================================");
+			System.out.println("\n========================================");//formating
 		} else {//if not match the existing name
 			
 			System.out.println("No Access");//print out the message
-			System.out.println("\n========================================");
+			System.out.println("\n========================================");//formating
 			changeCurrentPage(1);////change current page to page 1
 		}
 	}
@@ -284,7 +281,7 @@ public class UserInterface {//public the class
 			System.out.println("Plz enter option 1, 2, 3 or 4: ");//if not, ask for user input
 			option = sc.nextDouble();//overwrite the double with new user input
 		}
-		System.out.println("\n========================================");
+		System.out.println("\n========================================");//formating
 		if (option == 1) {changeCurrentPage(6);}//if option = 1, change current page to page 6
 		if (option == 2) {changeCurrentPage(7);}//if option = 2, change current page to page 7
 		if (option == 3) {changeCurrentPage(1);}//if option = 3, change current page to page 1
@@ -308,7 +305,7 @@ public class UserInterface {//public the class
 			System.out.println("Plz enter option 1, 2 or -1: ");//if not, ask for user input
 			option = sc.nextDouble();//overwrite the double with new user input
 		}
-		System.out.println("\n========================================");
+		System.out.println("\n========================================");//formating
 		if (option == 1) {changeCurrentPage(8);}//if option = 1, change current page to page 8
 		if (option == 2) {changeCurrentPage(9);}//if option = 2, change current page to page 9
 		if (option == -1) {changeCurrentPage(5);}//if option = -1, change current page to page 5
@@ -327,7 +324,7 @@ public class UserInterface {//public the class
 			System.out.println("Plz enter option 1 or -1: ");//if not, ask for user input
 			option = sc.nextDouble();//overwrite the double with new user input
 		}
-		System.out.println("\n========================================");
+		System.out.println("\n========================================");//formating
 		if (option == 1) {changeCurrentPage(10);}//if option = 1, change current page to page 10
 		if (option == -1) {changeCurrentPage(5);}//if option = -1, change current page to page 5
 	}
@@ -383,7 +380,7 @@ public class UserInterface {//public the class
 				System.out.println("Plz enter option 0 or -2: ");//if not, ask for user input
 				option1 = sc.nextDouble();//overwrite the double with new user input
 			}
-			System.out.println("\n========================================");
+			System.out.println("\n========================================");//formating
 			if (option1 == 0) {changeCurrentPage(10);}//if option = 0, change current page to page 10
 			if (option1 == -2) {changeCurrentPage(6);}//if option = 2, change current page to page 6
 			
@@ -443,7 +440,7 @@ public class UserInterface {//public the class
 				System.out.println("Plz enter option 0 or -2: ");//if not, ask for user input
 				option1 = sc.nextDouble();//overwrite the double with new user input
 			}
-			System.out.println("\n========================================");
+			System.out.println("\n========================================");//formating
 			if (option1 == 0) {changeCurrentPage(10);}//if option = 0, change current page to page 10
 			if (option1 == -2){changeCurrentPage(6);}//if option = 2, change current page to page 6
 		}
@@ -494,46 +491,46 @@ public class UserInterface {//public the class
 			System.out.println(confirmationId);//prints confirmation Id
 			System.out.println("Items shipped to: " + cart.getUsername());//print out message
 			System.out.println("Thanks for shopping! Now goes to browse item page");//print out message
-			cart.writeItemsBought(confirmationId);
-			cart.clearCart();
-			writeReadable();
-			writeAudio();
-			writeUser();System.out.println("\n========================================");
+			cart.writeItemsBought(confirmationId);//Write the order to the text file
+			cart.clearCart();//Clear the cart after checkout
+			writeReadable();//Write readable back to file
+			writeAudio();//Write audio back to file
+			writeUser();System.out.println("\n========================================");//formating
 			changeCurrentPage(5);//change current page to page 5
 		}
 		
 		if (s1.equals("no")) {// if they don't want to pay
 			System.out.println("Checkout not finished. Go to browse item page");//print out message
-			System.out.println("\n========================================");
+			System.out.println("\n========================================");//formating
 			changeCurrentPage(5);//change current page to page 5
 		}
 	}
 	
 	public void p11Info() {
-		System.out.println("Confirmation Id   Product Name   Total");
-		cart.getItemsBought();
+		System.out.println("Confirmation Id   Product Name   Total");//print out the message
+		cart.getItemsBought();//print out the order information
 		System.out.println("Press -1 to return to the previous page: ");//ask for user input
 		double option1 = sc.nextDouble();//store the user input in a double
-		while (option1 != -1) {//check if user input equals to 0 or -2
+		while (option1 != -1) {//check if user input equals to -1
 			
 			System.out.println("Plz enter option -1: ");//if not, ask for user input
 			option1 = sc.nextDouble();//overwrite the double with new user input
 		}
-		System.out.println("\n========================================");
-		if (option1 == -1){changeCurrentPage(5);}//if option = 2, change current page to page 6
+		System.out.println("\n========================================");//formating
+		if (option1 == -1){changeCurrentPage(5);}//if option = -1, change current page to page 5
 	}
 	
-	public void printReadable() {
+	public void printReadable() {//print out the readable on the screen
 		
-		for (int i = 0; i < readables.size(); i++) {
-			System.out.println(readables.get(i).getInfo());
+		for (int i = 0; i < readables.size(); i++) {//loop through the readable
+			System.out.println(readables.get(i).getInfo());//call the getInfo() for each item
 		}
 	}
 	
-	public void printAudioProduct() {
+	public void printAudioProduct() {//print out the audio on the screen
 		
-		for (int i = 0; i < audioProducts.size(); i++) {
-			System.out.println(audioProducts.get(i).getInfo());
+		for (int i = 0; i < audioProducts.size(); i++) {//loop through the audio
+			System.out.println(audioProducts.get(i).getInfo());//call the getInfo() for each item
 		}
 	}
 	
@@ -541,14 +538,12 @@ public class UserInterface {//public the class
 		
 		try {
 			BufferedWriter outputB = new BufferedWriter(new FileWriter("Books.txt", false));//file writer
-			//System.out.println("W1 load");
 			BufferedWriter outputE = new BufferedWriter(new FileWriter("Ebooks.txt", false));//file writer
-			//System.out.println("W2 load");
+
 			for (int i = 0; i < readables.size(); i++) {//loop thorough the readable ArrayList
 				
 				if (readables.get(i).getType().equals("Book")) {//check type
 					
-					//System.out.println(readables.get(i).getType());
 					outputB.write(readables.get(i).getInfo());//write book into text file
 					outputB.newLine();//print a new line
 				} else {//if it is a ebook
@@ -584,22 +579,22 @@ public class UserInterface {//public the class
 			outputC.close();//close the file
 			outputM.close();//close the file
 		} catch (IOException e) {
-			System.out.println("There is an error in writeAudio()");
-		}//handle exception
+			System.out.println("There is an error in writeAudio()");//handle exception
+		}
 	}
 
-	public void writeUser() {
+	public void writeUser() {//Write user back to text file
 		
-		try {
-			BufferedWriter output = new BufferedWriter(new FileWriter("Users.txt", false));
+		try {//try-catch structure
+			BufferedWriter output = new BufferedWriter(new FileWriter("Users.txt", false));//file writer
 			
-			for (int i = 0; i < name.size(); i++) {
-				output.write(name.get(i).getUsername());
-				output.newLine();
+			for (int i = 0; i < name.size(); i++) {//loop through ArrayList
+				output.write(name.get(i).getUsername());//write the name in file
+				output.newLine();//print out a new line
 			}
-			output.close();
-		} catch (IOException e) {
-			System.out.println("There is an error in writeUser()");
+			output.close();//close the file
+		} catch (IOException e) {//catch IOException
+			System.out.println("There is an error in writeUser()");//print out the message
 		}
 	}
 	

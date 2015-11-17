@@ -20,13 +20,13 @@ import java.text.SimpleDateFormat;//Import SimpleDateFormat
 
 public class ShoppingCart extends User{//public ShoopingCart
 	
-	private ArrayList<Readable> contentR = new ArrayList<Readable>();
-	private ArrayList<Audio> contentA = new ArrayList<Audio>();
+	private ArrayList<Readable> contentR = new ArrayList<Readable>();//Store all the readables
+	private ArrayList<Audio> contentA = new ArrayList<Audio>();//Store all the audios
 	
-	private ArrayList<Book> b1 = new ArrayList<Book>();
-	private ArrayList<MP3> m1 = new ArrayList<MP3>();
-	private ArrayList<eBook> e1 = new ArrayList<eBook>();
-	private ArrayList<CD> c1 = new ArrayList<CD>();
+	private ArrayList<Book> b1 = new ArrayList<Book>();//Store books from file
+	private ArrayList<MP3> m1 = new ArrayList<MP3>();//Store MP3s from file
+	private ArrayList<eBook> e1 = new ArrayList<eBook>();//Store eBooks from file
+	private ArrayList<CD> c1 = new ArrayList<CD>();//Store CDs from file
 	
 	
 	public ShoppingCart(String name){//Constructor which take in a string as user name
@@ -34,34 +34,31 @@ public class ShoppingCart extends User{//public ShoopingCart
 		super(name);//call parent's constructor
 	}
 	
-	public void loadCart() {
+	public void loadCart() {//load the cart information from file
 		
-		try {//try-catch structure to catch ant error
+		try {//try-catch structure to catch any error
 			BufferedReader input = new BufferedReader(new FileReader("Cart_" + this.getUsername() + ".txt"));//read in file
 			
 			String line = null;//define a string to store each line of the file
 			while ((line = input.readLine()) != null) {//while loop to loop thorough the file
-				String[] temp = line.split(", ");
-				int quan = Integer.parseInt(temp[3]);
-				String temp1 = checkType(temp[1]);
-				//System.out.println(temp[1]);
-				//System.out.println(temp1);
+				String[] temp = line.split(", ");//split the string
+				int quan = Integer.parseInt(temp[3]);//store quantity 
+				String temp1 = checkType(temp[1]);//store type
 				
-				if (temp1.equals("Book")) {
-					//System.out.println(temp1);
-					stringToBook(temp[1], quan);
+				if (temp1.equals("Book")) {//if it is a book
+					stringToBook(temp[1], quan);//add it to the ArrayList
 				}
 				
-				if (temp1.equals("eBook")) {
-					stringToEbook(temp[1], quan);
+				if (temp1.equals("eBook")) {//if it is a eBook
+					stringToEbook(temp[1], quan);//add it to the ArrayList
 				}
 				
-				if (temp1.equals("CD")) {
-					stringToCD(temp[1],quan);
+				if (temp1.equals("CD")) {//if it is a CD
+					stringToCD(temp[1],quan);//add it to the ArrayList
 				}
 				
-				if (temp1.equals("MP3")) {
-					stringToMP3(temp[1],quan);
+				if (temp1.equals("MP3")) {//if it is a MP3
+					stringToMP3(temp[1],quan);//add it to the ArrayList
 				}
 			}
 			
@@ -80,11 +77,11 @@ public class ShoppingCart extends User{//public ShoopingCart
 			}
 			
 		} catch (IOException e) {
-			System.out.println(e);
+			System.out.println(e);//Catch exception
 		}
 	}
 	
-	public void readBook() {
+	public void readBook() {//read book from file
 		try {//try-catch structure
 			BufferedReader inputB = new BufferedReader(new FileReader("Books.txt"));//file reader
 			
@@ -101,7 +98,7 @@ public class ShoppingCart extends User{//public ShoopingCart
 	}//read Book.txt into ArrayList
 
 	
-	public void readeBook() {
+	public void readeBook() {//read eBook from file
 		try {//try-catch structure
 			BufferedReader inputE = new BufferedReader(new FileReader("EBooks.txt"));//file reader
 			
@@ -116,7 +113,7 @@ public class ShoppingCart extends User{//public ShoopingCart
 		}
 	}//read eBook.txt into ArrayList
 	
-	public void readCD() {
+	public void readCD() {//read CD from file
 		
 		try {//try-catch structure
 			BufferedReader inputC = new BufferedReader(new FileReader("CDs.txt"));//file reader
@@ -126,13 +123,13 @@ public class ShoppingCart extends User{//public ShoopingCart
 				c1.add(stringToCD(lineC));//add CD to ArrayList
 			}
 			
-			inputC.close();
+			inputC.close();//close the file
 		} catch(IOException e) {//catch IOException
 			System.out.println("There is an error in readCD().");///print out the error message
 		}
 	}//read CD.txt into ArrayList
 	
-	public void readMP3() {
+	public void readMP3() {//read MP3 from file
 		
 		try {//try-catch structure
 			BufferedReader inputM= new BufferedReader(new FileReader("MP3s.txt"));//file reader
@@ -148,11 +145,11 @@ public class ShoppingCart extends User{//public ShoopingCart
 		}
 	}//read MP3.txt into ArrayList
 	
-	public Book stringToBook(String str) {
+	public Book stringToBook(String str) {//convert string to a book
 
-		String[] temp = str.split(", ");
-		Book b1 = new Book(Integer.parseInt(temp[0]), Double.parseDouble(temp[3]), temp[1], temp[2], Integer.parseInt(temp[4]));
-		return b1;
+		String[] temp = str.split(", ");//split the string
+		Book b1 = new Book(Integer.parseInt(temp[0]), Double.parseDouble(temp[3]), temp[1], temp[2], Integer.parseInt(temp[4]));//call constructor
+		return b1;//return the book
 	}
 	
 	public eBook stringToEbook(String str) {//Convert a string to ebook
@@ -179,101 +176,94 @@ public class ShoppingCart extends User{//public ShoopingCart
 		return m1;//return the MP3
 	}
 
-	public void stringToBook(String str, int quan) {
+	public void stringToBook(String str, int quan) {//convert string to book
 		
 		
-		for (int i = 0; i < b1.size(); i++) {
+		for (int i = 0; i < b1.size(); i++) {//loop through the books from file
 			
-			if (b1.get(i).getTitle().equals(str)) {
-				Book temp = new Book(b1.get(i).getsNo(), b1.get(i).getPrice()/1.02, str, b1.get(i).getAuthorName(), quan); 
-				//System.out.println(temp.getInfo());
-				contentR.add(temp);
-			}
-		}
-		//System.out.println(temp);
-	}
-	
-	public void stringToEbook(String str, int quan) {
-		for (int i = 0; i < e1.size(); i++) {
-			if (e1.get(i).getTitle().equals(str)) {
-				eBook temp = new eBook(e1.get(i).getsNo(), e1.get(i).getPrice(), str, e1.get(i).getAuthorName(),quan);
-				contentR.add(temp);
-			}
-		}
-		
-	}
-	
-	public void stringToCD(String str, int quan) {
-		
-		for (int i = 0; i < c1.size(); i++) {
-			if (c1.get(i).getTitle().equals(str)) {
-				CD temp = new CD(c1.get(i).getsNo(), c1.get(i).getPrice()/1.02, str, c1.get(i).getAuthorName(),quan);
-				contentA.add(temp);
+			if (b1.get(i).getTitle().equals(str)) {//check if has same title
+				Book temp = new Book(b1.get(i).getsNo(), b1.get(i).getPrice()/1.02, str, b1.get(i).getAuthorName(), quan);//call constructor
+				contentR.add(temp);//add new book to ArrayList
 			}
 		}
 	}
 	
-	public void stringToMP3(String str, int quan) {
+	public void stringToEbook(String str, int quan) {//convert string to ebook
+		for (int i = 0; i < e1.size(); i++) {//loop through the ebooks from file
+			if (e1.get(i).getTitle().equals(str)) {//check if has same title
+				eBook temp = new eBook(e1.get(i).getsNo(), e1.get(i).getPrice(), str, e1.get(i).getAuthorName(),quan);//call constructor
+				contentR.add(temp);//add new ebook to ArrayList
+			}
+		}
 		
-		for (int i = 0; i < m1.size(); i++) {
-			if (m1.get(i).getTitle().equals(str)) {
-				MP3 temp = new MP3(m1.get(i).getsNo(), m1.get(i).getPrice(), str, m1.get(i).getAuthorName(),quan);
-				contentA.add(temp);
+	}
+	
+	public void stringToCD(String str, int quan) {//convert string to CD
+		
+		for (int i = 0; i < c1.size(); i++) {//loop through the CD from file
+			if (c1.get(i).getTitle().equals(str)) {//check if has same title
+				CD temp = new CD(c1.get(i).getsNo(), c1.get(i).getPrice()/1.02, str, c1.get(i).getAuthorName(),quan);//call constructor
+				contentA.add(temp);//add new CD to ArrayList
 			}
 		}
 	}
 	
-	public String checkType(String str) {
+	public void stringToMP3(String str, int quan) {//convert string to MP3
 		
-		int check = 0;
-		//System.out.println(str);
-		for (int i = 0; i < b1.size(); i++) {
+		for (int i = 0; i < m1.size(); i++) {//loop through the CD from file
+			if (m1.get(i).getTitle().equals(str)) {//check if has same title
+				MP3 temp = new MP3(m1.get(i).getsNo(), m1.get(i).getPrice(), str, m1.get(i).getAuthorName(),quan);//call constructor
+				contentA.add(temp);//add new MP3 to ArrayList
+			}
+		}
+	}
+	
+	public String checkType(String str) {//return type of the given title of item
+		
+		int check = 0;//set check to zero
+		for (int i = 0; i < b1.size(); i++) {//loop through the ArrayList
 			
-			if (b1.get(i).getTitle().equals(str)) {
-				check = 1; 
-				//System.out.println(1);
+			if (b1.get(i).getTitle().equals(str)) {//check if has same title
+				check = 1; //overWrite check
 			}
 		}
 		
-		for (int i = 0; i < e1.size(); i++) {
+		for (int i = 0; i < e1.size(); i++) {//loop through the ArrayList
 			
-			if (e1.get(i).getTitle().equals(str)) {
-				check = 2;
-				//System.out.println(2);
+			if (e1.get(i).getTitle().equals(str)) {//check if has same title
+				check = 2;//overWrite check
 			}
 		}
 		
-		for (int i = 0; i < m1.size(); i++) {
+		for (int i = 0; i < m1.size(); i++) {//loop through the ArrayList
 			
-			if (m1.get(i).getTitle().equals(str)) {
-				check = 3;
-				//System.out.println(3);
+			if (m1.get(i).getTitle().equals(str)) {//check if has same title
+				check = 3;//overWrite check
 			}
 		}
 		
-		for (int i = 0; i < c1.size(); i++) {
+		for (int i = 0; i < c1.size(); i++) {//loop through the ArrayList
 			
-			if (c1.get(i).getTitle().equals(str)) {
-				check = 4;
-				//System.out.println(4);
+			if (c1.get(i).getTitle().equals(str)) {//check if has same title
+				check = 4;//overWrite check
 			}
 		}
 		
-		if (check == 1) {return "Book";}
-		if (check == 2) {return "eBook";}
-		if (check == 3) {return "MP3";}
-		if (check == 4) {return "CD";}
-		else {return "No type match!";}
+		if (check == 1) {return "Book";}//return type
+		if (check == 2) {return "eBook";}//return type
+		if (check == 3) {return "MP3";}//return type
+		if (check == 4) {return "CD";}//return type
+		else {return "No type match!";}//return type if not found
 		
 	}
 	
 	
 	public void addQuantity(int index, int quan, String str){//add given quantity to the item at given index
 		
-		if (str.equals("Book") || str.equals("eBook")) {
+		if (str.equals("Book") || str.equals("eBook")) {//check type
 			(contentR.get(index)).changeQuantityC(quan);//update the quantity for the item
 		}
-		if (str.equals("MP3") || str.equals("CD")) {
+		if (str.equals("MP3") || str.equals("CD")) {//check type
 			(contentA.get(index)).changeQuantityC(quan);//update the quantity for the item
 		}
 		
@@ -286,7 +276,7 @@ public class ShoppingCart extends User{//public ShoopingCart
 			
 			String lineB = null;//create a string to store each line of the file
 			while ((lineB = inputB.readLine()) != null) {//loop through the file
-				System.out.println(lineB);
+				System.out.println(lineB);//print the message
 			}
 			
 			inputB.close();//close the file
@@ -296,37 +286,37 @@ public class ShoppingCart extends User{//public ShoopingCart
 		}
 	}
 
-	public void writeItemsBought (String confirmationId) {
-		try {
-		BufferedWriter history = new BufferedWriter(new FileWriter("ItemsBought.txt", true));
-				for (int i = 0; i < contentR.size(); i++) {
-					if (contentR.get(i).getType() == "Book") {//Divide price by 1.02 to get original price
-					String display = confirmationId +"   "+ contentR.get(i).getTitle() +"   "+contentR.get(i).getPrice()/1.02;
-				    history.write(display);
+	public void writeItemsBought (String confirmationId) {//write order to file
+		try {//try-catch structure
+		BufferedWriter history = new BufferedWriter(new FileWriter("ItemsBought.txt", true));//file writer
+				for (int i = 0; i < contentR.size(); i++) {//loop through the ArrayList
+					if (contentR.get(i).getType() == "Book") {//check type
+					String display = confirmationId +"   "+ contentR.get(i).getTitle() +"   "+contentR.get(i).getPrice()/1.02;//Divide price by 1.02 to get original price
+				    history.write(display);//write file
 					history.newLine();//print a new line
-					} else{
-						String display = confirmationId+ "   " + contentR.get(i).getTitle() +"   "+contentR.get(i).getPrice();
-					    history.write(display);
+					} else{//check type
+						String display = confirmationId+ "   " + contentR.get(i).getTitle() +"   "+contentR.get(i).getPrice();//Divide price by 1.02 to get original price
+					    history.write(display);//write file
 						history.newLine();//print a new line
 
 					}
 				}
-				for (int i = 0; i < contentA.size(); i++) {
-					if (contentA.get(i).getType() == "CD") {			
-						String display = confirmationId + "   " + contentA.get(i).getTitle() +"   "+contentA.get(i).getPrice()/1.02;
-					    history.write(display);
+				for (int i = 0; i < contentA.size(); i++) {//loop through the ArrayList
+					if (contentA.get(i).getType() == "CD") {	//check type		
+						String display = confirmationId + "   " + contentA.get(i).getTitle() +"   "+contentA.get(i).getPrice()/1.02;//Divide price by 1.02 to get original price
+					    history.write(display);//write file
 						history.newLine();//print a new line
 
-					} else {
-						String display = "U1000   " + contentA.get(i).getTitle() +"   "+contentA.get(i).getPrice();
-					    history.write(display);
+					} else {//check type
+						String display = "U1000   " + contentA.get(i).getTitle() +"   "+contentA.get(i).getPrice();//Divide price by 1.02 to get original price
+					    history.write(display);//write file
 						history.newLine();//print a new line
 
 					}
 				}
-			history.close();
+			history.close();//close the file
 		}catch (Exception e) {  
-	        System.out.println("Some error occured while writing file");//prints error messgae
+	        System.out.println("Some error occured while writing file");//prints error message
 		} 
 	}	
 
@@ -334,93 +324,92 @@ public class ShoppingCart extends User{//public ShoopingCart
 	public void getItemsBought () {//Prints out the ItemsBought
 		try {
 			BufferedReader inputB = new BufferedReader(new FileReader("ItemsBought.txt"));//file reader
-			String lineB = null;
+			String lineB = null;//set string to null
 			while ((lineB = inputB.readLine()) != null) {//loop through the file
-				System.out.println(lineB);
+				System.out.println(lineB);//print out the message
 			}
 			inputB.close(); //close the file
 		} catch(IOException e) {//catch IOException
-			System.out.println("There is an error in getContent().");//print out the error message
+			System.out.println("\nNo previous order");//print out the error message
 		}
 	}
 	
 	public int checkItemsBought (){//Check how many items are in ItemBought
-		int counter = 0;
-		try {
+		int counter = 0;//set counter to zero
+		try {//try-catch structure
 			BufferedReader inputB = new BufferedReader(new FileReader("ItemsBought.txt"));//file reader
 			while ((inputB.readLine()) != null) {//loop through the file
-				counter++;
+				counter++;//incremetn counter by 1
 			}
 			inputB.close(); //close the file
 		}catch(IOException e) {//catch IOException
-			System.out.println("There is an error in getContent().");//print out the error message
+			System.out.println("\nNo previous order");//print out the error message
 		}
-		return counter;
+		return counter;//return counter
 	}
 	
 	public String getConfirmationId() {//Returns confirmation ID
-		int counter = 0;
-		String lineB = "1";
-		String [] temp = new String [3];
+		int counter = 0;//set counter to zero
+		String lineB = "1";//set string to 1
+		String [] temp = new String [3];//set array of string to size 3
 		try {
 			BufferedReader inputB = new BufferedReader(new FileReader("ItemsBought.txt"));//file reader
 			while ((inputB.readLine()) != null) {//loop through the file
-				counter++;
+				counter++;//increment the counter by one
 			}
 			inputB.close(); //close the file
 			
 		} catch(IOException e) {//catch IOException
 			System.out.println("There is an error in getContent().");//print out the error message
 		}
-		try {
+		try {//try-catch structure
 			BufferedReader inputB = new BufferedReader(new FileReader("ItemsBought.txt"));//file reader
-			for (int i = 0; i<counter; i++) {
-				lineB=inputB.readLine();
+			for (int i = 0; i < counter; i++) {//loop through the line 
+				lineB = inputB.readLine();//read line and stores in a string
 			}
 
-			temp = lineB.split("   ");
-			inputB.close();
+			temp = lineB.split("   ");//split the string
+			inputB.close();//close the file
 		}catch(IOException e) {//catch IOException
-			System.out.println("There is an error in getContent().");//print out the error message
+			System.out.println("\nNo previous order");//print out the error message
 		}
-		return temp [0];
-		//String [] temp = lineB.spilt
+		return temp [0];//return the string
 	}
 	
-	public void getCheckout() {
+	public void getCheckout() {//print out checkout page
 		
-		for (int i = 0; i < contentR.size(); i++) {
+		for (int i = 0; i < contentR.size(); i++) {//loop through the ArrayList
 			
-			if (contentR.get(i).getType() == "Book") {//Divide price by 1.02 to get original price
-				System.out.println(contentR.get(i).getTitle() + "    " + contentR.get(i).getQuantity() + "    " + (contentR.get(i).getPrice())/1.02);
+			if (contentR.get(i).getType() == "Book") {//check type
+				System.out.println(contentR.get(i).getTitle() + "    " + contentR.get(i).getQuantity() + "    " + (contentR.get(i).getPrice())/1.02);//Divide price by 1.02 to get original price
 			} else {
-				System.out.println(contentR.get(i).getTitle() + "    " + contentR.get(i).getQuantity() + "    " + contentR.get(i).getPrice());
+				System.out.println(contentR.get(i).getTitle() + "    " + contentR.get(i).getQuantity() + "    " + contentR.get(i).getPrice());//Divide price by 1.02 to get original price
 			}
 		}
 		
-		for (int i = 0; i < contentA.size(); i++) {
-			if (contentA.get(i).getType() == "CD") {			
-				System.out.println(contentA.get(i).getTitle() + "    " + contentA.get(i).getQuantity() + "    " + (contentA.get(i).getPrice())/1.02);
+		for (int i = 0; i < contentA.size(); i++) {//loop through the ArrayList
+			if (contentA.get(i).getType() == "CD") {//check type		
+				System.out.println(contentA.get(i).getTitle() + "    " + contentA.get(i).getQuantity() + "    " + (contentA.get(i).getPrice())/1.02);//Divide price by 1.02 to get original price
 			}else{
-				System.out.println(contentA.get(i).getTitle() + "    " + contentA.get(i).getQuantity() + "    " + contentA.get(i).getPrice());
+				System.out.println(contentA.get(i).getTitle() + "    " + contentA.get(i).getQuantity() + "    " + contentA.get(i).getPrice());//Divide price by 1.02 to get original price
 			}
 		}
 	}
 	
-	public double getEnvirTax() {
+	public double getEnvirTax() {//get Environmental tax
 		
-		double tax = 0;
-		for (int i = 0; i < contentR.size(); i++) {
-			if (contentR.get(i).getType().equals("Book")) {
-				tax += ((contentR.get(i)).getPrice() - contentR.get(i).getPrice()/1.02) * contentR.get(i).getQuantity();
+		double tax = 0;//set tax to zero
+		for (int i = 0; i < contentR.size(); i++) {//loop through the ArrayList
+			if (contentR.get(i).getType().equals("Book")) {//check type
+				tax += ((contentR.get(i)).getPrice() - contentR.get(i).getPrice()/1.02) * contentR.get(i).getQuantity();//increment tax
 			}
 		}
-		for (int i = 0; i < contentA.size(); i++) {
-			if (contentA.get(i).getType().equals("CD")) {
-				tax += ((contentA.get(i)).getPrice() - contentA.get(i).getPrice()/1.02) * contentA.get(i).getQuantity();
+		for (int i = 0; i < contentA.size(); i++) {//loop through the ArrayList
+			if (contentA.get(i).getType().equals("CD")) {//check type
+				tax += ((contentA.get(i)).getPrice() - contentA.get(i).getPrice()/1.02) * contentA.get(i).getQuantity();//increment tax
 			}
 		}
-		return Math.round(tax * 100)/100.0;
+		return Math.round(tax * 100)/100.0;//return and round tax to two decimal palce
 	}
 	
 	public double getShipping() {//return the shipping fee of the cart
@@ -483,77 +472,74 @@ public class ShoppingCart extends User{//public ShoopingCart
 	
 	public void AddItem(String title, int quan){//add an item to the cart
 		String temp1 = checkType(title);//Check the type of the item added
-		//System.out.println(temp1);
-		int sNoDisplay = 0;
-		//int quantityDisplay;
+		int sNoDisplay = 0;//set sNo to zero
 		
-		if (temp1.equals("Book")) {
-			for (int i = 0; i < b1.size(); i++) {
-				if (title.equals(b1.get(i).getTitle())) {
-					//System.out.println(b1.get(i).getsNo());
-					sNoDisplay = b1.get(i).getsNo();
-					contentR.add(b1.get(i));
-					addQuantity(contentR.indexOf(b1.get(i)), quan, "Book");
+		if (temp1.equals("Book")) {//check type
+			for (int i = 0; i < b1.size(); i++) {//loop through the ArrayList
+				if (title.equals(b1.get(i).getTitle())) {//check if have same title
+					sNoDisplay = b1.get(i).getsNo();//store the sNo
+					contentR.add(b1.get(i));//add to ArrayList
+					addQuantity(contentR.indexOf(b1.get(i)), quan, "Book");//update the quantity
 				}
 			}
 		}
 		
-		if (temp1.equals("eBook")) {
-			for (int i = 0; i < e1.size(); i++) {
-				if (title.equals(e1.get(i).getTitle())) {
-					contentR.add(e1.get(i));
-					sNoDisplay = e1.get(i).getsNo();
-					addQuantity(contentR.indexOf(e1.get(i)), quan, "eBook");
+		if (temp1.equals("eBook")) {//check type
+			for (int i = 0; i < e1.size(); i++) {//loop through the ArrayList
+				if (title.equals(e1.get(i).getTitle())) {//check if have same title
+					contentR.add(e1.get(i));//add to ArrayList
+					sNoDisplay = e1.get(i).getsNo();//store the sNo
+					addQuantity(contentR.indexOf(e1.get(i)), quan, "eBook");//update the quantity
 				}
 			}
 		}
 		
-		if (temp1.equals("CD")) {
-			for (int i = 0; i < c1.size(); i++) {
-				if (title.equals(c1.get(i).getTitle())) {
-					contentA.add(c1.get(i));
-					sNoDisplay = c1.get(i).getsNo();
-					addQuantity(contentA.indexOf(c1.get(i)), quan, "CD");
+		if (temp1.equals("CD")) {//check type
+			for (int i = 0; i < c1.size(); i++) {//loop through the ArrayList
+				if (title.equals(c1.get(i).getTitle())) {//check if have same title
+					contentA.add(c1.get(i));//add to ArrayList
+					sNoDisplay = c1.get(i).getsNo();//store the sNo
+					addQuantity(contentA.indexOf(c1.get(i)), quan, "CD");//update the quantity
 				}
 			}
 		}
 		
-		if (temp1.equals("MP3")) {
-			for (int i = 0; i < m1.size(); i++) {
-				if (title.equals(m1.get(i).getTitle())) {
-					contentA.add(m1.get(i));
-					sNoDisplay = m1.get(i).getsNo();
-					addQuantity(contentA.indexOf(m1.get(i)), quan, "MP3");
+		if (temp1.equals("MP3")) {//check type
+			for (int i = 0; i < m1.size(); i++) {//loop through the ArrayList
+				if (title.equals(m1.get(i).getTitle())) {//check if have same title
+					contentA.add(m1.get(i));//add to ArrayList
+					sNoDisplay = m1.get(i).getsNo();//store the sNo
+					addQuantity(contentA.indexOf(m1.get(i)), quan, "MP3");//update the quantity
 				}
 			}
 		}
 		
 		
-		try {
-			BufferedWriter output = new BufferedWriter(new FileWriter("Cart_" + getUsername() + ".txt", true));
+		try {//try-catch structure
+			BufferedWriter output = new BufferedWriter(new FileWriter("Cart_" + getUsername() + ".txt", true));//file writer
 			
 			DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd");//Get current yyyy/MM/dd and display it as it is
-			//get current date time with Date()
-			Date date = new Date();
 			
-			String display = sNoDisplay + ", " + title + ", " + dateFormat.format(date) + ", " + quan;
+			Date date = new Date();//get current date time with Date()
 			
-			output.write(display);
-			output.newLine();
-			output.close();
-		} catch (IOException e) {
-			System.out.println("There is an error in AddItem()");
+			String display = sNoDisplay + ", " + title + ", " + dateFormat.format(date) + ", " + quan;//set the string
+			
+			output.write(display);//write the string to file
+			output.newLine();//write a new line
+			output.close();//close the file
+		} catch (IOException e) {//catch IOException
+			System.out.println("There is an error in AddItem()");//print out message
 		}
 	}
 	
-	public void clearCart() {
+	public void clearCart() {//clear the cart after checkout
 		File deleteShoppingCart = new File ("Cart_"+getUsername()+".txt");//Create a file object for the user shopping cart text file
 		try {
 		if (deleteShoppingCart.delete()){//deletes the file and returns true if the file is deleted successfully
 			try {
 				if (deleteShoppingCart.createNewFile()) {//creates the file and returns true if the file is created successfully
-					contentR.clear();
-					contentA.clear();
+					contentR.clear();//clear the ArrayList
+					contentA.clear();//clear the ArrayList
 					return;
 				}else {
 			        System.out.println("File already exist");//prints error message the error already exists
