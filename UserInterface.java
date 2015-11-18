@@ -629,6 +629,7 @@ public class UserInterface {//public the class
 		for (int i = 0; i < name.size(); i++) {
 			System.out.println(name.get(i).getUsername());
 		}
+		writeUser();
 		System.out.println("\n========================================");//formating
 		System.out.println("Operation finished. Now back to previous menu.");
 		System.out.println("\n========================================");//formating
