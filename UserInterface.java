@@ -759,8 +759,8 @@ public class UserInterface {//public the class
 		            int index = i;
 		            for (int j = i + 1; j < readables.size(); j++){
 		            	double temp;
-		            	temp = readables.get(j).getTitle().compareTo(readables.get(j).getTitle());
-		                if (temp > 0){
+		            	temp = readables.get(j).getTitle().compareTo(readables.get(index).getTitle());
+		                if (temp < 0){
 		                    index = j;}
 		            
 		            Collections.swap(readables, i, index);
@@ -788,8 +788,8 @@ public class UserInterface {//public the class
 		            int index = i;
 		            for (int j = i + 1; j < audioProducts.size(); j++){
 		            	double temp;
-		            	temp = audioProducts.get(j).getTitle().compareTo(audioProducts.get(j).getTitle());
-		                if (temp > 0){
+		            	temp = audioProducts.get(j).getTitle().compareTo(audioProducts.get(index).getTitle());
+		                if (temp < 0){
 		                    index = j;}
 		            
 		            Collections.swap(audioProducts, i, index);
