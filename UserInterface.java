@@ -345,7 +345,7 @@ public class UserInterface {//public the class
 		if (option == 1) {changeCurrentPage(8);}//if option = 1, change current page to page 8
 		if (option == 2) {changeCurrentPage(9);}//if option = 2, change current page to page 9
 		if (option == -1) {
-			if (adm.getAdmin() == "ADMIN") {
+			if (adm.getUsername() == "ADMIN") {
 					changeCurrentPage(12);
 			}//if option = -1 and user is admin, change current page to page 12
 			else {
