@@ -14,6 +14,10 @@ public class ADMIN extends User{
 		return passWord.toString();
 	}
 	
+	public String getAdmin () {
+		return "ADMIN";
+	}
+	
 	public void changePassword(String temp) {
 		passWord = passWord.replace(0, passWord.length(), temp);
 	}

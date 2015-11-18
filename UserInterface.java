@@ -228,6 +228,7 @@ public class UserInterface {//public the class
 			if(createShoppingCart.createNewFile()){//Create a new file for user's shopping cart an returns a boolean value true if the file is created successfully, vice versa
 				cart = new ShoppingCart(n1);//initialize the shopping cart
 				name.add(stringToUser(n1));//add user to the ArrayList
+				writeUser();
 				System.out.println("\nUser name successfully added");//print out the message
 				changeCurrentPage(1);//change current page to page 1
 				System.out.println("\n========================================");//formating
@@ -343,7 +344,14 @@ public class UserInterface {//public the class
 		System.out.println("\n========================================");//formating
 		if (option == 1) {changeCurrentPage(8);}//if option = 1, change current page to page 8
 		if (option == 2) {changeCurrentPage(9);}//if option = 2, change current page to page 9
-		if (option == -1) {changeCurrentPage(5);}//if option = -1, change current page to page 5
+		if (option == -1) {
+			if (adm.getAdmin() == "ADMIN") {
+					changeCurrentPage(12);
+			}//if option = -1 and user is admin, change current page to page 12
+			else {
+				changeCurrentPage(5);//if option = -1 and not admin, change current page to 5
+			}
+		}
 	}
 	
 	public void p7Info() {//display the information for page 7
@@ -530,7 +538,6 @@ public class UserInterface {//public the class
 			cart.clearCart();//Clear the cart after checkout
 			writeReadable();//Write readable back to file
 			writeAudio();//Write audio back to file
-			writeUser();
 			System.out.println("\n========================================");//formating
 			changeCurrentPage(5);//change current page to page 5
 		}
@@ -644,7 +651,7 @@ public class UserInterface {//public the class
 		sc.nextLine();
 		String title = sc.nextLine();
 		
-		System.out.println("Author name: ");
+		System.out.println("Author name/Artist name: ");
 		String aName = sc.nextLine();
 		
 		System.out.println("Price: ");
@@ -723,7 +730,7 @@ public class UserInterface {//public the class
 		
 		System.out.println("Which inventory you want to sort? ");
 		System.out.println("1. Readable");
-		System.out.println("1. Audio");
+		System.out.println("2. Audio");
 		System.out.println("Choose your option: ");
 		
 		String option = sc.nextLine();
@@ -780,7 +787,7 @@ public class UserInterface {//public the class
 		            int index = i;
 		            for (int j = i + 1; j < audioProducts.size(); j++){
 		            	double temp;
-		            	temp = readables.get(j).getTitle().compareTo(audioProducts.get(j).getTitle());
+		            	temp = audioProducts.get(j).getTitle().compareTo(audioProducts.get(j).getTitle());
 		                if (temp > 0){
 		                    index = j;}
 		            
