@@ -205,15 +205,15 @@ public class UserInterface {//public the class
 		System.out.println("1. Sign in");//print each option
 		System.out.println("2. Sign up");//print each option
 		System.out.println("Choose your option: ");//ask for user input
-		double choice = sc.nextDouble();//take a user input as double
-		while (choice != 1 && choice != 2) {//check if choice == 1 or 2
+		String choice = sc.nextLine();//take a user input as string
+		while (!choice.equals("1") && !choice.equals("2")) {//check if choice == 1 or 2
 			
 			System.out.println("Plz enter choice 1 or 2: ");//if not, ask for another user input
-			choice = sc.nextDouble();//overwrite the double
+			choice = sc.next();//overwrite the double
 		}
 		System.out.println("\n========================================");//formating
-		if ((int)choice == 2) {changeCurrentPage(2);}//if user choose 1, display page 2
-		if ((int)choice == 1) {changeCurrentPage(3);}//if user choose 2, display page 3
+		if (Integer.parseInt(choice) == 2) {changeCurrentPage(2);}//if user choose 1, display page 2
+		if (Integer.parseInt(choice) == 1) {changeCurrentPage(3);}//if user choose 2, display page 3
 		
 	}
 	
@@ -247,7 +247,6 @@ public class UserInterface {//public the class
 		
 		//Scanner sc = new Scanner(System.in);//create the scanner
 		System.out.println("Enter your username: ");//ask for user name
-		sc.nextLine();
 		String n1 = sc.nextLine();//store user input as a string
 		boolean check = false;//set boolean to false
 		
@@ -310,18 +309,18 @@ public class UserInterface {//public the class
 		System.out.println("4. View Previous Orders");
 		System.out.println("\nChoose your option: ");//ask for user input
 		
-		double option = sc.nextDouble();//store user input into a double
+		String option = sc.nextLine();//store user input into a double
 		
-		while(option != 1 && option != 2 && option != 3 && option != 4) {//check if user input equals to 1, 2 or 3
+		while(!option.equals("1") && !option.equals("2") && !option.equals("3") && !option.equals("4")) {//check if user input equals to 1, 2 or 3
 			
 			System.out.println("Plz enter option 1, 2, 3 or 4: ");//if not, ask for user input
-			option = sc.nextDouble();//overwrite the double with new user input
+			option = sc.nextLine();//overwrite the double with new user input
 		}
 		System.out.println("\n========================================");//formating
-		if (option == 1) {changeCurrentPage(6);}//if option = 1, change current page to page 6
-		if (option == 2) {changeCurrentPage(7);}//if option = 2, change current page to page 7
-		if (option == 3) {changeCurrentPage(1);}//if option = 3, change current page to page 1
-		if (option == 4) {changeCurrentPage(11);}//if option = 4, change current page to page 11
+		if (Integer.parseInt(option) == 1) {changeCurrentPage(6);}//if option = 1, change current page to page 6
+		if (Integer.parseInt(option) == 2) {changeCurrentPage(7);}//if option = 2, change current page to page 7
+		if (Integer.parseInt(option) == 3) {changeCurrentPage(1);}//if option = 3, change current page to page 1
+		if (Integer.parseInt(option) == 4) {changeCurrentPage(11);}//if option = 4, change current page to page 11
 		
 	}
 	
@@ -334,17 +333,17 @@ public class UserInterface {//public the class
 		System.out.println("\nChoose your oprion: ");//ask for user input
 		System.out.println("\nPress -1 to return  to previous menu");//print out option
 		
-		double option = sc.nextDouble();//store the user input in a double
+		String option = sc.nextLine();//store the user input in a double
 		
-		while(option != 1 && option != 2 && option != -1) {//check if user input equals to 1, 2 or -1
+		while(!option.equals("1") && !option.equals("2") && !option.equals("-1")) {//check if user input equals to 1, 2 or -1
 		
 			System.out.println("Plz enter option 1, 2 or -1: ");//if not, ask for user input
-			option = sc.nextDouble();//overwrite the double with new user input
+			option = sc.nextLine();//overwrite the double with new user input
 		}
 		System.out.println("\n========================================");//formating
-		if (option == 1) {changeCurrentPage(8);}//if option = 1, change current page to page 8
-		if (option == 2) {changeCurrentPage(9);}//if option = 2, change current page to page 9
-		if (option == -1) {
+		if (Integer.parseInt(option) == 1) {changeCurrentPage(8);}//if option = 1, change current page to page 8
+		if (Integer.parseInt(option) == 2) {changeCurrentPage(9);}//if option = 2, change current page to page 9
+		if (Integer.parseInt(option) == -1) {
 			if (adm.getUsername() == "ADMIN") {
 					changeCurrentPage(12);
 			}//if option = -1 and user is admin, change current page to page 12
@@ -360,16 +359,16 @@ public class UserInterface {//public the class
 		System.out.println("\n========================================");
 		cart.getContent();//print out the whole cart
 		System.out.println("Plz enter 1 to checkout or -1 to previous page: ");//ask for user input
-		double option = sc.nextDouble();//store the user input in a double
+		String option = sc.nextLine();//store the user input in a double
 		
-		while(option != 1 && option != -1) {//check if user input equals to 1 or -1
+		while(!option.equals("1") && !option.equals("-1")){//check if user input equals to 1 or -1
 		
 			System.out.println("Plz enter option 1 or -1: ");//if not, ask for user input
-			option = sc.nextDouble();//overwrite the double with new user input
+			option = sc.nextLine();//overwrite the double with new user input
 		}
 		System.out.println("\n========================================");//formating
-		if (option == 1) {changeCurrentPage(10);}//if option = 1, change current page to page 10
-		if (option == -1) {changeCurrentPage(5);}//if option = -1, change current page to page 5
+		if (Integer.parseInt(option) == 1) {changeCurrentPage(10);}//if option = 1, change current page to page 10
+		if (Integer.parseInt(option) == -1) {changeCurrentPage(5);}//if option = -1, change current page to page 5
 	}
 	
 	public void p8Info() {//display the information for page 8
@@ -384,49 +383,58 @@ public class UserInterface {//public the class
 		System.out.println("Choose your option from 1 to " + readables.size() + ": ");//ask for user input
 		System.out.println("Press -1 to return to previous menu.");//print out the message
 		
-		double option = sc.nextDouble();//store the user input in a double
+		String option = sc.nextLine();//store the user input in a double
+		try{
+			  Integer.parseInt(option);// is an integer!
+			while (Integer.parseInt(option) > readables.size() && !option.equals("-1")) {//check if user input equals to -1 or option larger than the quantity of item
+				System.out.println("Plz enter a valid option: ");//if not, ask for user input
+				option = sc.nextLine();//overwrite the double with new user input
+				}
+			} catch (NumberFormatException e) {
+				System.out.println("Plz enter a number: ");//if not, ask for user input
+				changeCurrentPage(8);
+			  // not an integer!
+			}
 		
-		while (option > readables.size() && option != -1) {//check if user input equals to -1 or option larger than the quantity of item
-			
-			System.out.println("Plz enter a valid option: ");//if not, ask for user input
-			option = sc.nextDouble();//overwrite the double with new user input
-		}
-
-		
-		if (option == -1) {changeCurrentPage(6);}//if option = -1, change current page to page 6
+		if (Integer.parseInt(option) == -1) {changeCurrentPage(6);}//if option = -1, change current page to page 6
 		else {//if user want to add item to cart
-			while (readables.get((int)option - 1).getQuantity() == 0) {
+			try{
+			while (readables.get(Integer.parseInt(option) - 1).getQuantity() == 0) {
 				System.out.println("Sorry, the item is out of stock! Plz choose another item: ");
-				option = sc.nextDouble();
+				option = sc.nextLine();
 			}
 			System.out.println("Enter quantity: ");//ask for user input
-			int quan = sc.nextInt();//store the user input in a int
+			String quan = sc.nextLine();//store the user input in a int
 			
-			while(quan > (readables.get((int)option - 1)).getQuantity()) {//check if user input larger than the given quantity
+			while(Integer.parseInt(quan) > (readables.get(Integer.parseInt(option) - 1)).getQuantity()) {//check if user input larger than the given quantity
 				
 				System.out.println("Not enough item. Plz enter a smaller quantity.");//if not, ask for user input
-				quan = sc.nextInt();//overwrite the int with new user input
+				quan = sc.nextLine();//overwrite the int with new user input
 			}
 			
 			
-			cart.AddItem(readables.get((int)option - 1).getTitle(), quan);//add item to cart
-			readables.get((int)option - 1).changeQuantity(quan);//update the quantity of readable
+			cart.AddItem(readables.get(Integer.parseInt(option) - 1).getTitle(), Integer.parseInt(quan));//add item to cart
+			readables.get(Integer.parseInt(option) - 1).changeQuantity(Integer.parseInt(quan));//update the quantity of readable
 
-			System.out.println(quan + " " + readables.get((int)option - 1).getTitle() + " successfully added to your cart.");//print out message
+			System.out.println(quan + " " + readables.get(Integer.parseInt(option) - 1).getTitle() + " successfully added to your cart.");//print out message
 			
 			System.out.println("Press -2 to Continue Shopping or Press 0 to CheckOut: ");//ask for user input
 			
-			double option1 = sc.nextDouble();//store the user input in a double
+			String option1 = sc.nextLine();//store the user input in a double
 			
-			while (option1 != 0 && option1 != -2) {//check if user input equals to 0 or -2
+			while (!option1.equals("0") && !option1.equals("-2")) {//check if user input equals to 0 or -2
 				
 				System.out.println("Plz enter option 0 or -2: ");//if not, ask for user input
-				option1 = sc.nextDouble();//overwrite the double with new user input
+				option1 = sc.nextLine();//overwrite the double with new user input
 			}
 			System.out.println("\n========================================");//formating
-			if (option1 == 0) {changeCurrentPage(10);}//if option = 0, change current page to page 10
-			if (option1 == -2) {changeCurrentPage(6);}//if option = 2, change current page to page 6
-			
+			if (Integer.parseInt(option1) == 0) {changeCurrentPage(10);}//if option = 0, change current page to page 10
+			if (Integer.parseInt(option1) == -2) {changeCurrentPage(6);}//if option = 2, change current page to page 6
+			} catch (NumberFormatException e) {
+				System.out.println("Plz enter a number: ");//if not, ask for user input
+				changeCurrentPage(8);
+			  // not an integer!
+			}
 			
 		}
 	}
@@ -443,50 +451,66 @@ public class UserInterface {//public the class
 		System.out.println("Choose your option from 1 to " + audioProducts.size() + ": ");//ask for user input
 		System.out.println("Press -1 to return to previous menu.");//print out the message
 		
-		double option = sc.nextDouble();//store the user input in a double
+		String option = sc.nextLine();//store the user input in a double
+
+		try{
+			Integer.parseInt(option);// is an integer!
+			while (Integer.parseInt(option) > audioProducts.size() && !option.equals("-1")) {//check if user input equals to -1 or option larger than the quantity of item
+				
+				System.out.println("Plz enter a valid option: ");//if not, ask for user input
+				option = sc.nextLine();//overwrite the double with new user input
+			}
+			} catch (NumberFormatException e) {
+				System.out.println("Plz enter a number: ");//if not, ask for user input
+				changeCurrentPage(9);
+			  // not an integer!
+			}
 		
-		while (option > audioProducts.size() && option != -1) {//check if user input equals to -1 or option larger than the quantity of item
-			
-			System.out.println("Plz enter a valid option: ");//if not, ask for user input
-			option = sc.nextDouble();//overwrite the double with new user input
-		}
+
 		
 		
-		if (option == -1) {changeCurrentPage(6);}//check if user input equals to -1
-		else {//if not
-			
-			while (audioProducts.get((int)option - 1).getQuantity() == 0) {
+		if (Integer.parseInt(option) == -1) {changeCurrentPage(6);}//check if user input equals to -1
+		else {//if not -1
+			try{
+			while (audioProducts.get(Integer.parseInt(option) - 1).getQuantity() == 0) {
 				System.out.println("Sorry, the item is out of stock! Plz choose another item: ");
-				option = sc.nextDouble();
+				option = sc.nextLine();
 			}
 			
 			System.out.println("Enter quantity: ");//ask for user input
-			int quan = sc.nextInt();//store the user input in a int
+			String quan = sc.nextLine();//store the user input in a int
 			
-			while(quan > (audioProducts.get((int)option - 1)).getQuantity()) {//check if user input larger than the given quantity
+			while(Integer.parseInt(quan) > (audioProducts.get(Integer.parseInt(option) - 1)).getQuantity()) {//check if user input larger than the given quantity
 				
 				System.out.println("Not enough item. Plz enter a smaller quantity.");//if not, ask for user input
-				quan = sc.nextInt();//overwrite the int with new user input
+				quan = sc.nextLine();//overwrite the int with new user input
 			}
 			
-			cart.AddItem(audioProducts.get((int)option - 1).getTitle(), quan);//add item to cart
-			audioProducts.get((int)option - 1).changeQuantity(quan);//update the quantity of audioProducts
+			cart.AddItem(audioProducts.get(Integer.parseInt(option) - 1).getTitle(), Integer.parseInt(quan));//add item to cart
+			audioProducts.get(Integer.parseInt(option) - 1).changeQuantity(Integer.parseInt(quan))
+			;//update the quantity of audioProducts
 			
-			System.out.println(quan + " " + audioProducts.get((int)option - 1).getTitle() + " successfully added to your cart.");//print out message
+			System.out.println(quan + " " + audioProducts.get(Integer.parseInt(option) - 1).getTitle() + " successfully added to your cart.");//print out message
 			
 			System.out.println("Press -2 to Continue Shopping or Press 0 to CheckOut: ");//ask for user input
 			
-			double option1 = sc.nextDouble();//store the user input in a double
+			String option1 = sc.nextLine();//store the user input in a double
 			
-			while (option1 != 0 && option1 != -2) {//check if user input equals to 0 or -2
+			while (!option1.equals("0") && !option1.equals("-2")) {//check if user input equals to 0 or -2
 				
 				System.out.println("Plz enter option 0 or -2: ");//if not, ask for user input
-				option1 = sc.nextDouble();//overwrite the double with new user input
+				option1 = sc.nextLine();//overwrite the double with new user input
 			}
 			System.out.println("\n========================================");//formating
-			if (option1 == 0) {changeCurrentPage(10);}//if option = 0, change current page to page 10
-			if (option1 == -2){changeCurrentPage(6);}//if option = 2, change current page to page 6
-		}
+			if (Integer.parseInt(option1) == 0) {changeCurrentPage(10);}//if option = 0, change current page to page 10
+			if (Integer.parseInt(option1) == -2){changeCurrentPage(6);}//if option = 2, change current page to page 6
+			} catch (NumberFormatException e) {
+				System.out.println("Plz enter a number: ");//if not, ask for user input
+				changeCurrentPage(8);
+			  // not an integer!
+			}
+			}
+			
 	}
 	
 	public void p10Info() {//display the information for page 10
@@ -553,14 +577,13 @@ public class UserInterface {//public the class
 		System.out.println("Confirmation Id   Product Name   Total");//print out the message
 		cart.getItemsBought();//print out the order information
 		System.out.println("Press -1 to return to the previous page: ");//ask for user input
-		double option1 = sc.nextDouble();//store the user input in a double
-		while (option1 != -1) {//check if user input equals to -1
-			
+		String option1 = sc.nextLine();//store the user input in a double
+		while (!option1.equals("-1")) {//check if user input equals to -1
 			System.out.println("Plz enter option -1: ");//if not, ask for user input
-			option1 = sc.nextDouble();//overwrite the double with new user input
+			option1 = sc.nextLine();//overwrite the double with new user input
 		}
 		System.out.println("\n========================================");//formating
-		if (option1 == -1){changeCurrentPage(5);}//if option = -1, change current page to page 5
+		if (Integer.parseInt(option1) == -1){changeCurrentPage(5);}//if option = -1, change current page to page 5
 	}
 	
 	public void p12Info(){
