@@ -326,7 +326,9 @@ public class ShoppingCart extends User{//public ShoopingCart
 			BufferedReader inputB = new BufferedReader(new FileReader("ItemsBought.txt"));//file reader
 			String lineB = null;//set string to null
 			while ((lineB = inputB.readLine()) != null) {//loop through the file
-				System.out.println(lineB);//print out the message
+				String [] output = new String [3];//create new array to store information
+				output = lineB.split("   ");//break down the information about the item read from the text file
+				System.out.printf("%-20s%-50s%-30s\n", output[0], output[1], output[2]);//print item bought information
 			}
 			inputB.close(); //close the file
 		} catch(IOException e) {//catch IOException
@@ -381,17 +383,21 @@ public class ShoppingCart extends User{//public ShoopingCart
 		for (int i = 0; i < contentR.size(); i++) {//loop through the ArrayList
 			
 			if (contentR.get(i).getType() == "Book") {//check type
-				System.out.println(contentR.get(i).getTitle() + "    " + contentR.get(i).getQuantity() + "    " + (contentR.get(i).getPrice())/1.02);//Divide price by 1.02 to get original price
+				System.out.printf("%-50s%-20s%-30s\n", contentR.get(i).getTitle(), contentR.get(i).getQuantity(), (contentR.get(i).getPrice())/1.02);//get information about the item and divide price by 1.02 original price
+				//System.out.println(contentR.get(i).getTitle() + "    " + contentR.get(i).getQuantity() + "    " + (contentR.get(i).getPrice())/1.02);//Divide price by 1.02 to get original price
 			} else {
-				System.out.println(contentR.get(i).getTitle() + "    " + contentR.get(i).getQuantity() + "    " + contentR.get(i).getPrice());//Divide price by 1.02 to get original price
+				System.out.printf("%-50s%-20s%-30s\n", contentR.get(i).getTitle(), contentR.get(i).getQuantity(), (contentR.get(i).getPrice()));//get information about the item
+				//System.out.println(contentR.get(i).getTitle() + "    " + contentR.get(i).getQuantity() + "    " + contentR.get(i).getPrice());//Divide price by 1.02 to get original price
 			}
 		}
 		
 		for (int i = 0; i < contentA.size(); i++) {//loop through the ArrayList
-			if (contentA.get(i).getType() == "CD") {//check type		
-				System.out.println(contentA.get(i).getTitle() + "    " + contentA.get(i).getQuantity() + "    " + (contentA.get(i).getPrice())/1.02);//Divide price by 1.02 to get original price
+			if (contentA.get(i).getType() == "CD") {//check type	
+				System.out.printf("%-50s%-20s%-30s\n", contentA.get(i).getTitle(), contentA.get(i).getQuantity(), (contentA.get(i).getPrice())/1.02);//get information about item and divide price by 1.02 to get original price
+				//System.out.println(contentA.get(i).getTitle() + "    " + contentA.get(i).getQuantity() + "    " + (contentA.get(i).getPrice())/1.02);//Divide price by 1.02 to get original price
 			}else{
-				System.out.println(contentA.get(i).getTitle() + "    " + contentA.get(i).getQuantity() + "    " + contentA.get(i).getPrice());//Divide price by 1.02 to get original price
+				System.out.printf("%-50s%-20s%-30s\n", contentA.get(i).getTitle(), contentA.get(i).getQuantity(), (contentA.get(i).getPrice()));//get information about the item
+				//System.out.println(contentA.get(i).getTitle() + "    " + contentA.get(i).getQuantity() + "    " + contentA.get(i).getPrice());//Divide price by 1.02 to get original price
 			}
 		}
 	}

@@ -34,6 +34,7 @@ public class ADMIN extends User{
 		}
 	}
 	
+	
 	public String getPassword() {
 		
 		return passWord.toString();

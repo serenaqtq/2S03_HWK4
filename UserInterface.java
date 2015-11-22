@@ -207,7 +207,6 @@ public class UserInterface {//public the class
 		System.out.println("Choose your option: ");//ask for user input
 		String choice = sc.nextLine();//take a user input as string
 		while (!choice.equals("1") && !choice.equals("2")) {//check if choice == 1 or 2
-			
 			System.out.println("Plz enter choice 1 or 2: ");//if not, ask for another user input
 			choice = sc.next();//overwrite the double
 		}
@@ -343,20 +342,20 @@ public class UserInterface {//public the class
 		System.out.println("\n========================================");//formating
 		if (Integer.parseInt(option) == 1) {changeCurrentPage(8);}//if option = 1, change current page to page 8
 		if (Integer.parseInt(option) == 2) {changeCurrentPage(9);}//if option = 2, change current page to page 9
-		if (Integer.parseInt(option) == -1) {
-			if (adm.getUsername() == "ADMIN") {
-					changeCurrentPage(12);
+		if (Integer.parseInt(option) == -1){//if option is -1
+			if (cart.getUsername().equals("ADMIN")){//if current user is admin
+					changeCurrentPage(12);//change current page to 12
 			}//if option = -1 and user is admin, change current page to page 12
-			else {
-				changeCurrentPage(5);//if option = -1 and not admin, change current page to 5
+			else{
+			changeCurrentPage(5);//if option = -1 and not admin, change current page to 5
 			}
 		}
-	}
+		}
 	
 	public void p7Info() {//display the information for page 7
 		
 		//Scanner sc = new Scanner(System.in);//create scanner
-		System.out.println("\n========================================");
+		System.out.println("\n========================================");//formatting
 		cart.getContent();//print out the whole cart
 		System.out.println("Plz enter 1 to checkout or -1 to previous page: ");//ask for user input
 		String option = sc.nextLine();//store the user input in a double
@@ -368,7 +367,9 @@ public class UserInterface {//public the class
 		}
 		System.out.println("\n========================================");//formating
 		if (Integer.parseInt(option) == 1) {changeCurrentPage(10);}//if option = 1, change current page to page 10
-		if (Integer.parseInt(option) == -1) {changeCurrentPage(5);}//if option = -1, change current page to page 5
+		if (Integer.parseInt(option) == -1 && (cart.getUsername().equals("ADMIN"))) {//check if user is admin
+			changeCurrentPage(12);}//if option = -1 and admin, change current page to page 5
+		else{changeCurrentPage(5);}//if option = -1 and not admin, chnge current page to page 12
 	}
 	
 	public void p8Info() {//display the information for page 8
@@ -376,8 +377,7 @@ public class UserInterface {//public the class
 		//Scanner sc = new Scanner(System.in);//create scanner
 		
 		System.out.println("Readables: \n");//print out the message
-		System.out.println("S.No  Name of the Book   Author  Price($)  Quantity in Store  Type");//print out the message
-		
+		System.out.printf("%-13s%-40s%-30s%-20s%-20s%-30s\n", "S.No", "Name of the Book", "Author", "Price($)", "Quantity in Store", "Type");//Prints out the headings		
 		printReadable();//print out the readable ArrayList
 		
 		System.out.println("Choose your option from 1 to " + readables.size() + ": ");//ask for user input
@@ -444,7 +444,7 @@ public class UserInterface {//public the class
 		//Scanner sc = new Scanner(System.in);//create scanner
 		
 		System.out.println("Audio: \n");//print out the message
-		System.out.println("S.No  Name   Author  Price($)  Quantity in Store  Type");//print out the message
+		System.out.printf("%-13s%-40s%-30s%-20s%-20s%-30s\n", "S.No", "Name of the Book", "Artist", "Price($)", "Quantity in Store", "Type");//Prints out the headings	
 		
 		printAudioProduct();;//print out the information of the audio ArrayList
 		
@@ -465,10 +465,6 @@ public class UserInterface {//public the class
 				changeCurrentPage(9);
 			  // not an integer!
 			}
-		
-
-		
-		
 		if (Integer.parseInt(option) == -1) {changeCurrentPage(6);}//check if user input equals to -1
 		else {//if not -1
 			try{
@@ -476,7 +472,6 @@ public class UserInterface {//public the class
 				System.out.println("Sorry, the item is out of stock! Plz choose another item: ");
 				option = sc.nextLine();
 			}
-			
 			System.out.println("Enter quantity: ");//ask for user input
 			String quan = sc.nextLine();//store the user input in a int
 			
@@ -518,24 +513,26 @@ public class UserInterface {//public the class
 		//Scanner sc = new Scanner(System.in);//create scanner
 		
 		System.out.println("Billing Information: ");//print out message
-		System.out.println("Name     Quantity   Price");//print out message
-		
+		System.out.printf("%-50s%-20s%-30s\n", "Name", "Quantity", "Price");//Prints out the headings	
+		System.out.println();
 		cart.getCheckout();//print out the content of the cart
-		
-		System.out.print("Environment Tax    2%    ");//print out message
-		
+		System.out.println();
+		System.out.printf("%-70s", "Environment Tax               2%");//Prints out the headings	
+		//System.out.print("Environment Tax    2%    ");//print out message
 		System.out.println(cart.getEnvirTax());//print EnviroTax
 		
-		System.out.print("HST    13%    ");//print out message
+		System.out.printf("%-70s", "HST                          13%");//print out message
 		
 		System.out.println(cart.getHST());//print hst
-		System.out.print("Shipping    10%    ");//print out message
+		System.out.printf("%-70s", "Shipping                     10%");//print out message
 		
 		System.out.println(cart.getShipping());//print shipping
-		System.out.print("\nTotal: ");//print out message
+		System.out.printf("%78s\n", "_________");
+		System.out.printf("%-70s", "Total: ");//print out message
 		
 		System.out.println(cart.getTotal());//print total
-		System.out.println("Are you sure you want to pay?");//ask for user input
+		System.out.println();
+		System.out.println("Are you sure you want to pay? yes or no.");//ask for user input
 		String s1 = sc.nextLine().toLowerCase();//store the user input in a string and make it not case sensitive
 		//System.out.println(s1);
 		
@@ -555,7 +552,7 @@ public class UserInterface {//public the class
 				int id =Integer.parseInt(a.substring(1,a.length())) + 1;//Convert 1000 to a number and add 1
 				confirmationId = "U" + String.valueOf(id);//Set new confirmation id
 			}
-			System.out.println(confirmationId);//prints confirmation Id
+			System.out.println("Confirmation ID: " + confirmationId);//prints confirmation Id
 			System.out.println("Items shipped to: " + cart.getUsername());//print out message
 			System.out.println("Thanks for shopping! Now goes to browse item page");//print out message
 			cart.writeItemsBought(confirmationId);//Write the order to the text file
@@ -563,18 +560,28 @@ public class UserInterface {//public the class
 			writeReadable();//Write readable back to file
 			writeAudio();//Write audio back to file
 			System.out.println("\n========================================");//formating
+			if (cart.getUsername().equals("ADMIN")){
+				changeCurrentPage(12);
+			}
+			else{
 			changeCurrentPage(5);//change current page to page 5
+			}
 		}
 		
 		if (s1.equals("no")) {// if they don't want to pay
 			System.out.println("Checkout not finished. Go to browse item page");//print out message
 			System.out.println("\n========================================");//formating
+			if (cart.getUsername().equals("ADMIN")){
+				changeCurrentPage(12);
+			}
+			else{
 			changeCurrentPage(5);//change current page to page 5
+			}
 		}
 	}
 	
 	public void p11Info() {
-		System.out.println("Confirmation Id   Product Name   Total");//print out the message
+		System.out.printf("%-20s%-50s%-30s\n", "Confirmation Id", "Product Name", "Total");//print out the message
 		cart.getItemsBought();//print out the order information
 		System.out.println("Press -1 to return to the previous page: ");//ask for user input
 		String option1 = sc.nextLine();//store the user input in a double
@@ -583,7 +590,13 @@ public class UserInterface {//public the class
 			option1 = sc.nextLine();//overwrite the double with new user input
 		}
 		System.out.println("\n========================================");//formating
-		if (Integer.parseInt(option1) == -1){changeCurrentPage(5);}//if option = -1, change current page to page 5
+		if (Integer.parseInt(option1) == -1){
+			if (cart.getUsername().equals("ADMIN")){
+				changeCurrentPage(12);
+			}
+			else {
+			changeCurrentPage(5);}//if option = -1, change current page to page 5
+			}
 	}
 	
 	public void p12Info(){
@@ -848,14 +861,18 @@ public class UserInterface {//public the class
 	public void printReadable() {//print out the readable on the screen
 		
 		for (int i = 0; i < readables.size(); i++) {//loop through the readable
-			System.out.println(readables.get(i).getInfo());//call the getInfo() for each item
+			String [] output = new String [6];//create new array to store information of the item
+			output = readables.get(i).getInfo().split(",");//call the getInfo() for each item and split up the pieces of information related to the item
+			System.out.printf("%-12s%-40s%-30s%-20s%-20s%-20s\n", output[0], output[1], output[2], output[3], output[4], output[5]);//print the formatted information for the item
 		}
 	}
 	
 	public void printAudioProduct() {//print out the audio on the screen
 		
 		for (int i = 0; i < audioProducts.size(); i++) {//loop through the audio
-			System.out.println(audioProducts.get(i).getInfo());//call the getInfo() for each item
+			String [] output = new String [6];//create new array to store information of the item
+			output = audioProducts.get(i).getInfo().split(",");//call the getInfo() for each item and split up the pieces of information related to the item
+			System.out.printf("%-12s%-40s%-30s%-20s%-20s%-20s\n", output[0], output[1], output[2], output[3], output[4], output[5]);//print the formatted information for the item
 		}
 	}
 	
