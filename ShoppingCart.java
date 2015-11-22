@@ -341,7 +341,7 @@ public class ShoppingCart extends User{//public ShoopingCart
 		try {//try-catch structure
 			BufferedReader inputB = new BufferedReader(new FileReader("ItemsBought.txt"));//file reader
 			while ((inputB.readLine()) != null) {//loop through the file
-				counter++;//incremetn counter by 1
+				counter++;//increment counter by 1
 			}
 			inputB.close(); //close the file
 		}catch(IOException e) {//catch IOException

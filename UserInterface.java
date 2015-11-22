@@ -208,7 +208,7 @@ public class UserInterface {//public the class
 		String choice = sc.nextLine();//take a user input as string
 		while (!choice.equals("1") && !choice.equals("2")) {//check if choice == 1 or 2
 			System.out.println("Plz enter choice 1 or 2: ");//if not, ask for another user input
-			choice = sc.next();//overwrite the double
+			choice = sc.nextLine();//overwrite the double
 		}
 		System.out.println("\n========================================");//formating
 		if (Integer.parseInt(choice) == 2) {changeCurrentPage(2);}//if user choose 1, display page 2
@@ -590,33 +590,32 @@ public class UserInterface {//public the class
 			option1 = sc.nextLine();//overwrite the double with new user input
 		}
 		System.out.println("\n========================================");//formating
-		if (Integer.parseInt(option1) == -1){
-			if (cart.getUsername().equals("ADMIN")){
-				changeCurrentPage(12);
+		if (Integer.parseInt(option1) == -1){//check if option1 equals -1
+			if (cart.getUsername().equals("ADMIN")){//check if equals ADMIN
+				changeCurrentPage(12);//if yes, change current page to 12
 			}
-			else {
+			else {//if not
 			changeCurrentPage(5);}//if option = -1, change current page to page 5
 			}
 	}
 	
-	public void p12Info(){
+	public void p12Info(){//display page 12 
 		
 		System.out.println("1. View Items By Category");//print out option
 		System.out.println("2. View Shooping Cart");//print out option
 		System.out.println("3. Sign Out");//print out option
-		System.out.println("4. View Previous Orders");
-		System.out.println("5. Change password");
-		System.out.println("6. Delete duplicate username");
-		System.out.println("7. Add items to inventory");
-		System.out.println("8. Sort the inventory");
+		System.out.println("4. View Previous Orders");//print out the message
+		System.out.println("5. Change password");//print out the message
+		System.out.println("6. Delete duplicate username");//print out the message
+		System.out.println("7. Add items to inventory");//print out the message
+		System.out.println("8. Sort the inventory");//print out the message
 		System.out.println("\nChoose your option: ");//ask for user input
 		
-		//sc.nextLine();
-		String option = sc.nextLine();
+		String option = sc.nextLine();//store user input in a string
 		while (!option.equals("1") && !option.equals("2") && !option.equals("3") && !option.equals("4") && 
-				!option.equals("5") && !option.equals("6") && !option.equals("7") && !option.equals("8")) {
-			System.out.println("Plz enter a number between 1-8: ");
-			option = sc.nextLine();
+				!option.equals("5") && !option.equals("6") && !option.equals("7") && !option.equals("8")) {//check if the input between 1 to 8
+			System.out.println("Plz enter a number between 1-8: ");//print out the message
+			option = sc.nextLine();//store user input
 		}
 		
 		if (Integer.parseInt(option) == 1) {changeCurrentPage(6);}//if option = 1, change current page to page 6
@@ -630,232 +629,239 @@ public class UserInterface {//public the class
 		
 	}
 	
-	public void p13Info() {
+	public void p13Info() {//display page 13
 		
-		System.out.println("Plz enter your new password: ");
-		String str = sc.nextLine();
+		System.out.println("Plz enter your new password: ");//print out the message
+		String str = sc.nextLine();//store user input as a string
 		
-		adm.changePassword(str);
+		adm.changePassword(str);//change password to given string
 		//System.out.println(adm.getPassword());
-		System.out.println("Password successfully changed. Now back to previous menu");
+		System.out.println("Password successfully changed. Now back to previous menu");//print out the message
 		System.out.println("\n========================================");//formating
-		changeCurrentPage(12);
+		changeCurrentPage(12);//change current page to 12
 	}
 	
-	public void p14Info() {
-		System.out.println("System checking for duplicate username ...");
-		System.out.println("Users.txt before checking: ");
+	public void p14Info() {//display page 14
+		System.out.println("System checking for duplicate username ...");//print out the message
+		System.out.println("Users before checking: ");//print out the message
 		
-		for (int i = 0; i < name.size(); i++) {
-			System.out.println(name.get(i).getUsername());
+		for (int i = 0; i < name.size(); i++) {//loop through the users
+			System.out.println(name.get(i).getUsername());//print out the user name
 		}
 		
 		System.out.println("\n========================================");//formating
-		for (int i = 0; i < name.size(); i++) {
+		for (int i = 0; i < name.size(); i++) {//loop through the users
 			
-			String temp = name.get(i).getUsername();
-			for (int j = i + 1; j < name.size(); j++) {
-				if (name.get(j).getUsername().equals(temp)) {
-					name.remove(j);
+			String temp = name.get(i).getUsername();//store the user name
+			for (int j = i + 1; j < name.size(); j++) {//loop through the users from user[i]
+				if (name.get(j).getUsername().equals(temp)) {//check if two names equal
+					name.remove(j);//if yes, remove one
 				}
 			}
 		}
 		
-		System.out.println("Users after checking");
-		for (int i = 0; i < name.size(); i++) {
-			System.out.println(name.get(i).getUsername());
+		System.out.println("Users after checking");//print out the message
+		for (int i = 0; i < name.size(); i++) {//loop through the users
+			System.out.println(name.get(i).getUsername());//print out the user name
 		}
-		writeUser();
+		writeUser();//write user back to txt file
 		System.out.println("\n========================================");//formating
-		System.out.println("Operation finished. Now back to previous menu.");
+		System.out.println("Operation finished. Now back to previous menu.");//print out the message
 		System.out.println("\n========================================");//formating
 		changeCurrentPage(12);
 	}
 	
-	public void p15Info() {
+	public void p15Info() {//display page 15
 	
-		System.out.println("Enter the information of the item: ");
-		System.out.println("sNO: ");
+		System.out.println("Enter the information of the item: ");//print out the message
+		System.out.println("sNO: ");//print out the message
+		
+		while (!sc.hasNextInt()) {//if the input is not a int
+			System.out.println("Plz enter a integer as sNo: ");//print out the message
+			sc.next();//take user input
+		}
+		
+		int num = sc.nextInt();//store the user input as a int
+	
+		System.out.println("Title: ");//print out the message
+		sc.nextLine();//take user input
+		String title = sc.nextLine();//take user input as a string
+		
+		System.out.println("Author name/Artist name: ");//print out the message
+		String aName = sc.nextLine();//take user input as a string
+		
+		System.out.println("Price: ");//print out the message
+		
+		while (!sc.hasNextDouble()) {//check if not a double
+			System.out.println("Plz enter a double as price: ");//print out the message
+			sc.next();//take input
+		}
+		
+		double price = sc.nextDouble();//take user input as a double
+		
+		System.out.println("Quantity: ");//print out the message
 		
 		while (!sc.hasNextInt()) {
-			System.out.println("Plz enter a integer as sNo: ");
-			sc.next();
+			System.out.println("Plz enter a integer as sNo: ");//print out the message
+			sc.next();//take input
 		}
+		int quan = sc.nextInt();//take user input as a int 
 		
-		int num = sc.nextInt();
-	
-		System.out.println("Title: ");
-		sc.nextLine();
-		String title = sc.nextLine();
-		
-		System.out.println("Author name/Artist name: ");
-		String aName = sc.nextLine();
-		
-		System.out.println("Price: ");
-		
-		while (!sc.hasNextDouble()) {
-			System.out.println("Plz enter a double as price: ");
-			sc.next();
-		}
-		
-		double price = sc.nextDouble();
-		
-		System.out.println("Quantity: ");
-		
-		while (!sc.hasNextInt()) {
-			System.out.println("Plz enter a integer as sNo: ");
-			sc.next();
-		}
-		int quan = sc.nextInt();
-		
-		System.out.println("Choose inventory: ");
+		System.out.println("Choose inventory: ");//print out the message
 		System.out.println("1. Books");//print out option
 		System.out.println("2. eBooks");//print out option
-		System.out.println("3. CDs");
-		System.out.println("4. MP3s");
+		System.out.println("3. CDs");//print out the message
+		System.out.println("4. MP3s");//print out the message
 		System.out.println("\nChoose your oprion: ");//ask for user input
 		
-		String option = sc.nextLine();
-		while (!option.equals("1") && !option.equals("2") && !option.equals("3") && !option.equals("4")) {
-			System.out.println("Plz enter a number between 1-4: ");
-			option = sc.nextLine();
+		String option = sc.nextLine();//take user input as a string
+		while (!option.equals("1") && !option.equals("2") && !option.equals("3") && !option.equals("4")) {//check if between 1 to 4
+			System.out.println("Plz enter a number between 1-4: ");//print out the message
+			option = sc.nextLine();//take user input as a string
 		}
 		
-		if (Integer.parseInt(option) == 1) {
-			System.out.println("Now add item to book inventory...");
-			Book tempB = new Book(num, price, title, aName, quan);
-			readables.add(tempB);
+		if (Integer.parseInt(option) == 1) {//if equals to 1
+			System.out.println("Now add item to book inventory...");//print out the message
+			Book tempB = new Book(num, price, title, aName, quan);//call the constructor
+			readables.add(tempB);//add to inventory
 		}
-		if (Integer.parseInt(option) == 2) {
-			System.out.println("Now add item to eBook inventory...");
-			eBook tempB = new eBook(num, price, title, aName, quan);
-			readables.add(tempB);
+		if (Integer.parseInt(option) == 2) {//if equals to 2
+			System.out.println("Now add item to eBook inventory...");//print out the message
+			eBook tempB = new eBook(num, price, title, aName, quan);//call the constructor
+			readables.add(tempB);//add to inventory
 		}
-		if (Integer.parseInt(option) == 3) {
-			System.out.println("Now add item to CD inventory...");
-			CD tempB = new CD(num, price, title, aName, quan);
-			audioProducts.add(tempB);
+		if (Integer.parseInt(option) == 3) {//if equals to 3
+			System.out.println("Now add item to CD inventory...");//print out the message
+			CD tempB = new CD(num, price, title, aName, quan);//call the constructor
+			audioProducts.add(tempB);//add to inventory
 		}
-		if (Integer.parseInt(option) == 4) {
-			System.out.println("Now add item to MP3 inventory...");
-			MP3 tempB = new MP3(num, price, title, aName, quan);
-			audioProducts.add(tempB);
+		if (Integer.parseInt(option) == 4) {//if equals to 4
+			System.out.println("Now add item to MP3 inventory...");//print out the message
+			MP3 tempB = new MP3(num, price, title, aName, quan);//call the constructor
+			audioProducts.add(tempB);//add to inventory
 		}
-		System.out.println("Item add succesfully. Do you wanna ad  another item? ");
+		System.out.println("Item add succesfully. Do you wanna ad  another item? ");//print out the message
 		String s1 = sc.nextLine().toLowerCase();//store the user input in a string and make it not case sensitive
 		
 		while (!s1.equals("yes") && !s1.equals("no")) {//check if user input is yes or no
 			
 			System.out.println("Plz enter yes or no: ");//if not, ask for user input
-			s1 = sc.nextLine().toLowerCase();//!!!!!String cannot be overwritten!! How to do the error handle
+			s1 = sc.nextLine().toLowerCase();//print out the message
 		}
 		
-		if (s1.equals("no")) {
+		if (s1.equals("no")) {//if equals to "no"
 			writeReadable();//Write readable back to file
 			writeAudio();//Write audio back to file
-			System.out.println("Now back to previous menu.");
+			System.out.println("Now back to previous menu.");//print out the message
 			System.out.println("\n========================================");//formating
-			changeCurrentPage(12);
+			changeCurrentPage(12);//change current page to 12
 		}
-		if (s1.equals("yes")) {
+		if (s1.equals("yes")) {//if equals yes
 			System.out.println("\n========================================");//formating
-			changeCurrentPage(15);
+			changeCurrentPage(15);//change current page to 15
 		}
 	}
 	
-	public void p16Info() {
+	public void p16Info() {//display page 16
 		
-		System.out.println("Which inventory you want to sort? ");
-		System.out.println("1. Readable");
-		System.out.println("2. Audio");
-		System.out.println("Choose your option: ");
+		System.out.println("Which inventory you want to sort? ");//print out the message
+		System.out.println("1. Readable");//print out the message
+		System.out.println("2. Audio");//print out the message
+		System.out.println("Choose your option: ");//print out the message
 		
-		String option = sc.nextLine();
-		while (!option.equals("1") && !option.equals("2")) {
-			System.out.println("Plz enter a number between 1-2: ");
-			option = sc.nextLine();
+		String option = sc.nextLine();//take user input as a string
+		while (!option.equals("1") && !option.equals("2")) {//check if between 1 to 2
+			System.out.println("Plz enter a number between 1-2: ");//print out the message
+			option = sc.nextLine();//take user input as a string
 		}
 		
 		System.out.println("\n========================================");//formating
 		
-		System.out.println("What kind of sorting algorithm you want to use? ");
-		System.out.println("1. Sort by title");
-		System.out.println("2. Sort by price");
-		System.out.println("Choose your option: ");
+		System.out.println("What kind of sorting algorithm you want to use? ");//print out the message
+		System.out.println("1. Sort by title");//print out the message
+		System.out.println("2. Sort by price");//print out the message
+		System.out.println("Choose your option: ");//print out the message
 		
-		String option1 = sc.nextLine();
-		while (!option1.equals("1") && !option1.equals("2")) {
-			System.out.println("Plz enter a number between 1-2: ");
-			option1 = sc.nextLine();
+		String option1 = sc.nextLine();//take user input as a string
+		while (!option1.equals("1") && !option1.equals("2")) {//check if between 1 to 2
+			System.out.println("Plz enter a number between 1-2: ");//print out the message
+			option1 = sc.nextLine();//take user input as a string
 		}
 		
-		if (Integer.parseInt(option) == 1) {
-			if (Integer.parseInt(option1) == 1) {
-				for (int i = 0; i < readables.size() - 1; i++){
-		            int index = i;
-		            for (int j = i + 1; j < readables.size(); j++){
-		            	double temp;
-		            	temp = readables.get(j).getTitle().compareTo(readables.get(index).getTitle());
-		                if (temp < 0){
-		                    index = j;}
-		            
-		            Collections.swap(readables, i, index);
+		if (Integer.parseInt(option) == 1) {//if equals to 1
+			if (Integer.parseInt(option1) == 1) {//if equals to 1
+				for (int i = 0; i < readables.size() - 1; i++){//loop through the inventory
+		            int index = i;//store the index
+		            for (int j = i + 1; j < readables.size(); j++){//loop through the inventory
+		            	double temp;//declare a double 
+		            	temp = readables.get(j).getTitle().compareTo(readables.get(index).getTitle());//compare two strings
+		                if (temp < 0){//if the first one < the second one
+		                    index = j;}//store the index
 		            }
+		            Collections.swap(readables, i, index);//swap the item
+		            
 				}
 			}
-			if (Integer.parseInt(option1) == 2) {
-				for (int i = 0; i < readables.size() - 1; i++){
-		            int index = i;
-		            for (int j = i + 1; j < readables.size(); j++){
-		                if (readables.get(j).getPrice() < readables.get(index).getPrice()){
-		                    index = j;
-		                }
+			if (Integer.parseInt(option1) == 2) {//if equals to 2
+				for (int i = 0; i < readables.size() - 1; i++){//loop through the inventory
+		            int index = i;//store the index
+		            for (int j = i + 1; j < readables.size(); j++){//loop through the inventory
+		                if (readables.get(j).getPrice() < readables.get(index).getPrice()){//compare the price
+		                    index = j;//store the index
+		                    }
 		            }
+		            Collections.swap(readables, i, index);//swap the item
 		            
-		            Collections.swap(readables, i, index);
-		        }
+		            }
+				}
+			System.out.println("Readable after sorting: ");//print out the message
+			for (int i = 0; i < readables.size(); i++) {//loop through the inventory
+				System.out.println(readables.get(i).getInfo());//print out the message
 			}
+			System.out.println("\n========================================");//formating
 		}
 		
-		if (Integer.parseInt(option) == 2) {
-			if (Integer.parseInt(option1) == 1) {
+		if (Integer.parseInt(option) == 2) {//if equals to 2
+			if (Integer.parseInt(option1) == 1) {//if equals to 1
 
-				for (int i = 0; i < audioProducts.size() - 1; i++){
-		            int index = i;
-		            for (int j = i + 1; j < audioProducts.size(); j++){
-		            	double temp;
-		            	temp = audioProducts.get(j).getTitle().compareTo(audioProducts.get(index).getTitle());
-		                if (temp < 0){
-		                    index = j;}
-		            
-		            Collections.swap(audioProducts, i, index);
+				for (int i = 0; i < audioProducts.size() - 1; i++){//loop through the inventory
+		            int index = i;//store the index
+		            for (int j = i + 1; j < audioProducts.size(); j++){//loop through the inventory
+		            	double temp;//declare a double 
+		            	temp = audioProducts.get(j).getTitle().compareTo(audioProducts.get(index).getTitle());//compare two strings
+		                if (temp < 0){//if the first one < the second one
+		                    index = j;}//store the index
 		            }
+		            Collections.swap(audioProducts, i, index);//swap the item
+		            
 				}
-			
 			}
-			if (Integer.parseInt(option1) == 2) {
-				for (int i = 0; i < audioProducts.size() - 1; i++){
-		            int index = i;
-		            for (int j = i + 1; j < audioProducts.size(); j++){
-		                if (audioProducts.get(j).getPrice() < audioProducts.get(index).getPrice()){
-		                    index = j;
+			if (Integer.parseInt(option1) == 2) {//if equals to 2
+				for (int i = 0; i < audioProducts.size() - 1; i++){//loop through the inventory
+		            int index = i;//store the index
+		            for (int j = i + 1; j < audioProducts.size(); j++){//loop through the inventory
+		                if (audioProducts.get(j).getPrice() < audioProducts.get(index).getPrice()){//compare the price
+		                    index = j;//store the index
 		                }
 		            }		            
-		            Collections.swap(audioProducts, i, index);
+		            Collections.swap(audioProducts, i, index);//swap the item
+		            
 		        }
 			}
-		}
-//		for (int i = 0; i < audioProducts.size(); i++) {
-//			System.out.println(audioProducts.get(i).getInfo());
-//		}
-		writeReadable();
-		writeAudio();
-		System.out.println("Sorting finished. Now back to previous page");
-		System.out.println("\n========================================");//formating
-		changeCurrentPage(12);
+			System.out.println("Audio after sorting: ");//print out the message
+			for (int i = 0; i < audioProducts.size(); i++) {//loop through the inventory
+				System.out.println(audioProducts.get(i).getInfo());//print out the message
+			}
+			System.out.println("\n========================================");//formating
 
+		}
 		
-	}
+		writeReadable();//write readables back to file
+		writeAudio();//write audio back to file
+		System.out.println("Sorting finished. Now back to previous page");//print out the message
+		System.out.println("\n========================================");//formating
+		changeCurrentPage(12);//change current page to 12
+		}
 		
 	
 	public void printReadable() {//print out the readable on the screen
