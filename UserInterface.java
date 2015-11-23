@@ -272,7 +272,7 @@ public class UserInterface {//public the class
 		} else {
 		
 			for (int i = 0; i < name.size(); i++) {//loop through the user ArrayList
-				if (((name.get(i)).getUsername()).equals(n1)) {//check if the user input match the existing name
+				if (((name.get(i)).getUsername().toLowerCase()).equals(n1.toLowerCase())) {//check if the user input match the existing name
 					
 					check = true;//if match, change to true
 				}
@@ -286,7 +286,7 @@ public class UserInterface {//public the class
 				cart.readeBook();
 				cart.readMP3();
 				cart.loadCart();//assign to the shopping cart
-				System.out.println("Hello Mr/Miss. " + n1);//print out the welcome message
+				System.out.println("Hello Mr/Miss " + n1);//print out the welcome message
 				changeCurrentPage(5);//change current page to page 5
 				System.out.println("\n========================================");//formating
 			} else {//if not match the existing name
@@ -654,7 +654,7 @@ public class UserInterface {//public the class
 			
 			String temp = name.get(i).getUsername();//store the user name
 			for (int j = i + 1; j < name.size(); j++) {//loop through the users from user[i]
-				if (name.get(j).getUsername().equals(temp)) {//check if two names equal
+				if (name.get(j).getUsername().toLowerCase().equals(temp.toLowerCase())) {//check if two names equal
 					name.remove(j);//if yes, remove one
 				}
 			}
