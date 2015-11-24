@@ -207,7 +207,7 @@ public class UserInterface {//public the class
 		System.out.println("Choose your option: ");//ask for user input
 		String choice = sc.nextLine();//take a user input as string
 		while (!choice.equals("1") && !choice.equals("2")) {//check if choice == 1 or 2
-			System.out.println("Plz enter choice 1 or 2: ");//if not, ask for another user input
+			System.out.println("Please enter choice 1 or 2: ");//if not, ask for another user input
 			choice = sc.nextLine();//overwrite the double
 		}
 		System.out.println("\n========================================");//formating
@@ -251,7 +251,7 @@ public class UserInterface {//public the class
 		
 		if (n1.equals("ADMIN")) {
 			adm = new ADMIN();
-			System.out.println("Plz enter your password: ");
+			System.out.println("Please enter your password: ");
 			//sc.nextLine();
 			String p1 = sc.nextLine();
 			if (!p1.equals(adm.getPassword())) {
@@ -312,7 +312,7 @@ public class UserInterface {//public the class
 		
 		while(!option.equals("1") && !option.equals("2") && !option.equals("3") && !option.equals("4")) {//check if user input equals to 1, 2 or 3
 			
-			System.out.println("Plz enter option 1, 2, 3 or 4: ");//if not, ask for user input
+			System.out.println("Please enter option 1, 2, 3 or 4: ");//if not, ask for user input
 			option = sc.nextLine();//overwrite the double with new user input
 		}
 		System.out.println("\n========================================");//formating
@@ -336,7 +336,7 @@ public class UserInterface {//public the class
 		
 		while(!option.equals("1") && !option.equals("2") && !option.equals("-1")) {//check if user input equals to 1, 2 or -1
 		
-			System.out.println("Plz enter option 1, 2 or -1: ");//if not, ask for user input
+			System.out.println("Please enter option 1, 2 or -1: ");//if not, ask for user input
 			option = sc.nextLine();//overwrite the double with new user input
 		}
 		System.out.println("\n========================================");//formating
@@ -357,12 +357,12 @@ public class UserInterface {//public the class
 		//Scanner sc = new Scanner(System.in);//create scanner
 		System.out.println("\n========================================");//formatting
 		cart.getContent();//print out the whole cart
-		System.out.println("Plz enter 1 to checkout or -1 to previous page: ");//ask for user input
+		System.out.println("Please enter 1 to checkout or -1 to previous page: ");//ask for user input
 		String option = sc.nextLine();//store the user input in a double
 		
 		while(!option.equals("1") && !option.equals("-1")){//check if user input equals to 1 or -1
 		
-			System.out.println("Plz enter option 1 or -1: ");//if not, ask for user input
+			System.out.println("Please enter option 1 or -1: ");//if not, ask for user input
 			option = sc.nextLine();//overwrite the double with new user input
 		}
 		System.out.println("\n========================================");//formating
@@ -387,11 +387,11 @@ public class UserInterface {//public the class
 		try{
 			  Integer.parseInt(option);// is an integer!
 			while (Integer.parseInt(option) > readables.size() && !option.equals("-1")) {//check if user input equals to -1 or option larger than the quantity of item
-				System.out.println("Plz enter a valid option: ");//if not, ask for user input
+				System.out.println("Please enter a valid option: ");//if not, ask for user input
 				option = sc.nextLine();//overwrite the double with new user input
 				}
 			} catch (NumberFormatException e) {
-				System.out.println("Plz enter a number: ");//if not, ask for user input
+				System.out.println("Please enter a number: ");//if not, ask for user input
 				changeCurrentPage(8);
 			  // not an integer!
 			}
@@ -400,7 +400,7 @@ public class UserInterface {//public the class
 		else {//if user want to add item to cart
 			try{
 			while (readables.get(Integer.parseInt(option) - 1).getQuantity() == 0) {
-				System.out.println("Sorry, the item is out of stock! Plz choose another item: ");
+				System.out.println("Sorry, the item is out of stock! Please choose another item: ");
 				option = sc.nextLine();
 			}
 			System.out.println("Enter quantity: ");//ask for user input
@@ -408,7 +408,7 @@ public class UserInterface {//public the class
 			
 			while(Integer.parseInt(quan) > (readables.get(Integer.parseInt(option) - 1)).getQuantity()) {//check if user input larger than the given quantity
 				
-				System.out.println("Not enough item. Plz enter a smaller quantity.");//if not, ask for user input
+				System.out.println("Not enough item. Please enter a smaller quantity.");//if not, ask for user input
 				quan = sc.nextLine();//overwrite the int with new user input
 			}
 			
@@ -424,14 +424,14 @@ public class UserInterface {//public the class
 			
 			while (!option1.equals("0") && !option1.equals("-2")) {//check if user input equals to 0 or -2
 				
-				System.out.println("Plz enter option 0 or -2: ");//if not, ask for user input
+				System.out.println("Please enter option 0 or -2: ");//if not, ask for user input
 				option1 = sc.nextLine();//overwrite the double with new user input
 			}
 			System.out.println("\n========================================");//formating
 			if (Integer.parseInt(option1) == 0) {changeCurrentPage(10);}//if option = 0, change current page to page 10
 			if (Integer.parseInt(option1) == -2) {changeCurrentPage(6);}//if option = 2, change current page to page 6
 			} catch (NumberFormatException e) {
-				System.out.println("Plz enter a number: ");//if not, ask for user input
+				System.out.println("Please enter a number: ");//if not, ask for user input
 				changeCurrentPage(8);
 			  // not an integer!
 			}
@@ -457,11 +457,11 @@ public class UserInterface {//public the class
 			Integer.parseInt(option);// is an integer!
 			while (Integer.parseInt(option) > audioProducts.size() && !option.equals("-1")) {//check if user input equals to -1 or option larger than the quantity of item
 				
-				System.out.println("Plz enter a valid option: ");//if not, ask for user input
+				System.out.println("Please enter a valid option: ");//if not, ask for user input
 				option = sc.nextLine();//overwrite the double with new user input
 			}
 			} catch (NumberFormatException e) {
-				System.out.println("Plz enter a number: ");//if not, ask for user input
+				System.out.println("Please enter a number: ");//if not, ask for user input
 				changeCurrentPage(9);
 			  // not an integer!
 			}
@@ -469,7 +469,7 @@ public class UserInterface {//public the class
 		else {//if not -1
 			try{
 			while (audioProducts.get(Integer.parseInt(option) - 1).getQuantity() == 0) {
-				System.out.println("Sorry, the item is out of stock! Plz choose another item: ");
+				System.out.println("Sorry, the item is out of stock! Please choose another item: ");
 				option = sc.nextLine();
 			}
 			System.out.println("Enter quantity: ");//ask for user input
@@ -477,7 +477,7 @@ public class UserInterface {//public the class
 			
 			while(Integer.parseInt(quan) > (audioProducts.get(Integer.parseInt(option) - 1)).getQuantity()) {//check if user input larger than the given quantity
 				
-				System.out.println("Not enough item. Plz enter a smaller quantity.");//if not, ask for user input
+				System.out.println("Not enough item. Please enter a smaller quantity.");//if not, ask for user input
 				quan = sc.nextLine();//overwrite the int with new user input
 			}
 			
@@ -493,14 +493,14 @@ public class UserInterface {//public the class
 			
 			while (!option1.equals("0") && !option1.equals("-2")) {//check if user input equals to 0 or -2
 				
-				System.out.println("Plz enter option 0 or -2: ");//if not, ask for user input
+				System.out.println("Please enter option 0 or -2: ");//if not, ask for user input
 				option1 = sc.nextLine();//overwrite the double with new user input
 			}
 			System.out.println("\n========================================");//formating
 			if (Integer.parseInt(option1) == 0) {changeCurrentPage(10);}//if option = 0, change current page to page 10
 			if (Integer.parseInt(option1) == -2){changeCurrentPage(6);}//if option = 2, change current page to page 6
 			} catch (NumberFormatException e) {
-				System.out.println("Plz enter a number: ");//if not, ask for user input
+				System.out.println("Please enter a number: ");//if not, ask for user input
 				changeCurrentPage(8);
 			  // not an integer!
 			}
@@ -538,7 +538,7 @@ public class UserInterface {//public the class
 		
 		while (!s1.equals("yes") && !s1.equals("no")) {//check if user input is yes or no
 			
-			System.out.println("Plz enter yes or no: ");//if not, ask for user input
+			System.out.println("Please enter yes or no: ");//if not, ask for user input
 			s1 = sc.nextLine().toLowerCase();//!!!!!String cannot be overwritten!! How to do the error handle
 		}
 		
@@ -586,7 +586,7 @@ public class UserInterface {//public the class
 		System.out.println("Press -1 to return to the previous page: ");//ask for user input
 		String option1 = sc.nextLine();//store the user input in a double
 		while (!option1.equals("-1")) {//check if user input equals to -1
-			System.out.println("Plz enter option -1: ");//if not, ask for user input
+			System.out.println("Please enter option -1: ");//if not, ask for user input
 			option1 = sc.nextLine();//overwrite the double with new user input
 		}
 		System.out.println("\n========================================");//formating
@@ -614,7 +614,7 @@ public class UserInterface {//public the class
 		String option = sc.nextLine();//store user input in a string
 		while (!option.equals("1") && !option.equals("2") && !option.equals("3") && !option.equals("4") && 
 				!option.equals("5") && !option.equals("6") && !option.equals("7") && !option.equals("8")) {//check if the input between 1 to 8
-			System.out.println("Plz enter a number between 1-8: ");//print out the message
+			System.out.println("Please enter a number between 1-8: ");//print out the message
 			option = sc.nextLine();//store user input
 		}
 		
@@ -631,7 +631,7 @@ public class UserInterface {//public the class
 	
 	public void p13Info() {//display page 13
 		
-		System.out.println("Plz enter your new password: ");//print out the message
+		System.out.println("Please enter your new password: ");//print out the message
 		String str = sc.nextLine();//store user input as a string
 		
 		adm.changePassword(str);//change password to given string
@@ -677,7 +677,7 @@ public class UserInterface {//public the class
 		System.out.println("sNO: ");//print out the message
 		
 		while (!sc.hasNextInt()) {//if the input is not a int
-			System.out.println("Plz enter a integer as sNo: ");//print out the message
+			System.out.println("Please enter a integer as sNo: ");//print out the message
 			sc.next();//take user input
 		}
 		
@@ -693,7 +693,7 @@ public class UserInterface {//public the class
 		System.out.println("Price: ");//print out the message
 		
 		while (!sc.hasNextDouble()) {//check if not a double
-			System.out.println("Plz enter a double as price: ");//print out the message
+			System.out.println("Please enter a double as price: ");//print out the message
 			sc.next();//take input
 		}
 		
@@ -702,7 +702,7 @@ public class UserInterface {//public the class
 		System.out.println("Quantity: ");//print out the message
 		
 		while (!sc.hasNextInt()) {
-			System.out.println("Plz enter a integer as sNo: ");//print out the message
+			System.out.println("Please enter a integer as sNo: ");//print out the message
 			sc.next();//take input
 		}
 		int quan = sc.nextInt();//take user input as a int 
@@ -716,7 +716,7 @@ public class UserInterface {//public the class
 		
 		String option = sc.nextLine();//take user input as a string
 		while (!option.equals("1") && !option.equals("2") && !option.equals("3") && !option.equals("4")) {//check if between 1 to 4
-			System.out.println("Plz enter a number between 1-4: ");//print out the message
+			System.out.println("Please enter a number between 1-4: ");//print out the message
 			option = sc.nextLine();//take user input as a string
 		}
 		
@@ -726,26 +726,26 @@ public class UserInterface {//public the class
 			readables.add(tempB);//add to inventory
 		}
 		if (Integer.parseInt(option) == 2) {//if equals to 2
-			System.out.println("Now add item to eBook inventory...");//print out the message
+			System.out.println("Now adding item to eBook inventory...");//print out the message
 			eBook tempB = new eBook(num, price, title, aName, quan);//call the constructor
 			readables.add(tempB);//add to inventory
 		}
 		if (Integer.parseInt(option) == 3) {//if equals to 3
-			System.out.println("Now add item to CD inventory...");//print out the message
+			System.out.println("Now adding item to CD inventory...");//print out the message
 			CD tempB = new CD(num, price, title, aName, quan);//call the constructor
 			audioProducts.add(tempB);//add to inventory
 		}
 		if (Integer.parseInt(option) == 4) {//if equals to 4
-			System.out.println("Now add item to MP3 inventory...");//print out the message
+			System.out.println("Now adding item to MP3 inventory...");//print out the message
 			MP3 tempB = new MP3(num, price, title, aName, quan);//call the constructor
 			audioProducts.add(tempB);//add to inventory
 		}
-		System.out.println("Item add succesfully. Do you wanna ad  another item? ");//print out the message
+		System.out.println("Item added succesfully. Do you want to add  another item? ");//print out the message
 		String s1 = sc.nextLine().toLowerCase();//store the user input in a string and make it not case sensitive
 		
 		while (!s1.equals("yes") && !s1.equals("no")) {//check if user input is yes or no
 			
-			System.out.println("Plz enter yes or no: ");//if not, ask for user input
+			System.out.println("Please enter yes or no: ");//if not, ask for user input
 			s1 = sc.nextLine().toLowerCase();//print out the message
 		}
 		
@@ -771,7 +771,7 @@ public class UserInterface {//public the class
 		
 		String option = sc.nextLine();//take user input as a string
 		while (!option.equals("1") && !option.equals("2")) {//check if between 1 to 2
-			System.out.println("Plz enter a number between 1-2: ");//print out the message
+			System.out.println("Please enter a number between 1-2: ");//print out the message
 			option = sc.nextLine();//take user input as a string
 		}
 		
@@ -784,7 +784,7 @@ public class UserInterface {//public the class
 		
 		String option1 = sc.nextLine();//take user input as a string
 		while (!option1.equals("1") && !option1.equals("2")) {//check if between 1 to 2
-			System.out.println("Plz enter a number between 1-2: ");//print out the message
+			System.out.println("Please enter a number between 1-2: ");//print out the message
 			option1 = sc.nextLine();//take user input as a string
 		}
 		
