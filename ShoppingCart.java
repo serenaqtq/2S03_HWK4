@@ -76,8 +76,8 @@ public class ShoppingCart extends User{//public ShoopingCart
 				System.out.println(e);///print out the error message
 			}
 			
-		} catch (IOException e) {
-			System.out.println(e);//Catch exception
+		} catch (IOException e) {//catch IOException
+			System.out.println(e);//print out the error message
 		}
 	}
 	
@@ -315,7 +315,7 @@ public class ShoppingCart extends User{//public ShoopingCart
 					}
 				}
 			history.close();//close the file
-		}catch (Exception e) {  
+		}catch (Exception e) {  //catch IOexception
 	        System.out.println("Some error occured while writing file");//prints error message
 		} 
 	}	

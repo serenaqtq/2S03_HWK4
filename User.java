@@ -2,7 +2,7 @@
 * Name:​Tianqi Qi,Yihan Lu, Shiyu Luo
 * MacID:​qit3, luy27, luos
 * Student Number:​1405930,1428072, 1317135
-* Description:​This class build the object user.
+* Description:​This class build the object User.
 */
 public class User {//public class
 

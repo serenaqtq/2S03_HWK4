@@ -4,7 +4,7 @@
 * Student Number:​1405930,1428072, 1317135
 * Description:​This class build the object CD.
 */
-public class CD extends Audio {
+public class CD extends Audio {//create class CD
 
 	
 	public CD(int sNo, double price, String audioName, String artistName, int quantityAvl){//constructor

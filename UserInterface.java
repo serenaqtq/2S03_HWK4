@@ -249,27 +249,27 @@ public class UserInterface {//public the class
 		String n1 = sc.nextLine();//store user input as a string
 		boolean check = false;//set boolean to false
 		
-		if (n1.equals("ADMIN")) {
-			adm = new ADMIN();
-			System.out.println("Please enter your password: ");
+		if (n1.equals("ADMIN")) {//if user is admin
+			adm = new ADMIN();//create new admin 
+			System.out.println("Please enter your password: ");//print out msg prompt for user to enter password
 			//sc.nextLine();
 			String p1 = sc.nextLine();
-			if (!p1.equals(adm.getPassword())) {
-				System.out.println("Access denied. Back to previous menu.");
+			if (!p1.equals(adm.getPassword())) {//if the password does not match admin password
+				System.out.println("Access denied. Back to previous menu.");//print out error message
 				System.out.println("\n========================================");//formating
-				changeCurrentPage(1);
-			} else {
-				System.out.println("Hello, ADMIN");
+				changeCurrentPage(1);//go back to page 1
+			} else {//if passwork matches admin password
+				System.out.println("Hello, ADMIN");//prints greeting message
 				System.out.println("\n========================================");//formating
-				cart = new ShoppingCart(n1);
-				cart.readBook();
-				cart.readCD();
-				cart.readeBook();
-				cart.readMP3();
+				cart = new ShoppingCart(n1);//create shopping cart
+				cart.readBook();//call readBook
+				cart.readCD();//call readCD
+				cart.readeBook();//call readeBook()
+				cart.readMP3();//call readMP3
 				cart.loadCart();//assign to the shopping cart
-				changeCurrentPage(12);
+				changeCurrentPage(12);//change current page to 12
 			}
-		} else {
+		} else {//if user is not admin
 		
 			for (int i = 0; i < name.size(); i++) {//loop through the user ArrayList
 				if (((name.get(i)).getUsername().toLowerCase()).equals(n1.toLowerCase())) {//check if the user input match the existing name
@@ -280,11 +280,11 @@ public class UserInterface {//public the class
 			
 			if (check) {//name match the existing name
 				
-				cart = new ShoppingCart(n1);
-				cart.readBook();
-				cart.readCD();
-				cart.readeBook();
-				cart.readMP3();
+				cart = new ShoppingCart(n1);//create shopping cart
+				cart.readBook();//call readBook
+				cart.readCD();//call readCD
+				cart.readeBook();//call readeBook
+				cart.readMP3();//call readMP3
 				cart.loadCart();//assign to the shopping cart
 				System.out.println("Hello Mr/Miss " + n1);//print out the welcome message
 				changeCurrentPage(5);//change current page to page 5
@@ -293,7 +293,7 @@ public class UserInterface {//public the class
 				
 				System.out.println("No Access");//print out the message
 				System.out.println("\n========================================");//formating
-				changeCurrentPage(1);////change current page to page 1
+				changeCurrentPage(1);//change current page to page 1
 			}
 		}
 	}
@@ -374,8 +374,6 @@ public class UserInterface {//public the class
 	
 	public void p8Info() {//display the information for page 8
 		
-		//Scanner sc = new Scanner(System.in);//create scanner
-		
 		System.out.println("Readables: \n");//print out the message
 		System.out.printf("%-13s%-40s%-30s%-20s%-20s%-30s\n", "S.No", "Name of the Book", "Author", "Price($)", "Quantity in Store", "Type");//Prints out the headings		
 		printReadable();//print out the readable ArrayList
@@ -399,9 +397,9 @@ public class UserInterface {//public the class
 		if (Integer.parseInt(option) == -1) {changeCurrentPage(6);}//if option = -1, change current page to page 6
 		else {//if user want to add item to cart
 			try{
-			while (readables.get(Integer.parseInt(option) - 1).getQuantity() == 0) {
-				System.out.println("Sorry, the item is out of stock! Please choose another item: ");
-				option = sc.nextLine();
+			while (readables.get(Integer.parseInt(option) - 1).getQuantity() == 0) {//if the quantity is 0
+				System.out.println("Sorry, the item is out of stock! Please choose another item: ");//prints out error message
+				option = sc.nextLine();//accept another user input
 			}
 			System.out.println("Enter quantity: ");//ask for user input
 			String quan = sc.nextLine();//store the user input in a int
@@ -430,9 +428,9 @@ public class UserInterface {//public the class
 			System.out.println("\n========================================");//formating
 			if (Integer.parseInt(option1) == 0) {changeCurrentPage(10);}//if option = 0, change current page to page 10
 			if (Integer.parseInt(option1) == -2) {changeCurrentPage(6);}//if option = 2, change current page to page 6
-			} catch (NumberFormatException e) {
+			} catch (NumberFormatException e) {//catch IOexception
 				System.out.println("Please enter a number: ");//if not, ask for user input
-				changeCurrentPage(8);
+				changeCurrentPage(8);//change current page to 8
 			  // not an integer!
 			}
 			
@@ -462,15 +460,15 @@ public class UserInterface {//public the class
 			}
 			} catch (NumberFormatException e) {
 				System.out.println("Please enter a number: ");//if not, ask for user input
-				changeCurrentPage(9);
+				changeCurrentPage(9);//change current page to 9
 			  // not an integer!
 			}
 		if (Integer.parseInt(option) == -1) {changeCurrentPage(6);}//check if user input equals to -1
 		else {//if not -1
 			try{
-			while (audioProducts.get(Integer.parseInt(option) - 1).getQuantity() == 0) {
-				System.out.println("Sorry, the item is out of stock! Please choose another item: ");
-				option = sc.nextLine();
+			while (audioProducts.get(Integer.parseInt(option) - 1).getQuantity() == 0) {//if quantity of item is 0
+				System.out.println("Sorry, the item is out of stock! Please choose another item: ");//prints out error message
+				option = sc.nextLine();//ask for another user input
 			}
 			System.out.println("Enter quantity: ");//ask for user input
 			String quan = sc.nextLine();//store the user input in a int
@@ -482,7 +480,7 @@ public class UserInterface {//public the class
 			}
 			
 			cart.AddItem(audioProducts.get(Integer.parseInt(option) - 1).getTitle(), Integer.parseInt(quan));//add item to cart
-			audioProducts.get(Integer.parseInt(option) - 1).changeQuantity(Integer.parseInt(quan))
+			audioProducts.get(Integer.parseInt(option) - 1).changeQuantity(Integer.parseInt(quan))//change the quantity of the item in inventory
 			;//update the quantity of audioProducts
 			
 			System.out.println(quan + " " + audioProducts.get(Integer.parseInt(option) - 1).getTitle() + " successfully added to your cart.");//print out message
@@ -499,10 +497,9 @@ public class UserInterface {//public the class
 			System.out.println("\n========================================");//formating
 			if (Integer.parseInt(option1) == 0) {changeCurrentPage(10);}//if option = 0, change current page to page 10
 			if (Integer.parseInt(option1) == -2){changeCurrentPage(6);}//if option = 2, change current page to page 6
-			} catch (NumberFormatException e) {
+			} catch (NumberFormatException e) {//if input is not a number
 				System.out.println("Please enter a number: ");//if not, ask for user input
-				changeCurrentPage(8);
-			  // not an integer!
+				changeCurrentPage(8);//change current page to 8
 			}
 			}
 			
@@ -510,13 +507,11 @@ public class UserInterface {//public the class
 	
 	public void p10Info() {//display the information for page 10
 		
-		//Scanner sc = new Scanner(System.in);//create scanner
-		
 		System.out.println("Billing Information: ");//print out message
 		System.out.printf("%-50s%-20s%-30s\n", "Name", "Quantity", "Price");//Prints out the headings	
-		System.out.println();
+		System.out.println();//print empty line
 		cart.getCheckout();//print out the content of the cart
-		System.out.println();
+		System.out.println();//print empty line
 		System.out.printf("%-70s", "Environment Tax               2%");//Prints out the headings	
 		//System.out.print("Environment Tax    2%    ");//print out message
 		System.out.println(cart.getEnvirTax());//print EnviroTax
@@ -539,7 +534,7 @@ public class UserInterface {//public the class
 		while (!s1.equals("yes") && !s1.equals("no")) {//check if user input is yes or no
 			
 			System.out.println("Please enter yes or no: ");//if not, ask for user input
-			s1 = sc.nextLine().toLowerCase();//!!!!!String cannot be overwritten!! How to do the error handle
+			s1 = sc.nextLine().toLowerCase();//change all input to lower case
 		}
 		
 		if (s1.equals("yes")) {//if the user want to pay
@@ -560,10 +555,10 @@ public class UserInterface {//public the class
 			writeReadable();//Write readable back to file
 			writeAudio();//Write audio back to file
 			System.out.println("\n========================================");//formating
-			if (cart.getUsername().equals("ADMIN")){
-				changeCurrentPage(12);
+			if (cart.getUsername().equals("ADMIN")){//if user is admin
+				changeCurrentPage(12);//change current page to 12
 			}
-			else{
+			else{//if it is a regular user
 			changeCurrentPage(5);//change current page to page 5
 			}
 		}
@@ -571,10 +566,10 @@ public class UserInterface {//public the class
 		if (s1.equals("no")) {// if they don't want to pay
 			System.out.println("Checkout not finished. Go to browse item page");//print out message
 			System.out.println("\n========================================");//formating
-			if (cart.getUsername().equals("ADMIN")){
-				changeCurrentPage(12);
+			if (cart.getUsername().equals("ADMIN")){//if current user is admin
+				changeCurrentPage(12);//change current page to 12
 			}
-			else{
+			else{//if regular user
 			changeCurrentPage(5);//change current page to page 5
 			}
 		}
@@ -668,7 +663,7 @@ public class UserInterface {//public the class
 		System.out.println("\n========================================");//formating
 		System.out.println("Operation finished. Now back to previous menu.");//print out the message
 		System.out.println("\n========================================");//formating
-		changeCurrentPage(12);
+		changeCurrentPage(12);//change current page to 12
 	}
 	
 	public void p15Info() {//display page 15
@@ -879,7 +874,7 @@ public class UserInterface {//public the class
 			String [] output = new String [6];//create new array to store information of the item
 			output = audioProducts.get(i).getInfo().split(",");//call the getInfo() for each item and split up the pieces of information related to the item
 			System.out.printf("%-12s%-40s%-30s%-20s%-20s%-20s\n", output[0], output[1], output[2], output[3], output[4], output[5]);//print the formatted information for the item
-		}
+		}//print formated audio products
 	}
 	
 	
@@ -904,8 +899,8 @@ public class UserInterface {//public the class
 			}
 			outputB.close();//close the file
 			outputE.close();//close the file
-		} catch (IOException e) {
-			System.out.println(e);
+		} catch (IOException e) {//catch IOexception
+			System.out.println(e);//print out error message
 		}//handle exception
 	}
 	
@@ -928,7 +923,7 @@ public class UserInterface {//public the class
 			}
 			outputC.close();//close the file
 			outputM.close();//close the file
-		} catch (IOException e) {
+		} catch (IOException e) {//catch IOexception
 			System.out.println("There is an error in writeAudio()");//handle exception
 		}
 	}

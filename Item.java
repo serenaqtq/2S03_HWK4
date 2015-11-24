@@ -1,35 +1,25 @@
-public abstract class Item {
+/*
+* Name:​Tianqi Qi,Yihan Lu, Shiyu Luo
+* MacID:​qit3, luy27, luos
+* Student Number:​1405930,1428072, 1317135
+* Description:​This abstract class Item.
+*/
+public abstract class Item {//create abstract class Item
 	
-	public abstract String getInfo();
+	public abstract String getInfo();//create abstract method getInfo
 
-	public abstract double getPrice();
+	public abstract double getPrice();//create abstract method getPrice
 
-	public abstract int getsNo();
+	public abstract int getsNo();//create abstract method getsNo
 
-	public abstract int getQuantity();
+	public abstract int getQuantity();//create abstract method getQuantity
 
-	public abstract String getTitle();
+	public abstract String getTitle();//create abstract method getTitle
 	
 
-	protected double price;
-	protected int sNo;
-	protected int quantityAvl;
+	protected double price;//create protected variable price
+	protected int sNo;//create protected variable sNo
+	protected int quantityAvl;//create protect variable quantityAvl
 
-//	public static void main(String[] args) {
-//		Readable book1 = new Readable(1, 2, "H", "A", 100);
-//		Book book2 = new Book(1, 2, "H", "A", 100);
-//		eBook book3 = new eBook(1, 2, "H", "A", 100);
-//		System.out.println(
-//				"Readable: " + book1.getPrice() + " Book: " + book2.getPrice() + " eBook: " + book3.getPrice());
-//		System.out.println("Readable: " + book1.getInfo() + " Book: " + book2.getInfo() + " eBook: " + book3.getInfo());
-//		System.out.println("Readable: " + book1.getsNo() + " Book: " + book2.getsNo() + " eBook: " + book3.getsNo());
-//		System.out.println("Readable: " + book1.getQuantity() + " Book: " + book2.getQuantity() + " eBook: "
-//				+ book3.getQuantity());
-//		System.out.println("Readable: " + book1.getAuthorName() + " Book: " + book2.getAuthorName() + " eBook: "
-//				+ book3.getAuthorName());
-//		System.out.println(" Book:" + book2.getType() + " eBook:" + book3.getType());
-//		System.out.println("Readable:" + " " + book1.getBookName() + " Book: " + book2.getBookName() + " eBook: "
-//				+ book3.getBookName());
-//	}
 
 }
